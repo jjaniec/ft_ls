@@ -5,14 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/12/20 20:31:14 by jjaniec           #+#    #+#              #
-#    Updated: 2018/02/20 18:22:42 by jjaniec          ###   ########.fr        #
+#    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
+#    Updated: 2018/03/05 21:54:00 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC_NAME = main.c
+SRC_NAME = 	ft_parse_options.c \
+			main.c
 
 SRC_DIR = ./srcs/
 INCLUDES_DIR = ./includes/
