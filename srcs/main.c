@@ -12,8 +12,10 @@
 
 #include <ft_ls.h>
 
-int     main(int ac, char **av)
+int		main(int ac, char **av)
 {
-    ft_parse_options(ac, av);
-    return (ac);
+	t_param		opts;
+
+	opts = ft_parse_options(ac, av);
+	return (ac);
 }
