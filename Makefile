@@ -1,0 +1,58 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/12/20 20:31:14 by jjaniec           #+#    #+#              #
+#    Updated: 2018/02/20 18:22:42 by jjaniec          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = ft_ls
+
+SRC_NAME = main.c
+
+SRC_DIR = ./srcs/
+INCLUDES_DIR = ./includes/
+OBJ_DIR = ./obj/
+
+SRC = $(addprefix $(SRC_DIR), $(SRC_NAME))
+OBJ = $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
+
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
+LFLAGS = -L./ft_printf -lftprintf
+
+UNAME_S := $(shell uname -s)
+
+all : $(NAME)
+
+.PHONY : all clean
+
+$(NAME) : $(OBJ)
+	make -C ./ft_printf/
+	cp ./ft_printf/libftprintf.a ./libftprintf.a
+ifeq ($(UNAME_S),Linux)
+	gcc $(CFLAGS) $(LFLAGS) $(OBJ) ./ft_printf/ft_printf.* -o $(NAME)
+endif
+ifeq ($(UNAME_S),Darwin)
+	gcc $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
+endif
+
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
+	gcc $(CFLAGS) -c $(IFLAGS) $^ -o $@
+
+clean:
+	rm -rf $(OBJ_DIR)
+	make clean -C ft_printf/
+
+fclean: clean
+	make fclean -C ft_printf/
+	rm -f $(NAME)
+	rm ft_printf/includes/libft_printf.h
+
+re: fclean all
