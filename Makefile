@@ -25,13 +25,15 @@ CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
 LFLAGS = -L./ft_printf -lftprintf
 
+FT_PRINTF = ./ft_printf
+
 UNAME_S := $(shell uname -s)
 
 all : $(NAME)
 
 .PHONY : all clean
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(FT_PRINTF)
 	make -C ./ft_printf/
 	cp ./ft_printf/libftprintf.a ./libftprintf.a
 ifeq ($(UNAME_S),Linux)
@@ -45,6 +47,9 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
 	gcc $(CFLAGS) -c $(IFLAGS) $^ -o $@
+
+$(FT_PRINTF):
+	git clone https://github.com/jjaniec/ft_printf || true
 
 clean:
 	rm -rf $(OBJ_DIR)
