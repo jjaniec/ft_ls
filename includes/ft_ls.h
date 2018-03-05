@@ -32,3 +32,4 @@ typedef struct  s_param
 t_param ft_parse_options(int ac, char **av);
 
 #endif
+    
