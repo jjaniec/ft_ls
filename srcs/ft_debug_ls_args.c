@@ -12,7 +12,11 @@
 
 #include <ft_ls.h>
 
-static void	ft_debug_prm(t_param *prm)
+/*
+** print content of a s_param struct
+*/
+
+void	ft_debug_prm(t_param *prm)
 {
 	t_param	*tmp;
 
@@ -28,7 +32,11 @@ static void	ft_debug_prm(t_param *prm)
 		}
 }
 
-static void	ft_debug_opt(t_opt *opts)
+/*
+** print content of a s_opt struct
+*/
+
+void	ft_debug_opt(t_opt *opts)
 {
 	ft_printf("\topts:\n");
 	if (!opts)
@@ -42,6 +50,10 @@ static void	ft_debug_opt(t_opt *opts)
 		ft_printf("\t\topt t: %d\n", (*opts).t);
 	}
 }
+
+/*
+** print content of a s_args struct
+*/
 
 void		ft_debug_ls_args(t_args arg)
 {
