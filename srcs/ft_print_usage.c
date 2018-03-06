@@ -16,7 +16,7 @@
 ** Prints usage of the program
 */
 
-void	ft_print_usage(void)
+void	ft_print_usage(char *pname)
 {
-	ft_printf("usage: ls [lRart] [file ...]");
+	ft_printf("usage: %s [lRart] [file ...]", pname);
 }

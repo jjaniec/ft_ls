@@ -13,12 +13,12 @@
 #include <ft_ls.h>
 
 /*
-** 
+** Handle option error and print usage
 */
 
-void 			ft_handle_opt_err(char opt)
+void 			ft_handle_opt_err(char opt, char *pname)
 {
-	ft_printf("./ft_ls: illegal option -- %c\n", opt);
-	ft_print_usage();
+	ft_printf("%s: illegal option -- %c\n", pname, opt);
+	ft_print_usage(pname);
 	exit(1);
 }
