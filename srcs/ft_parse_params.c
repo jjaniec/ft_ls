@@ -46,7 +46,8 @@ static void			*ft_init_params_list(t_param **initptr, t_param *li, char *s)
 
 static void			ft_skip_param(int *ac, char ***ptr)
 {
-	*ptr = &ptr[0][1];
+	if (ac > 0)
+		*ptr = &ptr[0][1];
 	*ac -= 1;
 }
 
@@ -67,7 +68,7 @@ t_param				*ft_parse_params(int ac, char **av)
 		ptr = &ptr[1];
 	if ((strcmp(*ptr, "--") == 0))
 		ft_skip_param(&ac, &ptr);
-	while (ac-- > 0)
+	while (ac-- > -1)
 	{
 		if (ret)
 		{
