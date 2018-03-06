@@ -70,7 +70,7 @@ t_opt			ft_parse_options(int ac, char **av)
 	ptr = (ac >= 1) ? (&av[1]) : (NULL);
 	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
 	{
-		ft_printf("{FG_RED}str : %s\n", *ptr);
+		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		if (**ptr == '-')
 			ft_toggle_opt(&opts, (*ptr));
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);

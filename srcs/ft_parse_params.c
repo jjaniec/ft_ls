@@ -41,6 +41,16 @@ static void			*ft_init_params_list(t_param *initptr, t_param *li, char *s)
 }
 
 /*
+** Skip param in ptr
+*/
+
+static void			ft_skip_param(int *ac, char ***ptr)
+{
+	*ptr = &ptr[0][1];
+	*ac -= 1;
+}
+
+/*
 ** Parse cli parameters like file or folder names
 */
 
@@ -55,7 +65,9 @@ t_param				*ft_parse_params(int ac, char **av)
 	ret = NULL;
 	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
 		ptr = &ptr[1];
-	ft_printf("{FG_MAGENTA}str : %s\n", *ptr);
+	if ((strcmp(*ptr, "--") == 0))
+		ft_skip_param(&ac, &ptr);
+	ft_printf("{FG_MAGENTA}begin params : %s\n", *ptr);
 	while (ac-- > 0)
 	{
 		params = (!ret) ? \
