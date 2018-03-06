@@ -42,7 +42,6 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 			opts->r = TRUE;
 		if (*str == 't')
 			opts->t = TRUE;
-		ft_printf("{FG_GREEN}toggling [%c] opt\n", *str);
 	}
 }
 
@@ -76,10 +75,8 @@ t_opt			*ft_parse_options(int ac, char **av)
 	ptr = &av[1];
 	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
 	{
-		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		if (**ptr == '-')
 			ft_toggle_opt(opts, (*ptr), av[0]);
-		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);
 	}
 	return (opts);

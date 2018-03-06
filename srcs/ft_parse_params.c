@@ -30,13 +30,13 @@ static t_param		*ft_create_param_elem(char *s)
 ** Creates linked list's first argument and init return value of ft_parse_params
 */
 
-static void			*ft_init_params_list(t_param *initptr, t_param *li, char *s)
+static void			*ft_init_params_list(t_param **initptr, t_param *li, char *s)
 {
 	t_param		*t;
 
 	t = ft_create_param_elem(s);
 	li = t;
-	initptr = t;
+	*initptr = t;
 	return (t);
 }
 
@@ -61,19 +61,21 @@ t_param				*ft_parse_params(int ac, char **av)
 	char 		**ptr;
 
 	--ac;
-	ptr = (ac >= 1) ? (&av[1]) : (NULL);
+	ptr = &av[1];
 	ret = NULL;
 	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
 		ptr = &ptr[1];
 	if ((strcmp(*ptr, "--") == 0))
 		ft_skip_param(&ac, &ptr);
-	ft_printf("{FG_MAGENTA}begin params : %s\n", *ptr);
 	while (ac-- > 0)
 	{
-		params = (!ret) ? \
-			(ft_init_params_list(ret, params, *ptr)) : (ft_create_param_elem(*ptr));
-		ft_printf("{FG_GREEN}Param : %s\n", params->s);
-		params = params->next;
+		if (ret)
+		{
+			params->next = ft_create_param_elem(*ptr);
+			params = params->next;
+		}
+		else
+			params = ft_init_params_list(&ret, params, *ptr);
 		ptr = &ptr[1];
 	}
 	return (ret);
