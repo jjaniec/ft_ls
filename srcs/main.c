@@ -15,7 +15,7 @@
 int		main(int ac, char **av)
 {
 	t_opt		opts;
-	t_param		params;
+	t_param		*params;
 
 	opts = ft_parse_options(ac, av);
 	params = ft_parse_params(ac, av);

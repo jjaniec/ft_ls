@@ -13,6 +13,7 @@
 NAME = ft_ls
 
 SRC_NAME = 	ft_parse_options.c \
+			ft_parse_params.c \
 			main.c
 
 SRC_DIR = ./srcs/
