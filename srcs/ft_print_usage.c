@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_err.c                                    :+:      :+:    :+:   */
+/*   ft_print_usage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/06 18:17:58 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/06 19:25:55 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/06 19:25:57 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** 
+** Prints usage of the program
 */
 
-void 			ft_handle_opt_err(char opt)
+void	ft_print_usage(void)
 {
-	ft_printf("./ft_ls: illegal option -- %c\n", opt);
-	ft_print_usage();
-	exit(1);
+	ft_printf("usage: ls [lRart] [file ...]");
 }
