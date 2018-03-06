@@ -19,15 +19,27 @@ typedef int		t_bool;
 # define TRUE	1
 # define FALSE	0
 
-typedef struct	s_param
+typedef struct	s_opt
 {
 	t_bool	l;
 	t_bool	r_caps;
 	t_bool	a;
 	t_bool	r;
 	t_bool	t;
+}				t_opt;
+
+typedef struct	s_param
+{
+	char 			*s;
+	struct s_param	*next;
 }				t_param;
 
-t_param			ft_parse_options(int ac, char **av);
+t_opt			ft_parse_options(int ac, char **av);
+
+t_param			*ft_parse_params(int ac, char **av);
+
+void 			ft_handle_opt_err(char opt, char *pname);
+
+void			ft_print_usage(char *pname);
 
 #endif
