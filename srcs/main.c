@@ -14,10 +14,10 @@
 
 int		main(int ac, char **av)
 {
-	t_opt		opts;
+	t_opt		*opts;
 	t_param		*params;
 
-	opts = ft_parse_options(ac, av);
-	params = ft_parse_params(ac, av);
-	return (ac);
+	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
+	params = (ac > 1) ? (ft_parse_params(ac, av)) : (NULL);
+	return (0);
 }

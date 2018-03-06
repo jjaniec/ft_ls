@@ -50,13 +50,14 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 ** Takes a t_param * and set all it's elements to FALSE
 */
 
-static void		ft_init_opt_struct(t_opt *opts)
+static void		ft_init_opt_struct(t_opt **opts)
 {
-	opts->l = FALSE;
-	opts->r_caps = FALSE;
-	opts->a = FALSE;
-	opts->r = FALSE;
-	opts->t = FALSE;
+	(*opts) = malloc(sizeof(t_opt));
+	(*opts)->l = FALSE;
+	(*opts)->r_caps = FALSE;
+	(*opts)->a = FALSE;
+	(*opts)->r = FALSE;
+	(*opts)->t = FALSE;
 }
 
 /*
@@ -64,19 +65,21 @@ static void		ft_init_opt_struct(t_opt *opts)
 ** and store found paramaters in the opts struct
 */
 
-t_opt			ft_parse_options(int ac, char **av)
+t_opt			*ft_parse_options(int ac, char **av)
 {
 	char		**ptr;
-	t_opt		opts;
+	t_opt		*opts;
 
+	opts = NULL;
 	ft_init_opt_struct(&opts);
 	--ac;
-	ptr = (ac >= 1) ? (&av[1]) : (NULL);
+	ptr = &av[1];
 	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
 	{
 		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		if (**ptr == '-')
-			ft_toggle_opt(&opts, (*ptr), av[0]);
+			ft_toggle_opt(opts, (*ptr), av[0]);
+		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);
 	}
 	return (opts);

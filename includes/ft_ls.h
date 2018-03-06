@@ -34,7 +34,7 @@ typedef struct	s_param
 	struct s_param	*next;
 }				t_param;
 
-t_opt			ft_parse_options(int ac, char **av);
+t_opt			*ft_parse_options(int ac, char **av);
 
 t_param			*ft_parse_params(int ac, char **av);
 
