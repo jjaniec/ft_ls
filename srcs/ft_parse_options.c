@@ -28,6 +28,10 @@ static void		ft_toggle_opt(t_opt *opts, char *str)
 {
 	while (*(++str))
 	{
+		if (*str != 'l' && *str != 'R' && \
+			*str != 'a' && *str != 'r' && \
+			*str != 't')
+			ft_handle_opt_err(*str);
 		if (*str == 'l')
 			opts->l = TRUE;
 		if (*str == 'R')

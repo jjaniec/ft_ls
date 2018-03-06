@@ -38,4 +38,6 @@ t_opt			ft_parse_options(int ac, char **av);
 
 t_param			*ft_parse_params(int ac, char **av);
 
+void 			ft_handle_opt_err(char opt);
+
 #endif
