@@ -18,5 +18,5 @@
 
 void	ft_print_usage(char *pname)
 {
-	ft_printf("usage: %s [lRart] [file ...]", pname);
+	ft_printf("usage: %s [lRart] [file ...]\n", pname);
 }
