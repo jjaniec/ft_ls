@@ -24,10 +24,14 @@
 ** t : Sort by time modified (most recently modified first)
 */
 
-static void		ft_toggle_opt(t_opt *opts, char *str)
+static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 {
 	while (*(++str))
 	{
+		if (*str != 'l' && *str != 'R' && \
+			*str != 'a' && *str != 'r' && \
+			*str != 't')
+			ft_handle_opt_err(*str, pname);
 		if (*str == 'l')
 			opts->l = TRUE;
 		if (*str == 'R')
@@ -72,7 +76,7 @@ t_opt			ft_parse_options(int ac, char **av)
 	{
 		ft_printf("{FG_RED}opt : %s\n", *ptr);
 		if (**ptr == '-')
-			ft_toggle_opt(&opts, (*ptr));
+			ft_toggle_opt(&opts, (*ptr), av[0]);
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);
 	}
 	return (opts);
