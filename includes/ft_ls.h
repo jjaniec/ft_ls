@@ -48,4 +48,6 @@ void 			ft_handle_opt_err(char opt, char *pname);
 
 void			ft_print_usage(char *pname);
 
+void			ft_debug_ls_args(t_args arg);
+
 #endif

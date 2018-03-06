@@ -34,6 +34,6 @@ int		main(int ac, char **av)
 	t_args	arg;
 
 	ft_init_args(ac, av, &arg);
-	//ft_debug_args(args);
+	ft_debug_ls_args(arg);
 	return (0);
 }
