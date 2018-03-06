@@ -37,8 +37,7 @@ all : $(NAME)
 
 .PHONY : all clean
 
-$(NAME) : $(OBJ) $(FT_PRINTF)
-	make -C ./ft_printf/
+$(NAME) : $(FT_PRINTF) $(OBJ)
 	cp ./ft_printf/libftprintf.a ./libftprintf.a
 ifeq ($(UNAME_S),Linux)
 	gcc $(CFLAGS) $(LFLAGS) $(OBJ) ./ft_printf/ft_printf.* -o $(NAME)
@@ -54,6 +53,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 
 $(FT_PRINTF):
 	git clone https://github.com/jjaniec/ft_printf || true
+	make -C ft_printf
 
 clean:
 	rm -rf $(OBJ_DIR)

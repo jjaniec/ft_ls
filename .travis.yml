@@ -1,0 +1,29 @@
+language: c
+sudo: true
+notifications:
+  email: false
+before_install:
+    - brew update || sudo apt-get update -yqq
+    - brew install valgrind || sudo apt-get install -yqq valgrind
+matrix:
+    include:
+        - os: osx
+          compiler: gcc
+          env: CXX=gcc
+        - os: osx
+          compiler: clang
+          env: CXX=clang
+        - os: linux
+          compiler: gcc
+          env: CXX=gcc
+        - os: linux
+          compiler: clang
+          env: CXX=clang
+    allow_failures:
+        - os: linux
+          compiler: gcc
+          env: CXX=gcc
+        - os: linux
+          compiler: clang
+          env: CXX=clang
+script: make CC=$CXX; ./ft_ls
