@@ -55,12 +55,14 @@ static void			ft_skip_param(int *ac, char ***ptr)
 ** Parse cli parameters like file or folder names
 */
 
-t_param				*ft_parse_params(int ac, char **av)
+t_param				*ft_parse_params(int ac, char **av, int rev)
 {
 	t_param		*params;
 	t_param		*ret;
 	char 		**ptr;
 
+	if (rev)
+		return (ft_parse_params_rev(ac, av));
 	--ac;
 	ptr = &av[1];
 	ret = NULL;
@@ -78,6 +80,33 @@ t_param				*ft_parse_params(int ac, char **av)
 		else
 			params = ft_init_params_list(&ret, params, *ptr);
 		ptr = &ptr[1];
+	}
+	return (ret);
+}
+
+/*
+** Parse cli parameters like file or folder names in reverse for -r option
+*/
+
+t_param				*ft_parse_params_rev(int ac, char **av)
+{
+	t_param		*ret;
+	t_param		*params;
+	int			i;
+	i = 0;
+
+	ret = NULL;
+	while (++i < ac && (*(av[i]) == '-'))
+		;
+	while (ac-- > i)
+	{
+		if (ret)
+		{
+			params->next = ft_create_param_elem(av[ac]);
+			params = params->next;
+		}
+		else
+			params = ft_init_params_list(&ret, params, av[ac]);
 	}
 	return (ret);
 }
