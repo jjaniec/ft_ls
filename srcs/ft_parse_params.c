@@ -55,12 +55,14 @@ static void			ft_skip_param(int *ac, char ***ptr)
 ** Parse cli parameters like file or folder names
 */
 
-t_param				*ft_parse_params(int ac, char **av)
+t_param				*ft_parse_params(int ac, char **av, int rev)
 {
 	t_param		*params;
 	t_param		*ret;
 	char 		**ptr;
 
+	if (rev)
+		return (ft_parse_params_rev(ac, av));
 	--ac;
 	ptr = &av[1];
 	ret = NULL;

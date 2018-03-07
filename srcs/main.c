@@ -24,9 +24,9 @@ void		ft_init_args(int ac, char **av, t_args *args)
 
 	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	if (opts)
-		params = (ac > 2) ? (ft_parse_params(ac, av)) : (NULL);
+		params = (ac > 2) ? (ft_parse_params(ac, av, opts->r)) : (NULL);
 	else
-		params = (ac > 1) ? (ft_parse_params(ac, av)) : (NULL);
+		params = (ac > 1) ? (ft_parse_params(ac, av, opts->r)) : (NULL);
 	args->opt = opts;
 	args->prm = params;
 }
