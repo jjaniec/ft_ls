@@ -98,7 +98,7 @@ t_param				*ft_parse_params_rev(int ac, char **av)
 	ret = NULL;
 	while (++i < ac && (*(av[i]) == '-'))
 		;
-	while (ac > i)
+	while (ac-- > i)
 	{
 		if (ret)
 		{
@@ -107,7 +107,6 @@ t_param				*ft_parse_params_rev(int ac, char **av)
 		}
 		else
 			params = ft_init_params_list(&ret, params, av[ac]);
-		ac--;
 	}
 	return (ret);
 }
