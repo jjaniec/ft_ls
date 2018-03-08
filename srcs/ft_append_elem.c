@@ -23,10 +23,10 @@ t_param			*ft_append_elem(t_param *li, t_param *prm, int rev)
 	t_param		*prev;
 
 	ptr = li;
-	rev = 0;
 	prev = NULL;
-	while (ptr && ((rev == 0 && (ft_strcmp(ptr->s, prm->s) > 0)) || \
-		(rev == 1 && (ft_strcmp(ptr->s, prm->s) < 0))))
+	ft_printf("rev : %d\n", rev);
+	while (ptr && ((rev && (ft_strcmp(ptr->s, prm->s) > 0)) || \
+		(!rev && (ft_strcmp(ptr->s, prm->s) < 0))))
 	{
 		prev = ptr;
 		ptr = ptr->next;
