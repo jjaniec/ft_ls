@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 20:41:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:13:42 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts)
 {
+	
 	return (NULL);
 }
 
@@ -35,11 +36,11 @@ t_str_stats		*ft_get_stats(char *arg, t_opt *opt)
 	f = ft_create_str_stats_elem(arg);
 	f->rcode = lstat(arg, &arg_stats);
 	if (f->rcode < 0)
-		return (NULL);
+		return (ft_free_str_stat_struct(f));
 	f->name = arg;
-	if (opt && opt->l)
-		return (ft_get_stats_l_opt(arg, &arg_stats, opt));
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
+	if (opt && opt->l)
+		return (ft_get_stats_l_opt(arg, &arg_stats, opt));
 	return (f);
 }

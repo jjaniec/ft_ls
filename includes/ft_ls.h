@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 21:02:37 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:13:03 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct	s_args
 	struct s_param	*prm;
 }				t_args;
 
-typedef struct s_str_stats
+typedef struct t_str_stats
 {
 	char	*name;
 	t_bool	folder;
@@ -78,5 +78,7 @@ t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts);
 void			ft_ls(t_args args);
 
 void			ft_debug_str_stats(char *name, t_str_stats *s);
+
+void			*ft_free_str_stat_struct(t_str_stats *t_s);
 
 #endif

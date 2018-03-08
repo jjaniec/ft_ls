@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/08 20:44:59 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/08 21:13:21 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = ft_ls
 
 SRC_NAME = 	ft_append_elem.c \
 			ft_debug_ls_struct.c \
+			ft_free_ls_struct.c \
 			ft_handle_err.c \
 			ft_parse_options.c \
 			ft_parse_params.c \
