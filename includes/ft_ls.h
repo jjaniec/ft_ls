@@ -61,6 +61,8 @@ t_param			*ft_parse_params(int ac, char **av, int rev);
 
 t_param			*ft_create_param_elem(char *s);
 
+t_str_stats		*ft_create_str_stats_elem(char *s);
+
 void 			ft_handle_opt_err(char opt, char *pname);
 
 void			ft_print_usage(char *pname);

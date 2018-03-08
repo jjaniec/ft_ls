@@ -31,10 +31,9 @@ t_str_stats		*ft_get_stats(char *arg, t_args *args)
 {
 	struct stat		arg_stats;
 	t_str_stats		*f;
-	int				r;
 
-	f = malloc(sizeof(t_str_stats));
-	f->rcode = stat(arg, &arg_stats);
+	f = ft_create_str_stats_elem(arg);
+	f->rcode = lstat(arg, &arg_stats);
 	if (f->rcode < 0)
 		return (NULL);
 	if (args->opt && args->opt->l)

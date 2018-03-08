@@ -13,6 +13,26 @@
 #include <ft_ls.h>
 
 /*
+** Create a t_str_stat struct, set .name to s and init all other elements to NULL
+*/
+
+t_str_stats			*ft_create_str_stats_elem(char *s)
+{
+	t_str_stats		*f;
+
+	f->name = s;
+	f->folder = 0;
+	f->perms = NULL;
+	f->slnks = NULL;
+	f->ownr = NULL;
+	f->ownr_grp = NULL;
+	f->size = 0;
+	f->last_mod = NULL;
+	f->rcode = -1;
+	return (f);
+}
+
+/*
 ** Creates t_param elem with content passed as parameter and set next to null
 */
 
