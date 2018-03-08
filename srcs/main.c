@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 20:51:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:02:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	ft_ls(t_args args)
 {
 	t_param		*aptr;
 	t_str_stats	*infs;
-	
+
 	aptr = args.prm;
 	while (aptr)
 	{
 		infs = ft_get_stats(aptr->s, args.opt);
-		ft_debug_str_stats(infs);
+		ft_debug_str_stats(aptr->s, infs);
 		aptr = aptr->next;
 	}
 }

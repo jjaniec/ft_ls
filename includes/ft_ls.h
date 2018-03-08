@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 20:47:50 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:02:37 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts);
 
 void			ft_ls(t_args args);
 
-void			ft_debug_str_stats(t_str_stats *s);
+void			ft_debug_str_stats(char *name, t_str_stats *s);
 
 #endif

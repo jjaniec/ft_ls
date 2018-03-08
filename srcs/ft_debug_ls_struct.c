@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 20:49:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:02:02 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@
 ** print content of a t_str_stats struct
 */
 
-void	ft_debug_str_stats(t_str_stats *s)
+void	ft_debug_str_stats(char *name, t_str_stats *s)
 {
-	ft_printf("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", s->name);
-	ft_printf("\t\tt_str_stats->folder %d:\n", s->folder);
-	
-	ft_printf("\t\tt_str_stats->rcode %d:\n", s->rcode);
+	ft_printf("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", name);
+	if (!s)
+		ft_printf("\t\t(null)\n");
+	else
+	{
+		ft_printf("\t\tt_str_stats->name %s:\n", s->name);
+		ft_printf("\t\tt_str_stats->folder %d:\n", s->folder);
+
+		ft_printf("\t\tt_str_stats->rcode %d:\n", s->rcode);
+	}
 }
 
 /*
