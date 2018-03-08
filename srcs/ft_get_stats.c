@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 21:18:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 21:27:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 ** required for -l output of $arg file
 */
 
-t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts)
+t_str_stats		*ft_get_stats_l_opt(\
+		t_str_stats *f, struct stat *f_stats, t_opt *opts)
 {
-	
-	return (NULL);
+	ft_get_arg_perms(f, f_stats);
+	return (f);
 }
 
 /*
@@ -41,6 +42,6 @@ t_str_stats		*ft_get_stats(char *s, t_opt *opt)
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
 	if (opt && opt->l)
-		return (ft_get_stats_l_opt(s, &arg_stats, opt));
+		return (ft_get_stats_l_opt(f, &arg_stats, opt));
 	return (f);
 }
