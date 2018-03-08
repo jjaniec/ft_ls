@@ -79,5 +79,10 @@ t_opt			*ft_parse_options(int ac, char **av)
 			ft_toggle_opt(opts, (*ptr), av[0]);
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);
 	}
+	if (opts && !opts->l && !opts->r_caps && !opts->a && !opts->r && !opts->t)
+	{
+		free(opts);
+		opts = NULL;
+	}
 	return (opts);
 }

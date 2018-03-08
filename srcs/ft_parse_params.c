@@ -16,7 +16,7 @@
 ** Creates t_param elem with content passed as parameter and set next to null
 */
 
-static t_param		*ft_create_param_elem(char *s)
+t_param				*ft_create_param_elem(char *s)
 {
 	t_param		*p;
 
