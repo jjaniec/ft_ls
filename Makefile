@@ -12,7 +12,8 @@
 
 NAME = ft_ls
 
-SRC_NAME = 	ft_debug_ls_args.c \
+SRC_NAME = 	ft_append_elem.c \
+			ft_debug_ls_args.c \
 			ft_handle_err.c \
 			ft_parse_options.c \
 			ft_parse_params.c \
@@ -26,7 +27,7 @@ OBJ_DIR = ./obj/
 SRC = $(addprefix $(SRC_DIR), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
 LFLAGS = -L./ft_printf -lftprintf
 

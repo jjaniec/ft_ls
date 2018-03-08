@@ -30,25 +30,13 @@ static t_param		*ft_create_param_elem(char *s)
 ** Creates linked list's first argument and init return value of ft_parse_params
 */
 
-static void			*ft_init_params_list(t_param **initptr, t_param *li, char *s)
+static void			*ft_init_params_list(t_param **initptr, char *s)
 {
 	t_param		*t;
 
 	t = ft_create_param_elem(s);
-	li = t;
 	*initptr = t;
 	return (t);
-}
-
-/*
-** Skip param in ptr
-*/
-
-static void			ft_skip_param(int *ac, char ***ptr)
-{
-	if (ac > 0)
-		*ptr = &ptr[0][1];
-	*ac -= 1;
 }
 
 /*
@@ -57,56 +45,26 @@ static void			ft_skip_param(int *ac, char ***ptr)
 
 t_param				*ft_parse_params(int ac, char **av, int rev)
 {
-	t_param		*params;
-	t_param		*ret;
-	char 		**ptr;
-
-	if (rev)
-		return (ft_parse_params_rev(ac, av));
-	--ac;
-	ptr = &av[1];
-	ret = NULL;
-	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
-		ptr = &ptr[1];
-	if ((strcmp(*ptr, "--") == 0))
-		ft_skip_param(&ac, &ptr);
-	while (ac-- > -1)
-	{
-		if (ret)
-		{
-			params->next = ft_create_param_elem(*ptr);
-			params = params->next;
-		}
-		else
-			params = ft_init_params_list(&ret, params, *ptr);
-		ptr = &ptr[1];
-	}
-	return (ret);
-}
-
-/*
-** Parse cli parameters like file or folder names in reverse for -r option
-*/
-
-t_param				*ft_parse_params_rev(int ac, char **av)
-{
-	t_param		*ret;
-	t_param		*params;
+	t_param		*li;
+	t_param		*tmp;
 	int			i;
-	i = 0;
 
-	ret = NULL;
-	while (++i < ac && (*(av[i]) == '-'))
-		;
-	while (ac-- > i)
+	i = 1;
+	li = NULL;
+	while (i < ac && av[i][0] == '-' && !(av[i][0] == '-' && av[i][1] == '-'))
+		i++;
+	if ((strcmp(av[i], "--") == 0))
+		i++;
+	while (i < ac)
 	{
-		if (ret)
+		if (li)
 		{
-			params->next = ft_create_param_elem(av[ac]);
-			params = params->next;
+			tmp = ft_create_param_elem(av[i]);
+			li = ft_append_elem(li, tmp, rev);
 		}
 		else
-			params = ft_init_params_list(&ret, params, av[ac]);
+			ft_init_params_list(&li, av[i]);
+		i++;
 	}
-	return (ret);
+	return (li);
 }
