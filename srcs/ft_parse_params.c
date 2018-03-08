@@ -51,7 +51,7 @@ t_param				*ft_parse_params(int ac, char **av, int rev)
 
 	i = 1;
 	li = NULL;
-	while (i <= ac && av[i][0] == '-' && !(av[i][0] == '-' && av[i][1] == '-'))
+	while (i < ac && av[i][0] == '-' && !(av[i][0] == '-' && av[i][1] == '-'))
 		i++;
 	if ((strcmp(av[i], "--") == 0))
 		i++;
