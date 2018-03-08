@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_stats.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 16:54:20 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 20:41:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts)
 ** name and sets str_stats.folder to 1 if $arg is a folder
 */
 
-t_str_stats		*ft_get_stats(char *arg, t_args *args)
+t_str_stats		*ft_get_stats(char *arg, t_opt *opt)
 {
 	struct stat		arg_stats;
 	t_str_stats		*f;
@@ -36,9 +36,10 @@ t_str_stats		*ft_get_stats(char *arg, t_args *args)
 	f->rcode = lstat(arg, &arg_stats);
 	if (f->rcode < 0)
 		return (NULL);
-	if (args->opt && args->opt->l)
-		return (ft_get_stats_l_opt(arg, &arg_stats, args->opt));
-	ft_printf("{FG_RED}stat return value : %d{FG_RESET}\n", f->rcode);
-	printf("File Size: \t\t%lld bytes\n", arg_stats.st_size);
-	return (NULL);
+	f->name = arg;
+	if (opt && opt->l)
+		return (ft_get_stats_l_opt(arg, &arg_stats, opt));
+	if (S_ISDIR(arg_stats.st_mode))
+		f->folder = TRUE;
+	return (f);
 }
