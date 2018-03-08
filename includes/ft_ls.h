@@ -13,6 +13,8 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 # include <ft_printf.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 
 typedef int		t_bool;
 
@@ -53,5 +55,7 @@ void			ft_print_usage(char *pname);
 void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
+
+void			ft_get_stats(char *str);
 
 #endif
