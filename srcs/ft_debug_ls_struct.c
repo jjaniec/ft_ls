@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug_args.c                                    :+:      :+:    :+:   */
+/*   ft_debug_ls_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/06 20:54:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 20:49:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+/*
+** print content of a t_str_stats struct
+*/
+
+void	ft_debug_str_stats(t_str_stats *s)
+{
+	ft_printf("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", s->name);
+	ft_printf("\t\tt_str_stats->folder %d:\n", s->folder);
+	
+	ft_printf("\t\tt_str_stats->rcode %d:\n", s->rcode);
+}
 
 /*
 ** print content of a s_param struct

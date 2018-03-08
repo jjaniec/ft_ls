@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/05 21:53:30 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/08 20:47:50 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_param			*ft_parse_params(int ac, char **av, int rev);
 
 t_param			*ft_create_param_elem(char *s);
 
+t_str_stats		*ft_create_str_stats_elem(char *s);
+
 void 			ft_handle_opt_err(char opt, char *pname);
 
 void			ft_print_usage(char *pname);
@@ -69,8 +71,12 @@ void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
 
-t_str_stats		*ft_get_stats(char *str, t_args *args);
+t_str_stats		*ft_get_stats(char *str, t_opt *opt);
 
 t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts);
+
+void			ft_ls(t_args args);
+
+void			ft_debug_str_stats(t_str_stats *s);
 
 #endif
