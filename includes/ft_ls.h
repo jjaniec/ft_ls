@@ -42,6 +42,19 @@ typedef struct	s_args
 	struct s_param	*prm;
 }				t_args;
 
+typedef struct s_str_stats
+{
+	char	*name;
+	t_bool	folder;
+	char	*perms;
+	char	*slnks;
+	char	*ownr;
+	char	*ownr_grp;
+	int		size;
+	char	*last_mod;
+	int		rcode;
+} t_str_stats;
+
 t_opt			*ft_parse_options(int ac, char **av);
 
 t_param			*ft_parse_params(int ac, char **av, int rev);
@@ -56,6 +69,8 @@ void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
 
-void			ft_get_stats(char *str);
+t_str_stats		*ft_get_stats(char *str, t_args *args);
+
+t_str_stats		*ft_get_stats_l_opt(char *arg, struct stat *f_stats, t_opt *opts);
 
 #endif

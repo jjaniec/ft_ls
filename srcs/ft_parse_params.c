@@ -13,20 +13,6 @@
 #include	<ft_ls.h>
 
 /*
-** Creates t_param elem with content passed as parameter and set next to null
-*/
-
-t_param				*ft_create_param_elem(char *s)
-{
-	t_param		*p;
-
-	p = malloc(sizeof(t_param));
-	p->s = s;
-	p->next = NULL;
-	return (p);
-}
-
-/*
 ** Creates linked list's first argument and init return value of ft_parse_params
 */
 

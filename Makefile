@@ -19,6 +19,7 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_parse_params.c \
 			ft_print_usage.c \
 			ft_get_stats.c \
+			ft_create_ls_elem.c \
 			main.c
 
 SRC_DIR = ./srcs/
