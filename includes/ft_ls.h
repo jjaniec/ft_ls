@@ -52,4 +52,6 @@ void			ft_print_usage(char *pname);
 
 void			ft_debug_ls_args(t_args arg);
 
+t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
+
 #endif
