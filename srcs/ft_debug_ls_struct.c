@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:12:53 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 18:48:43 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 	{
 		ft_printf("\t\tt_str_stats->name |%s|\n", s->name);
 		ft_printf("\t\tt_str_stats->folder: |%d|\n", s->folder);
+		ft_printf("\t\tt_str_stats->perms |%s|\n", s->perms);
 		if (opts && opts->l)
 		{
-			ft_printf("\t\tt_str_stats->perms |%s|\n", s->perms);
 			ft_printf("\t\tt_str_stats->slnks |%d|\n", s->slnks);
 			ft_printf("\t\tt_str_stats->ownr_uid |%u|\n", s->ownr_uid);
 			ft_printf("\t\tt_str_stats->ownr_grp_uid |%u|\n", s->ownr_grp_uid);

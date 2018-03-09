@@ -6,13 +6,14 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/09 18:15:35 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/09 18:38:43 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
 SRC_NAME = 	ft_append_elem.c \
+			ft_colorize_name.c \
 			ft_debug_ls_struct.c \
 			ft_free_ls_struct.c \
 			ft_fill_perms.c \
