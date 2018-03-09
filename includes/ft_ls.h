@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/08 21:40:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 16:09:32 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct t_str_stats
 	char	*name;
 	t_bool	folder;
 	char	*perms;
-	char	*slnks;
+	int		slnks;
 	char	*ownr;
 	char	*ownr_grp;
 	int		size;
@@ -81,6 +81,6 @@ void			ft_debug_str_stats(char *name, t_str_stats *s, t_bool l);
 
 void			*ft_free_str_stat_struct(t_str_stats *t_s);
 
-void			ft_get_arg_perms(t_str_stats *f, struct stat *f_stats);
+void			ft_fill_perms(t_str_stats *f, struct stat *f_stats);
 
 #endif
