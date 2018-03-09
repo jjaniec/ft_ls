@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:58:07 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:36:12 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <ft_printf.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <pwd.h>
+# include <grp.h>
 
 typedef int		t_bool;
 
@@ -81,7 +83,7 @@ t_str_stats		*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 
 void			ft_ls(t_args args);
 
-void			ft_debug_str_stats(char *name, t_str_stats *s, t_bool l);
+void			ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
 
 void			*ft_free_str_stat_struct(t_str_stats *t_s);
 

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:01:03 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:03:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 ** r : Reverse the order of the sort to get reverse lexicographical order
 **     or the oldest entries first.
 ** t : Sort by time modified (most recently modified first)
+** n : Display user and group IDs numerically,
+**     rather than converting to a user or group name in a long (-l) output.
 */
 
 static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
