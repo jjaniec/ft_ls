@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_ls_struct.c                                :+:      :+:    :+:   */
+/*   ft_fill_last_mod.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:51:51 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/09 18:13:17 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/09 18:23:32 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Free t_str_stat structure and set all of it's elements to NULL
+** Takes last modification information and format it like the ls -l option does
+** char			*ft_strsub_free(char *s, unsigned int start, size_t len);
 */
 
-void	*ft_free_str_stat_struct(t_str_stats *t_s)
+void		ft_fill_last_mod(t_str_stats *f, struct stat *f_stats)
 {
-	free(t_s->name);
-	free(t_s->perms);
-	if (t_s->ownr)
-		free(t_s->ownr);
-	if (t_s->ownr_grp)
-		free(t_s->ownr_grp);
-	if (t_s->last_mod)
-		free(t_s->last_mod);
-	return (NULL);
+	char	*s;
+
+	s = ctime(&(*f_stats).st_mtime);
+	s = ft_strsub(s + 4, 0, ft_strlen(s + 4) - 9);
+	f->last_mod = s;
 }

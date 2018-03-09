@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_options.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/05 21:53:43 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:03:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 ** r : Reverse the order of the sort to get reverse lexicographical order
 **     or the oldest entries first.
 ** t : Sort by time modified (most recently modified first)
+** n : Display user and group IDs numerically,
+**     rather than converting to a user or group name in a long (-l) output.
 */
 
 static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
@@ -30,7 +32,7 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 	{
 		if (*str != 'l' && *str != 'R' && \
 			*str != 'a' && *str != 'r' && \
-			*str != 't')
+			*str != 't' && *str != 'n')
 			ft_handle_opt_err(*str, pname);
 		if (*str == 'l')
 			opts->l = TRUE;
@@ -42,6 +44,11 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 			opts->r = TRUE;
 		if (*str == 't')
 			opts->t = TRUE;
+		if (*str == 'n')
+		{
+			opts->n = TRUE;
+			opts->l = TRUE;
+		}
 	}
 }
 
@@ -57,6 +64,7 @@ static void		ft_init_opt_struct(t_opt **opts)
 	(*opts)->a = FALSE;
 	(*opts)->r = FALSE;
 	(*opts)->t = FALSE;
+	(*opts)->n = FALSE;
 }
 
 /*
