@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaniec <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/05 23:44:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:48:19 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			*ft_init_params_list(t_param **initptr, char *s)
 {
 	t_param		*t;
 
-	t = ft_create_param_elem(s);
+	t = ft_create_param_elem(ft_strdup(s));
 	*initptr = t;
 	return (t);
 }
