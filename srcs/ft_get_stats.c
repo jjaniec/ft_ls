@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:54:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 18:15:11 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_str_stats		*ft_get_stats_l_opt(\
 	f->slnks = f_stats->st_nlink;
 	ft_fill_owners(f, f_stats, opts);
 	f->size = f_stats->st_size;
+	ft_fill_last_mod(f, f_stats);
 	return (f);
 }
 
