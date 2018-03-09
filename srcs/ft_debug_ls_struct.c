@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:31:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 16:58:57 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_debug_opt(t_opt *opts)
 		ft_printf("\t\topt a: %d\n", (*opts).a);
 		ft_printf("\t\topt r: %d\n", (*opts).r);
 		ft_printf("\t\topt t: %d\n", (*opts).t);
+		ft_printf("\t\topt n: %d\n", (*opts).n);
 	}
 }
 

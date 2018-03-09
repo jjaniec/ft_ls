@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:57:22 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:01:03 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 		if (*str == 't')
 			opts->t = TRUE;
 		if (*str == 'n')
+		{
 			opts->n = TRUE;
+			opts->l = TRUE;
+		}
 	}
 }
 
