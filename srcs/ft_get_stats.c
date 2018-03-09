@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:15:11 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 18:39:42 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 t_str_stats		*ft_get_stats_l_opt(\
 		t_str_stats *f, struct stat *f_stats, t_opt *opts)
 {
-	ft_fill_perms(f, f_stats);
 	f->slnks = f_stats->st_nlink;
 	ft_fill_owners(f, f_stats, opts);
 	f->size = f_stats->st_size;
 	ft_fill_last_mod(f, f_stats);
+
 	return (f);
 }
 
@@ -45,6 +45,8 @@ t_str_stats		*ft_get_stats(char *s, t_opt *opt)
 	f->name = s;
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
+	ft_fill_perms(f, &arg_stats);
+	ft_colorize_name(f);
 	if (opt && opt->l)
 		return (ft_get_stats_l_opt(f, &arg_stats, opt));
 	return (f);

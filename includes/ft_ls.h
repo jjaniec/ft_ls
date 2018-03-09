@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:15:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 18:48:27 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef int		t_bool;
 
 # define TRUE	1
 # define FALSE	0
+
+# define DIR_COLOR FG_BLUE
+# define EXEC_COLOR FG_RED
 
 typedef struct	s_opt
 {
@@ -93,5 +96,7 @@ void			ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
 
 void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
+
+void			ft_colorize_name(t_str_stats *f);
 
 #endif
