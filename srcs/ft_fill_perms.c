@@ -6,11 +6,17 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:24:03 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:08:11 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 16:20:33 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+/*
+** Apply mask on each permission and return a string containing
+** characters for each permission
+** ls -l like
+*/
 
 void	ft_fill_perms(t_str_stats *f, struct stat *f_stats)
 {

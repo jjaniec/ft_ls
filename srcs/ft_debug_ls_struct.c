@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:10:28 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 16:31:51 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_bool l)
 			ft_printf("\t\tt_str_stats->perms |%s|\n", s->perms);
 			ft_printf("\t\tt_str_stats->slnks |%d|\n", s->slnks);
 			ft_printf("\t\tt_str_stats->ownr |%s|\n", s->ownr);
+			ft_printf("\t\tt_str_stats->ownr_uid |%u|\n", s->ownr_uid);
 			ft_printf("\t\tt_str_stats->ownr_grp |%s|\n", s->ownr_grp);
+			ft_printf("\t\tt_str_stats->ownr_grp_uid |%u|\n", s->ownr_grp_uid);
 			ft_printf("\t\tt_str_stats->size |%d|\n", s->size);
 			ft_printf("\t\tt_str_stats->last_mod |%d|\n", s->last_mod);
 			ft_printf("\t\tt_str_stats->rcode |%d|\n", s->rcode);

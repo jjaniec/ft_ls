@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:09:32 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 16:30:54 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,32 @@ typedef struct	s_opt
 	t_bool	t;
 }				t_opt;
 
-typedef struct	s_param
+typedef struct		s_param
 {
 	char 			*s;
 	struct s_param	*next;
-}				t_param;
+}					t_param;
 
-typedef struct	s_args
+typedef struct		s_args
 {
 	struct s_opt	*opt;
 	struct s_param	*prm;
-}				t_args;
+}					t_args;
 
-typedef struct t_str_stats
+typedef struct		s_str_stats
 {
-	char	*name;
-	t_bool	folder;
-	char	*perms;
-	int		slnks;
-	char	*ownr;
-	char	*ownr_grp;
-	int		size;
-	char	*last_mod;
-	int		rcode;
-} t_str_stats;
+	char			*name;
+	t_bool			folder;
+	char			*perms;
+	int				slnks;
+	char			*ownr;
+	unsigned int	ownr_uid;
+	char			*ownr_grp;
+	unsigned int	ownr_grp_uid;
+	int				size;
+	char			*last_mod;
+	int				rcode;
+}					t_str_stats;
 
 t_opt			*ft_parse_options(int ac, char **av);
 
