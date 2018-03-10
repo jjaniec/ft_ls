@@ -1,1 +1,2 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/055cf66f6c374e1899e476d5d958078a)](https://app.codacy.com/app/jjaniec/ft_ls?utm_source=github.com&utm_medium=referral&utm_content=jjaniec/ft_ls&utm_campaign=badger)
 # ft_ls [![Build Status](https://travis-ci.org/jjaniec/ft_ls.svg?branch=master)](https://travis-ci.org/jjaniec/ft_ls)
