@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 18:04:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 23:05:10 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include <dirent.h>
 # include <time.h>
 
-typedef int		t_bool;
-
-# define TRUE	1
-# define FALSE	0
-
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
+
+typedef int t_bool;
+
+# define TRUE 1
+# define FALSE 0
+
+# define terpri ft_putchar('\n')
 
 typedef struct	s_opt
 {
@@ -90,6 +92,10 @@ void			ft_ls(t_args args);
 
 void			ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
 
+void			ft_debug_prm(t_param *prm);
+
+void			ft_debug_opt(t_opt *opts);
+
 void			*ft_free_str_stat_struct(t_str_stats *t_s);
 
 void			ft_fill_perms(t_str_stats *f, struct stat *f_stats);
@@ -104,5 +110,7 @@ void			ft_colorize_name(t_str_stats *f);
 void			*ft_init_params_list(t_param **initptr, char *s);
 
 t_param			*ft_ls_create_filesll(char *path, int rev);
+
+char			*ft_strjoin_path(char *s1, char *s2);
 
 #endif
