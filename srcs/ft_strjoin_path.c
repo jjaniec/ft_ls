@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 22:00:45 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 22:42:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 23:37:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin_path(char *s1, char *s2)
 	ft_strcpy(r, s1);
 	ft_strcpy(r + l + 1, s2);
 	r[l] = '/';
-	/*free(s1);
-	free(s2);*/
+	free(s1);
+	free(s2);
 	return (r);
 }
