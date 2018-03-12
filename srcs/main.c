@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 17:19:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 18:01:53 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,36 @@ void		ft_init_args(int ac, char **av, t_args *args)
 		(ft_parse_params(ac, av, 0)) : (ft_create_param_elem("."));
 	args->opt = opts;
 	args->prm = params;
+}
+
+/*
+** Create a sorted linked list containing all file/folder names
+** sorted by ascii values
+*/
+
+t_param				*ft_ls_create_filesll(char *path, int rev)
+{
+	DIR				*d;
+	struct dirent 	*entry;
+	t_param			*li;
+	t_param			*tmp;
+	int				i;
+
+	d = opendir(path);
+	li = NULL;
+	if (d)
+		while ((entry = readdir(d)))
+		{
+			if (li)
+			{
+				tmp = ft_create_param_elem(entry->d_name);
+				li = ft_append_elem(li, tmp, rev);
+			}
+			else
+				ft_init_params_list(&li, entry->d_name);
+			i++;
+		}
+	return (li);
 }
 
 /*
@@ -61,7 +91,7 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 			ns[l] = '/';
 			ns = ft_strjoin_free(ns, ft_strdup(dir->d_name));
 			st = ft_get_stats(ns, opts);
-			ft_debug_str_stats(ns, st, opts);
+			//ft_debug_str_stats(ns, st, opts);
 			//ft_printf("%s\n", ns);
 			if (st && st->folder && opts && opts->r_caps)
 				ft_ls_foreach_in_dir(ns, opts);

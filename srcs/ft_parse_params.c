@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:48:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 18:02:43 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Creates linked list's first argument and init return value of ft_parse_params
 */
 
-static void			*ft_init_params_list(t_param **initptr, char *s)
+void			*ft_init_params_list(t_param **initptr, char *s)
 {
 	t_param		*t;
 

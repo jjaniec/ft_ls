@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 17:22:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 17:41:19 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_colorize_name(t_str_stats *f)
 			f->name = ft_strjoin(DIR_COLOR, f->name);
 		else
 			f->name = ft_strjoin(EXEC_COLOR, f->name);
-		free(s);
 		s = f->name;
 		f->name = ft_strjoin(f->name, FG_WHITE);
 		free(s);

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 19:51:48 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/12 18:04:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <dirent.h>
+# include <time.h>
 
 typedef int		t_bool;
 
@@ -99,5 +100,9 @@ void			ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
 void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
 
 void			ft_colorize_name(t_str_stats *f);
+
+void			*ft_init_params_list(t_param **initptr, char *s);
+
+t_param			*ft_ls_create_filesll(char *path, int rev);
 
 #endif
