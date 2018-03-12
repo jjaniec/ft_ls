@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:48:27 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/09 19:51:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 # include <pwd.h>
 # include <grp.h>
+# include <dirent.h>
 
 typedef int		t_bool;
 
@@ -33,12 +34,12 @@ typedef struct	s_opt
 	t_bool	a;
 	t_bool	r;
 	t_bool	t;
-	t_bool 	n;
+	t_bool	n;
 }				t_opt;
 
 typedef struct		s_param
 {
-	char 			*s;
+	char			*s;
 	struct s_param	*next;
 }					t_param;
 
