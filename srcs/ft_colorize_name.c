@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 17:41:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:28:49 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_colorize_name(t_str_stats *f)
 {
 	char	*s;
 
+	s = NULL;
 	if (f->folder || f->perms[3] == 'x')
 	{
 		s = f->name;

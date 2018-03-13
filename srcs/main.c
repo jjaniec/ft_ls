@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:02:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:35:13 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void			ft_init_args(int ac, char **av, t_args *args)
 	else
 		params = (ac > 1) ? \
 		(ft_parse_params(ac, av, 0)) : (ft_create_param_elem("."));
+	if (!opts && !params)
+		params = ft_create_param_elem("-");
 	args->opt = opts;
 	args->prm = params;
 }
@@ -46,7 +48,7 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	char			*ns;
 
 	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0));
-	li = dc->elems;
+	li = (dc) ? (dc->elems) : (NULL);
 	ptr = li;
 	//ft_debug_dir_content(dc, opts);
 	ft_printf("%s:\n", s);
@@ -85,6 +87,8 @@ void	ft_ls(t_args args)
 	t_param		*prev;
 	t_str_stats	*infs;
 
+	prev = NULL;
+	infs = NULL;
 	aptr = args.prm;
 	while (aptr)
 	{

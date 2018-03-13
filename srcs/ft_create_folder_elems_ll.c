@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:00:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:31:15 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			*ft_init_folder_elems_ll(\
 
 /*
 ** Create a sorted linked list containing all file/folder names
-** sorted by ascii values
+** sorted by (reverse(see $rev)) ascii values order
 */
 
 t_dir_content		*ft_create_folder_elems_ll(char *path, int rev)
@@ -39,11 +39,12 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int rev)
 	t_dir_entry		*tmp;
 	t_dir_content	*r;
 
+	entry = NULL;
+	tmp = NULL;
 	r = ft_create_dir_content_s();
 	d = opendir(path);
 	li = NULL;
 	if (d)
-	{
 		while ((entry = readdir(d)))
 			if (!(entry->d_name[0] == '.'))
 			{
@@ -55,8 +56,6 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int rev)
 				else
 					ft_init_folder_elems_ll(&li, entry->d_name);
 			}
-	}
 	r->elems = li;
-	//ft_debug_prm(li);
 	return (r);
 }

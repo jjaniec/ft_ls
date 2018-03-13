@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 18:53:48 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:32:23 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,16 @@ void	ft_debug_prm(t_param *prm)
 ** Print content of elements of a d_dir_content struct
 */
 
-void	ft_debug_dir_content(t_dir_content *s, t_opt *opts)
+void	ft_debug_dir_content(t_dir_content *s)
 {
 	t_dir_entry	*tmp;
 
-	tmp = s->elems;
 	ft_printf("\nentries:\n");
 	if (!s)
 		ft_printf("\t\t(null)\n");
 	else
 	{
+		tmp = s->elems;
 		ft_printf("\t\tc: %u\n\t\tblocks_total: %u\n", s->c, s->blocks_total);
 		while (tmp)
 		{
