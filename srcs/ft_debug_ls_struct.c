@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:48:43 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 18:53:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 }
 
 /*
-** print content of a s_param struct
+** print content of a s_param linked list
 */
 
 void	ft_debug_prm(t_param *prm)
@@ -61,6 +61,30 @@ void	ft_debug_prm(t_param *prm)
 			ft_printf("\t\tprm: %s\n", tmp->s);
 			tmp = tmp->next;
 		}
+}
+
+/*
+** Print content of elements of a d_dir_content struct
+*/
+
+void	ft_debug_dir_content(t_dir_content *s, t_opt *opts)
+{
+	t_dir_entry	*tmp;
+
+	tmp = s->elems;
+	ft_printf("\nentries:\n");
+	if (!s)
+		ft_printf("\t\t(null)\n");
+	else
+	{
+		ft_printf("\t\tc: %u\n\t\tblocks_total: %u\n", s->c, s->blocks_total);
+		while (tmp)
+		{
+			ft_printf("\t\t\tentry: %s\n", tmp->s);
+			//ft_debug_str_stats(tmp->s, tmp->stats, opts);
+			tmp = tmp->next;
+		}
+	}
 }
 
 /*

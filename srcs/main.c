@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 14:49:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:02:26 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 ** a pointer on a linked list containing all files/folder names of type t_param
 */
 
-void		ft_init_args(int ac, char **av, t_args *args)
+void			ft_init_args(int ac, char **av, t_args *args)
 {
 	t_opt	*opts;
 	t_param	*params;
 
-	opts = NULL;
 	params = NULL;
 	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	if (opts)
@@ -36,33 +35,43 @@ void		ft_init_args(int ac, char **av, t_args *args)
 }
 
 /*
-** Recursive part,
-** first two readdir are here to skip . & ..
+** Recursive part
 */
 
 void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 {
-	DIR				*d;
-	struct dirent 	*dir;
-	t_str_stats		*st;
+	t_dir_content	*dc;
+	t_dir_entry		*li;
+	t_dir_entry		*ptr;
 	char			*ns;
 
-	d = opendir(s);
-	if (d)
+	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0));
+	li = dc->elems;
+	ptr = li;
+	//ft_debug_dir_content(dc, opts);
+	ft_printf("%s:\n", s);
+	while (ptr)
 	{
-		dir = readdir(d);
-		dir = readdir(d);
-		while ((dir = readdir(d)) != NULL)
-		{
-			printf("%s\n", s);
-			ns = ft_strjoin(ft_strjoin(s, "/"), dir->d_name);
-			st = ft_get_stats(ns, opts);
-			ft_debug_str_stats(ns, st, opts);
-			if (st && st->folder && opts && opts->r_caps && st->name[0] != '.' && s[0] != '.')
-				ft_ls_foreach_in_dir(ns, opts);
-		}
-		closedir(d);
+		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
+		ptr->stats = ft_get_stats(ns, opts);
+		if (ptr->stats)
+			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
+		ptr = ptr->next;
 	}
+	(terpri);
+	while (li)
+	{
+		if (li && li->stats && opts && li->stats->folder && opts->r_caps)
+		{
+			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
+			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
+			free(ns);
+		}
+		ptr = li;
+		li = li->next;
+		free(ptr);
+	}
+	//free(dc);
 }
 
 /*
@@ -73,6 +82,7 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 void	ft_ls(t_args args)
 {
 	t_param		*aptr;
+	t_param		*prev;
 	t_str_stats	*infs;
 
 	aptr = args.prm;
@@ -82,7 +92,10 @@ void	ft_ls(t_args args)
 		ft_debug_str_stats(aptr->s, infs, args.opt);
 		if (infs && infs->folder)
 			ft_ls_foreach_in_dir(aptr->s, args.opt);
+		prev = aptr;
 		aptr = aptr->next;
+		free(prev);
+		free(infs);
 	}
 }
 

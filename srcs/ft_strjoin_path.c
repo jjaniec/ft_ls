@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_colorize_name.c                                 :+:      :+:    :+:   */
+/*   ft_strjoin_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 17:41:19 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/12 22:00:45 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/12 23:37:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-/*
-** Apply colors on file/folder name:
-** red: executable
-** magenta: folder
-*/
-
-void	ft_colorize_name(t_str_stats *f)
+char	*ft_strjoin_path(char *s1, char *s2)
 {
-	char	*s;
+	char	*r;
+	size_t	l;
 
-	if (f->folder || f->perms[3] == 'x')
-	{
-		s = f->name;
-		if (f->folder)
-			f->name = ft_strjoin(DIR_COLOR, f->name);
-		else
-			f->name = ft_strjoin(EXEC_COLOR, f->name);
-		s = f->name;
-		f->name = ft_strjoin(f->name, FG_WHITE);
-		free(s);
-	}
+	l = ft_strlen(s1);
+	r = malloc((l + ft_strlen(s2) + 2) * sizeof(char));
+	ft_strcpy(r, s1);
+	ft_strcpy(r + l + 1, s2);
+	r[l] = '/';
+	free(s1);
+	free(s2);
+	return (r);
 }
