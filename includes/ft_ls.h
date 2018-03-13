@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 23:05:10 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 16:42:36 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef int t_bool;
 
 # define terpri ft_putchar('\n')
 
+/*
+** Struct to store options, toggle booleans if option is specified
+*/
+
 typedef struct	s_opt
 {
 	t_bool	l;
@@ -40,17 +44,30 @@ typedef struct	s_opt
 	t_bool	n;
 }				t_opt;
 
+/*
+** Struct to store cli parameters in a linked list
+*/
+
 typedef struct		s_param
 {
 	char			*s;
 	struct s_param	*next;
 }					t_param;
 
+/*
+** Struct to wrap options and cli parameters linked list
+*/
+
 typedef struct		s_args
 {
 	struct s_opt	*opt;
 	struct s_param	*prm;
 }					t_args;
+
+/*
+** Struct to store converted content of
+** the stat(3) and lstats(3) functions
+*/
 
 typedef struct		s_str_stats
 {
@@ -66,6 +83,31 @@ typedef struct		s_str_stats
 	char			*last_mod;
 	int				rcode;
 }					t_str_stats;
+
+/*
+** Struct to store name of each element and it's stats
+** found in a directory, by a linked list
+*/
+
+typedef struct		s_dir_entry
+{
+	char					*s;
+	t_str_stats				*stats;
+	struct s_dir_entry		*next;
+}					t_dir_entry;
+
+/*
+** Struct to store total blocks of memory used by folder,
+** with c to store number of elements in the $elems linked list
+*/
+
+typedef struct		s_dir_content
+{
+	unsigned int	c;
+	unsigned int	blocks_total;
+	t_dir_entry		*elems;
+
+}					t_dir_content;
 
 t_opt			*ft_parse_options(int ac, char **av);
 
