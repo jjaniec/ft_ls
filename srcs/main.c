@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 23:39:57 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:02:26 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** a pointer on a linked list containing all files/folder names of type t_param
 */
 
-void		ft_init_args(int ac, char **av, t_args *args)
+void			ft_init_args(int ac, char **av, t_args *args)
 {
 	t_opt	*opts;
 	t_param	*params;
@@ -35,74 +35,43 @@ void		ft_init_args(int ac, char **av, t_args *args)
 }
 
 /*
-** Create a sorted linked list containing all file/folder names
-** sorted by ascii values
-*/
-
-t_param				*ft_ls_create_filesll(char *path, int rev)
-{
-	DIR				*d;
-	struct dirent 	*entry;
-	t_param			*li;
-	t_param			*tmp;
-
-	d = opendir(path);
-	li = NULL;
-	if (d)
-	{
-		while ((entry = readdir(d)))
-			if (!(entry->d_name[0] == '.'))
-			{
-				if (li)
-				{
-					tmp = ft_create_param_elem(entry->d_name);
-					li = ft_append_elem(li, tmp, rev);
-				}
-				else
-					ft_init_params_list(&li, entry->d_name);
-			}
-	}
-	//ft_debug_prm(li);
-	return (li);
-}
-
-/*
 ** Recursive part
 */
 
 void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 {
-	t_param			*li;
-	t_param			*ptr;
-	t_str_stats		*st;
+	t_dir_content	*dc;
+	t_dir_entry		*li;
+	t_dir_entry		*ptr;
 	char			*ns;
 
-	li = ft_ls_create_filesll(s, (opts) ? (opts->r) : (0));
+	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0));
+	li = dc->elems;
 	ptr = li;
+	//ft_debug_dir_content(dc, opts);
 	ft_printf("%s:\n", s);
 	while (ptr)
 	{
 		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
-		st = ft_get_stats(ns, opts);
-		if (st)
-			ft_printf("%s - %s\n", st->perms, ptr->s);
+		ptr->stats = ft_get_stats(ns, opts);
+		if (ptr->stats)
+			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
 		ptr = ptr->next;
 	}
 	(terpri);
 	while (li)
 	{
-		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-		st = ft_get_stats(ns, opts);
-		//ft_debug_str_stats(ns, st, opts);
-		//ft_debug_str_stats(li->s, st, opts);
-		if (st && opts && st->folder && opts->r_caps)
+		if (li && li->stats && opts && li->stats->folder && opts->r_caps)
+		{
+			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
-		free(ns);
-		free(st);
+			free(ns);
+		}
 		ptr = li;
 		li = li->next;
 		free(ptr);
 	}
+	//free(dc);
 }
 
 /*
