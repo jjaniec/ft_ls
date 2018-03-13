@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 18:51:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 18:53:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_debug_dir_content(t_dir_content *s, t_opt *opts)
 		while (tmp)
 		{
 			ft_printf("\t\t\tentry: %s\n", tmp->s);
-			ft_debug_str_stats(tmp->s, tmp->stats, opts);
+			//ft_debug_str_stats(tmp->s, tmp->stats, opts);
 			tmp = tmp->next;
 		}
 	}

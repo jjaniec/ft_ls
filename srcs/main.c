@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 17:52:58 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:02:26 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	t_dir_entry		*ptr;
 	char			*ns;
 
-	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0), opts);
+	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0));
 	li = dc->elems;
 	ptr = li;
+	//ft_debug_dir_content(dc, opts);
 	ft_printf("%s:\n", s);
 	while (ptr)
 	{
 		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
+		ptr->stats = ft_get_stats(ns, opts);
 		if (ptr->stats)
 			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
 		ptr = ptr->next;
@@ -59,12 +61,12 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	(terpri);
 	while (li)
 	{
-		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-		//ft_debug_str_stats(ns, st, opts);
-		ft_debug_str_stats(li->s, li->stats, opts);
 		if (li && li->stats && opts && li->stats->folder && opts->r_caps)
-			ft_create_folder_elems_ll(ft_strdup(ns), (opts) ? (opts->r) : (0), opts);
-		free(ns);
+		{
+			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
+			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
+			free(ns);
+		}
 		ptr = li;
 		li = li->next;
 		free(ptr);

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 17:03:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 18:59:16 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ t_param				*ft_create_param_elem(char *s)
 ** it's address
 */
 
-t_dir_entry			*ft_create_dir_entry_elem(char *s, t_opt *opts)
+t_dir_entry			*ft_create_dir_entry_elem(char *s)
 {
 	t_dir_entry		*e;
 
 	e = malloc(sizeof(t_dir_entry));
 	e->s = s;
-	e->stats = ft_get_stats(s, opts);
+	e->stats = NULL;
 	e->next = NULL;
 	return (e);
 }

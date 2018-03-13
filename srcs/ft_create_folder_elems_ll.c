@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 17:58:52 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:00:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 */
 
 static void			*ft_init_folder_elems_ll(\
-						t_dir_entry **initptr, char *s, t_opt *opts)
+						t_dir_entry **initptr, char *s)
 {
 	t_dir_entry		*t;
 
-	t = ft_create_dir_entry_elem(ft_strdup(s), opts);
+	t = ft_create_dir_entry_elem(ft_strdup(s));
 	*initptr = t;
 	return (t);
 }
@@ -31,7 +31,7 @@ static void			*ft_init_folder_elems_ll(\
 ** sorted by ascii values
 */
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts)
+t_dir_content		*ft_create_folder_elems_ll(char *path, int rev)
 {
 	DIR				*d;
 	struct dirent	*entry;
@@ -49,11 +49,11 @@ t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts)
 			{
 				if (li)
 				{
-					tmp = ft_create_dir_entry_elem(entry->d_name, opts);
+					tmp = ft_create_dir_entry_elem(entry->d_name);
 					li = ft_append_direntry(li, tmp, rev);
 				}
 				else
-					ft_init_folder_elems_ll(&li, entry->d_name, opts);
+					ft_init_folder_elems_ll(&li, entry->d_name);
 			}
 	}
 	r->elems = li;

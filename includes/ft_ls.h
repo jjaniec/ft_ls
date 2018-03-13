@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 18:51:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:00:23 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,13 @@ void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
 
 void			ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts);
+t_dir_content	*ft_create_folder_elems_ll(char *path, int rev);
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, t_opt *opts);
+t_dir_entry		*ft_create_dir_entry_elem(char *s);
 
 t_dir_content	*ft_create_dir_content_s(void);
 
