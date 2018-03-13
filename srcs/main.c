@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:37:58 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:02:26 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 ** a pointer on a linked list containing all files/folder names of type t_param
 */
 
-void		ft_init_args(int ac, char **av, t_args *args)
+void			ft_init_args(int ac, char **av, t_args *args)
 {
 	t_opt	*opts;
 	t_param	*params;
 
-	opts = NULL;
 	params = NULL;
 	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	if (opts)
@@ -36,12 +35,54 @@ void		ft_init_args(int ac, char **av, t_args *args)
 }
 
 /*
-**
+** Recursive part
+*/
+
+void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
+{
+	t_dir_content	*dc;
+	t_dir_entry		*li;
+	t_dir_entry		*ptr;
+	char			*ns;
+
+	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0));
+	li = dc->elems;
+	ptr = li;
+	//ft_debug_dir_content(dc, opts);
+	ft_printf("%s:\n", s);
+	while (ptr)
+	{
+		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
+		ptr->stats = ft_get_stats(ns, opts);
+		if (ptr->stats)
+			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
+		ptr = ptr->next;
+	}
+	(terpri);
+	while (li)
+	{
+		if (li && li->stats && opts && li->stats->folder && opts->r_caps)
+		{
+			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
+			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
+			free(ns);
+		}
+		ptr = li;
+		li = li->next;
+		free(ptr);
+	}
+	//free(dc);
+}
+
+/*
+** Cycle through cli arguments and launch ft_ls_foreach_in_dir
+** for each element of the linked list args.aptr
 */
 
 void	ft_ls(t_args args)
 {
 	t_param		*aptr;
+	t_param		*prev;
 	t_str_stats	*infs;
 
 	aptr = args.prm;
@@ -49,7 +90,12 @@ void	ft_ls(t_args args)
 	{
 		infs = ft_get_stats(aptr->s, args.opt);
 		ft_debug_str_stats(aptr->s, infs, args.opt);
+		if (infs && infs->folder)
+			ft_ls_foreach_in_dir(aptr->s, args.opt);
+		prev = aptr;
 		aptr = aptr->next;
+		free(prev);
+		free(infs);
 	}
 }
 

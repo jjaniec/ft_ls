@@ -6,14 +6,15 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:50:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 18:59:16 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Create a t_str_stat struct, set .name to s and init all other elements to NULL
+** Create a t_str_stat struct, set .name to s
+** and init all other elements to NULL
 */
 
 t_str_stats			*ft_create_str_stats_elem(char *s)
@@ -52,4 +53,36 @@ t_param				*ft_create_param_elem(char *s)
 	p->s = s;
 	p->next = NULL;
 	return (p);
+}
+
+/*
+** Creates a t_dir_entry elem, store stats of elem in elem->stats and return
+** it's address
+*/
+
+t_dir_entry			*ft_create_dir_entry_elem(char *s)
+{
+	t_dir_entry		*e;
+
+	e = malloc(sizeof(t_dir_entry));
+	e->s = s;
+	e->stats = NULL;
+	e->next = NULL;
+	return (e);
+}
+
+/*
+** Creates a t_dir_content struct to store all elements of a directory
+** init the total blocks count to 0 and return address of created element
+*/
+
+t_dir_content		*ft_create_dir_content_s(void)
+{
+	t_dir_content		*r;
+
+	r = malloc(sizeof(t_dir_content));
+	r->c = 0;
+	r->blocks_total = 0;
+	r->elems = NULL;
+	return (r);
 }
