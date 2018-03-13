@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:49:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 17:16:04 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/13 17:51:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev)
 	ptr = li;
 	prev = NULL;
 	while (ptr && \
-		((rev && (ft_strcmp(ptr->s, prm->s) > 0)) || \
-		(!rev && (ft_strcmp(ptr->s, prm->s) < 0))))
+		((rev && (ft_strcmp(ptr->s, new->s) > 0)) || \
+		(!rev && (ft_strcmp(ptr->s, new->s) < 0))))
 	{
 		prev = ptr;
 		ptr = ptr->next;
 	}
 	if (prev)
 	{
-		prev->next = prm;
-		prm->next = ptr;
+		prev->next = new;
+		new->next = ptr;
 		return (li);
 	}
-	prm->next = li;
-	return (prm);
+	new->next = li;
+	return (new);
 }
