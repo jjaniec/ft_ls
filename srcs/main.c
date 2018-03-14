@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 16:22:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 17:39:02 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void			ft_init_args(int ac, char **av, t_args *args)
 	params = NULL;
 	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	if (opts)
-		params = (ac > 2) ? \
-		(ft_parse_params(ac, av, opts->r)) : (ft_create_param_elem("."));
+		params = (ac > 1) ? \
+		(ft_parse_params(ac, av, opts->r, opts)) : (ft_create_param_elem(".", opts));
 	else
 		params = (ac > 1) ? \
-		(ft_parse_params(ac, av, 0)) : (ft_create_param_elem("."));
+		(ft_parse_params(ac, av, 0, opts)) : (ft_create_param_elem(".", opts));
 	if (!params)
-		params = ft_create_param_elem(".");
+		params = ft_create_param_elem(".", opts);
 	args->opt = opts;
 	args->prm = params;
 }
@@ -85,21 +85,17 @@ void	ft_ls(t_args args)
 {
 	t_param		*aptr;
 	t_param		*prev;
-	t_str_stats	*infs;
 
 	prev = NULL;
-	infs = NULL;
 	aptr = args.prm;
 	while (aptr)
 	{
-		infs = ft_get_stats(aptr->s, args.opt, ft_strdup(aptr->s));
-		ft_debug_str_stats(aptr->s, infs, args.opt);
-		if (infs && infs->folder)
+		ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
+		if (aptr->stats && aptr->stats->folder)
 			ft_ls_foreach_in_dir(aptr->s, args.opt);
 		prev = aptr;
 		aptr = aptr->next;
 		free(prev);
-		free(infs);
 	}
 }
 

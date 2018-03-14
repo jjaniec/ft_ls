@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 18:59:16 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 17:49:03 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,19 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 ** Creates t_param elem with content passed as parameter and set next to null
 */
 
-t_param				*ft_create_param_elem(char *s)
+t_param				*ft_create_param_elem(char *s, t_opt *opts)
 {
 	t_param		*p;
 
 	p = malloc(sizeof(t_param));
 	p->s = s;
+	p->stats = ft_get_stats(s, opts, s);
+	if (!p->stats)
+	{
+		free(p);
+		ft_printf("ft_ls: %s: No such file or directory\n", s);
+		return (NULL);
+	}
 	p->next = NULL;
 	return (p);
 }

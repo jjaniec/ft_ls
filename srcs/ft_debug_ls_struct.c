@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:24:32 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 17:41:58 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_debug_prm(t_param *prm)
 	if (!prm)
 		ft_printf("\t\t(null)\n");
 	else
-		while (tmp)
+		while (tmp && tmp->s)
 		{
 			ft_printf("\t\tprm: %s\n", tmp->s);
 			tmp = tmp->next;

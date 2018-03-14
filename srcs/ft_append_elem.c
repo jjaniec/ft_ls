@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:49:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 17:51:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 17:46:55 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ t_param			*ft_append_elem(t_param *li, t_param *prm, int rev)
 	t_param		*ptr;
 	t_param		*prev;
 
+	if (!prm)
+		return (li);
 	ptr = li;
 	prev = NULL;
-	while (ptr && \
+	while (prm && ptr && \
 		((rev && (ft_strcmp(ptr->s, prm->s) > 0)) || \
 		(!rev && (ft_strcmp(ptr->s, prm->s) < 0))))
 	{
