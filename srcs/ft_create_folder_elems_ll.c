@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:49:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 16:23:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts)
 				tmp = ft_create_dir_entry_elem(entry->d_name);
 				li = ft_append_direntry(li, tmp, rev);
 			}
-			else if (!li && !(entry->d_name[0] == '.' && opts && !opts->a))
+			else if (!li && (entry->d_name[0] != '.' || \
+				(entry->d_name[0] == '.' && opts && opts->a)))
 				ft_init_folder_elems_ll(&li, entry->d_name);
 	}
 	r->elems = li;
