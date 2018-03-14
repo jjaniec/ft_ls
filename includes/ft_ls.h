@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:12:08 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:00:58 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
 
-t_str_stats		*ft_get_stats(char *str, t_opt *opt);
+t_str_stats		*ft_get_stats(char *str, t_opt *opt, char *name);
 
 t_str_stats		*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
@@ -162,5 +162,7 @@ t_dir_content	*ft_create_dir_content_s(void);
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
 void			ft_debug_dir_content(t_dir_content *s);
+
+void			ft_ls_output_entry(t_str_stats *de, t_opt *opts);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 18:39:42 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:00:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_str_stats		*ft_get_stats_l_opt(\
 	ft_fill_owners(f, f_stats, opts);
 	f->size = f_stats->st_size;
 	ft_fill_last_mod(f, f_stats);
-
 	return (f);
 }
 
@@ -33,16 +32,16 @@ t_str_stats		*ft_get_stats_l_opt(\
 ** name and sets str_stats.folder to 1 if $s is a folder
 */
 
-t_str_stats		*ft_get_stats(char *s, t_opt *opt)
+t_str_stats		*ft_get_stats(char *path, t_opt *opt, char *name)
 {
 	struct stat		arg_stats;
 	t_str_stats		*f;
 
-	f = ft_create_str_stats_elem(s);
-	f->rcode = lstat(s, &arg_stats);
+	f = ft_create_str_stats_elem(path);
+	f->rcode = lstat(path, &arg_stats);
 	if (f->rcode < 0)
 		return (ft_free_str_stat_struct(f));
-	f->name = s;
+	f->name = name;
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
 	ft_fill_perms(f, &arg_stats);
