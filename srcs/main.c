@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:35:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 14:48:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
 		ptr->stats = ft_get_stats(ns, opts);
 		if (ptr->stats)
-			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
+			ft_ls_output_entry(ptr->stats, opts);
 		ptr = ptr->next;
 	}
 	(terpri);
