@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:45:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:58:29 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,7 @@ void			ft_debug_dir_content(t_dir_content *s);
 void			ft_ls_output_entry(t_str_stats *de, t_opt *opts);
 
 int				ft_can_recurse(char *s);
+
+int				ft_is_option(char *str);
 
 #endif
