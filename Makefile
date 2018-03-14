@@ -51,7 +51,7 @@ all : $(NAME)
 $(NAME) : $(FT_PRINTF) $(OBJ)
 	cp ./ft_printf/libftprintf.a ./libftprintf.a
 ifeq ($(UNAME_S),Linux)
-	gcc $(CFLAGS) $(LFLAGS) $(OBJ) ./ft_printf/ft_printf.* -o $(NAME)
+	gcc $(CFLAGS) $(LFLAGS) $(OBJ) ./ft_printf/libftprintf.a -o $(NAME)
 endif
 ifeq ($(UNAME_S),Darwin)
 	gcc $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
