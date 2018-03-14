@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:35:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:17:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	while (ptr)
 	{
 		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
-		ptr->stats = ft_get_stats(ns, opts);
+		ptr->stats = ft_get_stats(ns, opts, ft_strdup(ptr->s));
 		if (ptr->stats)
-			ft_printf("%s - %s\n", ptr->stats->perms, ptr->s);
+			ft_ls_output_entry(ptr->stats, opts);
 		ptr = ptr->next;
 	}
 	(terpri);
 	while (li)
 	{
-		if (li && li->stats && opts && li->stats->folder && opts->r_caps)
+		if (li && li->stats && opts && li->stats->folder && opts->r_caps && ft_can_recurse(li->s))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
@@ -92,7 +92,7 @@ void	ft_ls(t_args args)
 	aptr = args.prm;
 	while (aptr)
 	{
-		infs = ft_get_stats(aptr->s, args.opt);
+		infs = ft_get_stats(aptr->s, args.opt, ft_strdup(aptr->s));
 		ft_debug_str_stats(aptr->s, infs, args.opt);
 		if (infs && infs->folder)
 			ft_ls_foreach_in_dir(aptr->s, args.opt);

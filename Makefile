@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/13 17:53:21 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/14 15:18:09 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_create_ls_elem.c \
 			ft_strjoin_path.c \
 			ft_create_folder_elems_ll.c \
+			ft_ls_output.c \
+			ft_can_recurse.c \
 			main.c
 
 SRC_DIR = ./srcs/

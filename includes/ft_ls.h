@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:12:08 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:22:40 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
 
-typedef int t_bool;
+typedef int			t_bool;
 
 # define TRUE 1
 # define FALSE 0
 
-# define terpri ft_putchar('\n')
+# define terpri		ft_putchar('\n')
 
 /*
 ** Struct to store options, toggle booleans if option is specified
@@ -36,12 +36,13 @@ typedef int t_bool;
 
 typedef struct	s_opt
 {
-	t_bool	l;
-	t_bool	r_caps;
-	t_bool	a;
-	t_bool	r;
-	t_bool	t;
-	t_bool	n;
+	t_bool		l;
+	t_bool		r_caps;
+	t_bool		a;
+	t_bool		r;
+	t_bool		t;
+	t_bool		n;
+	t_bool		g_caps;
 }				t_opt;
 
 /*
@@ -125,7 +126,7 @@ void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
 
-t_str_stats		*ft_get_stats(char *str, t_opt *opt);
+t_str_stats		*ft_get_stats(char *str, t_opt *opt, char *name);
 
 t_str_stats		*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
@@ -162,5 +163,9 @@ t_dir_content	*ft_create_dir_content_s(void);
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
 void			ft_debug_dir_content(t_dir_content *s);
+
+void			ft_ls_output_entry(t_str_stats *de, t_opt *opts);
+
+int				ft_can_recurse(char *s);
 
 #endif
