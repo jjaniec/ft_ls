@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:18:01 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:22:40 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
 
-typedef int t_bool;
+typedef int			t_bool;
 
 # define TRUE 1
 # define FALSE 0
 
-# define terpri ft_putchar('\n')
+# define terpri		ft_putchar('\n')
 
 /*
 ** Struct to store options, toggle booleans if option is specified
@@ -36,12 +36,13 @@ typedef int t_bool;
 
 typedef struct	s_opt
 {
-	t_bool	l;
-	t_bool	r_caps;
-	t_bool	a;
-	t_bool	r;
-	t_bool	t;
-	t_bool	n;
+	t_bool		l;
+	t_bool		r_caps;
+	t_bool		a;
+	t_bool		r;
+	t_bool		t;
+	t_bool		n;
+	t_bool		g_caps;
 }				t_opt;
 
 /*
