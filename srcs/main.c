@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 17:39:02 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 14:01:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@
 ** a pointer on a linked list containing all files/folder names of type t_param
 */
 
-void			ft_init_args(int ac, char **av, t_args *args)
+static void		ft_init_args(int ac, char **av, t_args *args)
 {
-	t_opt	*opts;
 	t_param	*params;
 
+	args->r = 0;
 	params = NULL;
-	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
-	if (opts)
-		params = (ac > 1) ? \
-		(ft_parse_params(ac, av, opts->r, opts)) : (ft_create_param_elem(".", opts));
+	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
+	if (args->opt)
+		params = (ac > 2) ? (ft_parse_params(ac, av, args)) : \
+							(ft_create_param_elem(".", args->opt, &(args->r)));
 	else
-		params = (ac > 1) ? \
-		(ft_parse_params(ac, av, 0, opts)) : (ft_create_param_elem(".", opts));
-	if (!params)
-		params = ft_create_param_elem(".", opts);
-	args->opt = opts;
+		params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
+							(ft_create_param_elem(".", args->opt, &(args->r)));
+	if (!params && !(args->r))
+		params = ft_create_param_elem(".", args->opt, &(args->r));
 	args->prm = params;
 }
 
@@ -40,7 +39,7 @@ void			ft_init_args(int ac, char **av, t_args *args)
 ** Recursive part
 */
 
-void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
+static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 {
 	t_dir_content	*dc;
 	t_dir_entry		*li;
@@ -81,7 +80,7 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 ** for each element of the linked list args.aptr
 */
 
-void	ft_ls(t_args args)
+void		ft_ls(t_args args)
 {
 	t_param		*aptr;
 	t_param		*prev;
@@ -111,6 +110,7 @@ int		main(int ac, char **av)
 
 	ft_init_args(ac, av, &args);
 	ft_debug_ls_args(args);
-	ft_ls(args);
-	return (0);
+	if (args.prm)
+		ft_ls(args);
+	return ((args.r));
 }

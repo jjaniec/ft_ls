@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 17:36:34 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:50:58 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct		s_args
 {
 	struct s_opt	*opt;
 	struct s_param	*prm;
+	int				r;
 }					t_args;
 
 /*
@@ -113,9 +114,9 @@ typedef struct		s_dir_content
 
 t_opt			*ft_parse_options(int ac, char **av);
 
-t_param			*ft_parse_params(int ac, char **av, int rev, t_opt *opts);
+t_param			*ft_parse_params(int ac, char **av, t_args *args);
 
-t_param			*ft_create_param_elem(char *s, t_opt *opts);
+t_param			*ft_create_param_elem(char *s, t_opt *opts, int *r);
 
 t_str_stats		*ft_create_str_stats_elem(char *s);
 
