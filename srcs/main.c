@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:46:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 14:27:47 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,17 @@
 ** a pointer on a linked list containing all files/folder names of type t_param
 */
 
-void			ft_init_args(int ac, char **av, t_args *args)
+static void		ft_init_args(int ac, char **av, t_args *args)
 {
-	t_opt	*opts;
 	t_param	*params;
 
+	args->r = 0;
 	params = NULL;
-	opts = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
-	if (opts)
-		params = (ac > 2) ? \
-		(ft_parse_params(ac, av, opts->r)) : (ft_create_param_elem("."));
-	else
-		params = (ac > 1) ? \
-		(ft_parse_params(ac, av, 0)) : (ft_create_param_elem("."));
-	if (!opts && !params)
-		params = ft_create_param_elem("-");
-	args->opt = opts;
+	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
+	params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
+						(ft_create_param_elem(".", args->opt, &(args->r)));
+	if (!params && !(args->r))
+		params = ft_create_param_elem(".", args->opt, &(args->r));
 	args->prm = params;
 }
 
@@ -40,7 +35,7 @@ void			ft_init_args(int ac, char **av, t_args *args)
 ** Recursive part
 */
 
-void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
+static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 {
 	t_dir_content	*dc;
 	t_dir_entry		*li;
@@ -81,25 +76,21 @@ void	ft_ls_foreach_in_dir(char *s, t_opt *opts)
 ** for each element of the linked list args.aptr
 */
 
-void	ft_ls(t_args args)
+void		ft_ls(t_args args)
 {
 	t_param		*aptr;
 	t_param		*prev;
-	t_str_stats	*infs;
 
 	prev = NULL;
-	infs = NULL;
 	aptr = args.prm;
 	while (aptr)
 	{
-		infs = ft_get_stats(aptr->s, args.opt, ft_strdup(aptr->s));
-		ft_debug_str_stats(aptr->s, infs, args.opt);
-		if (infs && infs->folder)
+		ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
+		if (aptr->stats && aptr->stats->folder)
 			ft_ls_foreach_in_dir(aptr->s, args.opt);
 		prev = aptr;
 		aptr = aptr->next;
 		free(prev);
-		free(infs);
 	}
 }
 
@@ -115,6 +106,7 @@ int		main(int ac, char **av)
 
 	ft_init_args(ac, av, &args);
 	ft_debug_ls_args(args);
-	ft_ls(args);
-	return (0);
+	if (args.prm)
+		ft_ls(args);
+	return ((args.r));
 }

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:58:29 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:50:58 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,6 @@ typedef struct	s_opt
 }				t_opt;
 
 /*
-** Struct to store cli parameters in a linked list
-*/
-
-typedef struct		s_param
-{
-	char			*s;
-	struct s_param	*next;
-}					t_param;
-
-/*
-** Struct to wrap options and cli parameters linked list
-*/
-
-typedef struct		s_args
-{
-	struct s_opt	*opt;
-	struct s_param	*prm;
-}					t_args;
-
-/*
 ** Struct to store converted content of
 ** the stat(3) and lstats(3) functions
 */
@@ -84,6 +64,28 @@ typedef struct		s_str_stats
 	char			*last_mod;
 	int				rcode;
 }					t_str_stats;
+
+/*
+** Struct to store cli parameters in a linked list
+*/
+
+typedef struct		s_param
+{
+	char			*s;
+	t_str_stats		*stats;
+	struct s_param	*next;
+}					t_param;
+
+/*
+** Struct to wrap options and cli parameters linked list
+*/
+
+typedef struct		s_args
+{
+	struct s_opt	*opt;
+	struct s_param	*prm;
+	int				r;
+}					t_args;
 
 /*
 ** Struct to store name of each element and it's stats
@@ -112,9 +114,9 @@ typedef struct		s_dir_content
 
 t_opt			*ft_parse_options(int ac, char **av);
 
-t_param			*ft_parse_params(int ac, char **av, int rev);
+t_param			*ft_parse_params(int ac, char **av, t_args *args);
 
-t_param			*ft_create_param_elem(char *s);
+t_param			*ft_create_param_elem(char *s, t_opt *opts, int *r);
 
 t_str_stats		*ft_create_str_stats_elem(char *s);
 

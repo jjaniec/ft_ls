@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:24:32 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:54:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_debug_prm(t_param *prm)
 	if (!prm)
 		ft_printf("\t\t(null)\n");
 	else
-		while (tmp)
+		while (tmp && tmp->s)
 		{
 			ft_printf("\t\tprm: %s\n", tmp->s);
 			tmp = tmp->next;
@@ -98,13 +98,13 @@ void	ft_debug_opt(t_opt *opts)
 		ft_printf("\t\t(null)\n");
 	else
 	{
-		ft_printf("\t\topt l: %d\n", (*opts).l);
-		ft_printf("\t\topt R: %d\n", (*opts).r_caps);
-		ft_printf("\t\topt a: %d\n", (*opts).a);
-		ft_printf("\t\topt r: %d\n", (*opts).r);
-		ft_printf("\t\topt t: %d\n", (*opts).t);
-		ft_printf("\t\topt n: %d\n", (*opts).n);
-		ft_printf("\t\topt G: %d\n", (*opts).g_caps);
+		ft_printf("\t\topt l: %d\n", opts->l);
+		ft_printf("\t\topt R: %d\n", opts->r_caps);
+		ft_printf("\t\topt a: %d\n", opts->a);
+		ft_printf("\t\topt r: %d\n", opts->r);
+		ft_printf("\t\topt t: %d\n", opts->t);
+		ft_printf("\t\topt n: %d\n", opts->n);
+		ft_printf("\t\topt G: %d\n", opts->g_caps);
 	}
 }
 
