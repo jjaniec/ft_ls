@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_err.c                                    :+:      :+:    :+:   */
+/*   ft_is_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:23:46 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/14 15:56:34 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/14 15:58:10 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-/*
-** Handle option error and print usage
-*/
-
-void			ft_handle_opt_err(char opt, char *pname)
+int		ft_is_option(char *str)
 {
-	ft_printf("%s: illegal option -- %c\n", pname, opt);
-	ft_print_usage(pname);
-	exit(1);
+	if (*str != 'l' && *str != 'R' && \
+		*str != 'a' && *str != 'r' && \
+		*str != 't' && *str != 'n' && \
+		*str != 'G')
+		return (0);
+	return (1);
 }

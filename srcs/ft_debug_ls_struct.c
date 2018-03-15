@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:32:23 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:26:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 			}
 			ft_printf("\t\tt_str_stats->size |%d|\n", s->size);
 			ft_printf("\t\tt_str_stats->last_mod |%s|\n", s->last_mod);
+			ft_printf("\t\tt_str_stats->size_blocks |%s|\n", s->size_blocks);
 			ft_printf("\t\tt_str_stats->rcode |%d|\n", s->rcode);
 		}
 	}
@@ -56,7 +57,7 @@ void	ft_debug_prm(t_param *prm)
 	if (!prm)
 		ft_printf("\t\t(null)\n");
 	else
-		while (tmp)
+		while (tmp && tmp->s)
 		{
 			ft_printf("\t\tprm: %s\n", tmp->s);
 			tmp = tmp->next;
@@ -77,7 +78,7 @@ void	ft_debug_dir_content(t_dir_content *s)
 	else
 	{
 		tmp = s->elems;
-		ft_printf("\t\tc: %u\n\t\tblocks_total: %u\n", s->c, s->blocks_total);
+		ft_printf("\t\tc: %u\n", s->c);
 		while (tmp)
 		{
 			ft_printf("\t\t\tentry: %s\n", tmp->s);
@@ -98,12 +99,13 @@ void	ft_debug_opt(t_opt *opts)
 		ft_printf("\t\t(null)\n");
 	else
 	{
-		ft_printf("\t\topt l: %d\n", (*opts).l);
-		ft_printf("\t\topt R: %d\n", (*opts).r_caps);
-		ft_printf("\t\topt a: %d\n", (*opts).a);
-		ft_printf("\t\topt r: %d\n", (*opts).r);
-		ft_printf("\t\topt t: %d\n", (*opts).t);
-		ft_printf("\t\topt n: %d\n", (*opts).n);
+		ft_printf("\t\topt l: %d\n", opts->l);
+		ft_printf("\t\topt R: %d\n", opts->r_caps);
+		ft_printf("\t\topt a: %d\n", opts->a);
+		ft_printf("\t\topt r: %d\n", opts->r);
+		ft_printf("\t\topt t: %d\n", opts->t);
+		ft_printf("\t\topt n: %d\n", opts->n);
+		ft_printf("\t\topt G: %d\n", opts->g_caps);
 	}
 }
 

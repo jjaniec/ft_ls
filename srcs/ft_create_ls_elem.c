@@ -6,11 +6,33 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 18:59:16 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:43:18 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+/*
+** Creates t_param elem with content passed as parameter and set next to null
+*/
+
+t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
+{
+	t_param		*p;
+
+	p = malloc(sizeof(t_param));
+	p->s = s;
+	p->stats = ft_get_stats(s, opts, s);
+	if (!p->stats)
+	{
+		free(p);
+		ft_printf("ft_ls: %s: No such file or directory\n", s);
+		*r = 1;
+		return (NULL);
+	}
+	p->next = NULL;
+	return (p);
+}
 
 /*
 ** Create a t_str_stat struct, set .name to s
@@ -42,31 +64,22 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 }
 
 /*
-** Creates t_param elem with content passed as parameter and set next to null
-*/
-
-t_param				*ft_create_param_elem(char *s)
-{
-	t_param		*p;
-
-	p = malloc(sizeof(t_param));
-	p->s = s;
-	p->next = NULL;
-	return (p);
-}
-
-/*
 ** Creates a t_dir_entry elem, store stats of elem in elem->stats and return
 ** it's address
 */
 
-t_dir_entry			*ft_create_dir_entry_elem(char *s)
+t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+						int *total_blk)
 {
 	t_dir_entry		*e;
+	char			*ns;
 
 	e = malloc(sizeof(t_dir_entry));
 	e->s = s;
-	e->stats = NULL;
+	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
+	e->stats = ft_get_stats(ns, opts, s);
+	if (e->stats)
+		*total_blk += e->stats->size_blocks;
 	e->next = NULL;
 	return (e);
 }
@@ -82,7 +95,6 @@ t_dir_content		*ft_create_dir_content_s(void)
 
 	r = malloc(sizeof(t_dir_content));
 	r->c = 0;
-	r->blocks_total = 0;
 	r->elems = NULL;
 	return (r);
 }

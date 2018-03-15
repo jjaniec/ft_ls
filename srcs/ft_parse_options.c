@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 17:03:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/14 16:02:38 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 {
 	while (*(++str))
 	{
-		if (*str != 'l' && *str != 'R' && \
-			*str != 'a' && *str != 'r' && \
-			*str != 't' && *str != 'n')
+		if (!ft_is_option(str))
 			ft_handle_opt_err(*str, pname);
 		if (*str == 'l')
 			opts->l = TRUE;
@@ -49,6 +47,8 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 			opts->n = TRUE;
 			opts->l = TRUE;
 		}
+		if (*str == 'G')
+			opts->g_caps = TRUE;
 	}
 }
 
@@ -65,6 +65,7 @@ static void		ft_init_opt_struct(t_opt **opts)
 	(*opts)->r = FALSE;
 	(*opts)->t = FALSE;
 	(*opts)->n = FALSE;
+	(*opts)->g_caps = FALSE;
 }
 
 /*
@@ -86,11 +87,6 @@ t_opt			*ft_parse_options(int ac, char **av)
 		if (**ptr == '-')
 			ft_toggle_opt(opts, (*ptr), av[0]);
 		ptr = (ac != 0) ? (&ptr[1]) : (NULL);
-	}
-	if (opts && !opts->l && !opts->r_caps && !opts->a && !opts->r && !opts->t)
-	{
-		free(opts);
-		opts = NULL;
 	}
 	return (opts);
 }

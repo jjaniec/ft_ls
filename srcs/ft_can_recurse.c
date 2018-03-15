@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_err.c                                    :+:      :+:    :+:   */
+/*   ft_can_recurse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:23:46 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/14 15:12:27 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/14 15:18:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Handle option error and print usage
+** Return 0 if strcmp($s, ".") == 0 || strcmp($s, "..") == 0
+** otherwise return 1
 */
 
-void			ft_handle_opt_err(char opt, char *pname)
+int		ft_can_recurse(char *s)
 {
-	ft_printf("%s: illegal option -- %c\n", pname, opt);
-	ft_print_usage(pname);
-	exit(1);
+	if (s && s[0] == '.')
+	{
+		if (!s[1] || ft_strcmp(s, "..") == 0)
+			return (0);
+	}
+	return (1);
 }

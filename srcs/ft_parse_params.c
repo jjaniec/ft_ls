@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/13 19:15:22 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 14:24:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 ** Creates linked list's first argument and init return value of ft_parse_params
 */
 
-static void			*ft_init_params_list(t_param **initptr, char *s)
+static void			*ft_init_params_list(\
+						t_param **initptr, char *s, t_opt *opts, int *r)
 {
 	t_param		*t;
 
-	t = ft_create_param_elem(ft_strdup(s));
+	t = ft_create_param_elem(ft_strdup(s), opts, r);
 	*initptr = t;
 	return (t);
 }
@@ -29,27 +30,29 @@ static void			*ft_init_params_list(t_param **initptr, char *s)
 ** Parse cli parameters like file or folder names
 */
 
-t_param				*ft_parse_params(int ac, char **av, int rev)
+t_param				*ft_parse_params(int ac, char **av, t_args *args)
 {
 	t_param		*li;
 	t_param		*tmp;
 	int			i;
+	t_opt		*opts;
 
+	opts = args->opt;
 	i = 1;
 	li = NULL;
-	while (i < ac && av[i][0] == '-' && !(av[i][0] == '-' && av[i][1] == '-'))
+	while (i < ac && av[i][0] == '-' && ft_is_option(&av[i][1]))
 		i++;
-	if (i < ac && (ft_strcmp(av[i], "--") == 0))
+	if (i < ac && ft_strcmp(av[i], "--") == 0)
 		i++;
 	while (i < ac)
 	{
 		if (li)
 		{
-			tmp = ft_create_param_elem(av[i]);
-			li = ft_append_elem(li, tmp, rev);
+			tmp = ft_create_param_elem(av[i], opts, &(args->r));
+			li = ft_append_elem(li, tmp, args->opt->r);
 		}
 		else
-			ft_init_params_list(&li, av[i]);
+			ft_init_params_list(&li, av[i], opts, &(args->r));
 		i++;
 	}
 	return (li);
