@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 13:51:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 14:24:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_param				*ft_parse_params(int ac, char **av, t_args *args)
 	li = NULL;
 	while (i < ac && av[i][0] == '-' && ft_is_option(&av[i][1]))
 		i++;
-	if (ft_strcmp(av[i], "--") == 0)
+	if (i < ac && ft_strcmp(av[i], "--") == 0)
 		i++;
 	while (i < ac)
 	{

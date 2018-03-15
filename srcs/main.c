@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 14:01:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 14:27:47 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 	args->r = 0;
 	params = NULL;
 	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
-	if (args->opt)
-		params = (ac > 2) ? (ft_parse_params(ac, av, args)) : \
-							(ft_create_param_elem(".", args->opt, &(args->r)));
-	else
-		params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
-							(ft_create_param_elem(".", args->opt, &(args->r)));
+	params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
+						(ft_create_param_elem(".", args->opt, &(args->r)));
 	if (!params && !(args->r))
 		params = ft_create_param_elem(".", args->opt, &(args->r));
 	args->prm = params;
