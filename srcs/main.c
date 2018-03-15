@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 14:27:47 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:19:44 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,16 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	t_dir_content	*dc;
 	t_dir_entry		*li;
 	t_dir_entry		*ptr;
+	int	blocks_total;
 	char			*ns;
 
-	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0), opts);
+	blocks_total = 0;
+	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0), opts, &blocks_total);
 	li = (dc) ? (dc->elems) : (NULL);
 	ptr = li;
-	//ft_debug_dir_content(dc, opts);
-	ft_printf("%s:\n", s);
+	ft_printf("%s:\ntotal %d\n", s, blocks_total);
 	while (ptr)
 	{
-		ns = ft_strjoin_path(ft_strdup(s), ft_strdup(ptr->s));
-		ptr->stats = ft_get_stats(ns, opts, ft_strdup(ptr->s));
 		if (ptr->stats)
 			ft_ls_output_entry(ptr->stats, opts);
 		ptr = ptr->next;
@@ -58,7 +57,7 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	(terpri);
 	while (li)
 	{
-		if (li && li->stats && opts && li->stats->folder && opts->r_caps && ft_can_recurse(li->s))
+		if (li && li->stats && li->stats->folder && opts && opts->r_caps && ft_can_recurse(li->s))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
