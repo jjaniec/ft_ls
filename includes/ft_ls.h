@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:20:41 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:45:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,8 @@ char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts);
+t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);
 
