@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:19:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 22:19:47 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 	(terpri);
 	while (li)
 	{
-		if (li && li->stats && li->stats->folder && opts && opts->r_caps && ft_can_recurse(li->s))
+		if (li && li->stats && li->stats->folder && opts && opts->r_caps && ft_can_recurse(li))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 			ft_ls_foreach_in_dir(ft_strdup(ns), opts);

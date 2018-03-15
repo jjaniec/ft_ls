@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:24:03 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/09 16:20:33 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 21:37:20 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_fill_perms(t_str_stats *f, struct stat *f_stats)
 	char	*s;
 
 	s = ft_strnew(10);
-	*s = (f->folder) ? 'd' : '-';
+	*s = (f->folder) ? ('d') : ('-');
+	*s = (S_ISLNK(f_stats->st_mode)) ? ('l') : (*s);
 	s[1] = ((f_stats->st_mode & S_IRUSR) ? 'r' : '-');
 	s[2] = ((f_stats->st_mode & S_IWUSR) ? 'w' : '-');
 	s[3] = ((f_stats->st_mode & S_IXUSR) ? 'x' : '-');
