@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 13:50:58 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:45:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_str_stats
 	unsigned int	ownr_grp_uid;
 	int				size;
 	char			*last_mod;
+	unsigned int	size_blocks;
 	int				rcode;
 }					t_str_stats;
 
@@ -100,14 +101,12 @@ typedef struct		s_dir_entry
 }					t_dir_entry;
 
 /*
-** Struct to store total blocks of memory used by folder,
-** with c to store number of elements in the $elems linked list
+** Struct with $c to store number of elements in the $elems linked list
 */
 
 typedef struct		s_dir_content
 {
 	unsigned int	c;
-	unsigned int	blocks_total;
 	t_dir_entry		*elems;
 
 }					t_dir_content;
@@ -152,13 +151,15 @@ void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
 
 void			ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts);
+t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts, \
+					int *total_blk);
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s);
+t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);
 

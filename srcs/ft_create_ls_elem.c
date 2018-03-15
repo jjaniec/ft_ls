@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 13:44:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:43:18 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,18 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 ** it's address
 */
 
-t_dir_entry			*ft_create_dir_entry_elem(char *s)
+t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+						int *total_blk)
 {
 	t_dir_entry		*e;
+	char			*ns;
 
 	e = malloc(sizeof(t_dir_entry));
 	e->s = s;
-	e->stats = NULL;
+	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
+	e->stats = ft_get_stats(ns, opts, s);
+	if (e->stats)
+		*total_blk += e->stats->size_blocks;
 	e->next = NULL;
 	return (e);
 }
@@ -90,7 +95,6 @@ t_dir_content		*ft_create_dir_content_s(void)
 
 	r = malloc(sizeof(t_dir_content));
 	r->c = 0;
-	r->blocks_total = 0;
 	r->elems = NULL;
 	return (r);
 }
