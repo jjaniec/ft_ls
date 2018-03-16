@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 20:41:31 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 21:04:57 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 		li = ptr;
 	}
 	ft_free_dir_entry(li);
-	free(s);
-	s = NULL;
+	ft_free_ptr(s);
+	ft_free_ptr(dc);
 }
 
 /*

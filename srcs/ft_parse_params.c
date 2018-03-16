@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 14:24:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 21:20:06 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			*ft_init_params_list(\
 {
 	t_param		*t;
 
-	t = ft_create_param_elem(ft_strdup(s), opts, r);
+	t = ft_create_param_elem(s, opts, r);
 	*initptr = t;
 	return (t);
 }

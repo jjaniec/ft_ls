@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 19:25:20 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 21:17:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,5 +181,7 @@ void			ft_get_symlink_target(char *path, t_str_stats *f);
 void			ft_free_dir_entry(t_dir_entry *de);
 
 void			ft_free_param_elem(t_param *e);
+
+void			ft_free_ptr(void *ptr);
 
 #endif
