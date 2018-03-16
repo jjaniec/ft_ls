@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/12 15:40:08 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 18:47:53 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,27 @@ void	*ft_free_str_stat_struct(t_str_stats *t_s)
 	if (t_s->last_mod)
 		free(t_s->last_mod);
 	return (NULL);
+}
+
+/*
+** Free all content of a dir_entry struct pointer and set the pointer to NULL
+*/
+
+void	ft_free_dir_entry(t_dir_entry *de)
+{
+	if (de)
+	{
+		if (de->s)
+		{
+			free(de->s);
+			de->s = NULL;
+		}
+		if (de->stats)
+		{
+			free(de->stats);
+			de->stats = NULL;
+		}
+		free(de);
+		de = NULL;
+	}
 }

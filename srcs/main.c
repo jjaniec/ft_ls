@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 18:57:32 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
 			free(ns);
 		}
-		ptr = li;
-		li = li->next;
-		free(ptr);
+		ptr = li->next;
+		ft_free_dir_entry(li);
+		li = ptr;
 	}
-	//free(li);
+	ft_free_dir_entry(li);
 }
 
 /*
