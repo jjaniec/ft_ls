@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 19:09:39 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
 	t_param		*p;
 
 	p = malloc(sizeof(t_param));
-	p->s = s;
+	p->s = ft_strdup(s);
 	p->stats = ft_get_stats(s, opts, s);
 	if (!p->stats)
 	{

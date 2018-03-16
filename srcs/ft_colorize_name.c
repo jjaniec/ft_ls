@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 21:35:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 20:30:29 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	ft_colorize_name(t_str_stats *f)
 			f->name = ft_strjoin(s, FG_WHITE);
 			free(s);
 		}
+		else
+			free(s);
 	}
 }
