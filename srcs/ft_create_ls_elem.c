@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 14:08:28 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
 	if (!p->stats)
 	{
 		free(p);
-		ft_printf("ft_ls: %s: No such file or directory\n", s);
+		PRINTF("ft_ls: %s: No such file or directory\n", s);
 		*r = 1;
 		return (NULL);
 	}
@@ -46,7 +46,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	f = malloc(sizeof(t_str_stats));
 	if (!f)
 	{
-		ft_printf("ft_ls: malloc error\n");
+		PRINTF("ft_ls: malloc error\n");
 		exit(1);
 	}
 	f->name = ft_strdup(s);

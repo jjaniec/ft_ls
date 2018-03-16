@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:26:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@
 
 void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 {
-	ft_printf("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", name);
+	PRINTF("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", name);
 	if (!s)
-		ft_printf("\t\t(null)\n");
+		PRINTF("\t\t(null)\n");
 	else
 	{
-		ft_printf("\t\tt_str_stats->name |%s|\n", s->name);
-		ft_printf("\t\tt_str_stats->folder: |%d|\n", s->folder);
-		ft_printf("\t\tt_str_stats->perms |%s|\n", s->perms);
+		PRINTF("\t\tt_str_stats->name |%s|\n", s->name);
+		PRINTF("\t\tt_str_stats->folder: |%d|\n", s->folder);
+		PRINTF("\t\tt_str_stats->perms |%s|\n", s->perms);
 		if (opts && opts->l)
 		{
-			ft_printf("\t\tt_str_stats->slnks |%d|\n", s->slnks);
-			ft_printf("\t\tt_str_stats->ownr_uid |%u|\n", s->ownr_uid);
-			ft_printf("\t\tt_str_stats->ownr_grp_uid |%u|\n", s->ownr_grp_uid);
+			PRINTF("\t\tt_str_stats->slnks |%d|\n", s->slnks);
+			PRINTF("\t\tt_str_stats->ownr_uid |%u|\n", s->ownr_uid);
+			PRINTF("\t\tt_str_stats->ownr_grp_uid |%u|\n", s->ownr_grp_uid);
 			if (!opts->n)
 			{
-				ft_printf("\t\tt_str_stats->ownr |%s|\n", s->ownr);
-				ft_printf("\t\tt_str_stats->ownr_grp |%s|\n", s->ownr_grp);
+				PRINTF("\t\tt_str_stats->ownr |%s|\n", s->ownr);
+				PRINTF("\t\tt_str_stats->ownr_grp |%s|\n", s->ownr_grp);
 			}
-			ft_printf("\t\tt_str_stats->size |%d|\n", s->size);
-			ft_printf("\t\tt_str_stats->last_mod |%s|\n", s->last_mod);
-			ft_printf("\t\tt_str_stats->size_blocks |%s|\n", s->size_blocks);
-			ft_printf("\t\tt_str_stats->rcode |%d|\n", s->rcode);
+			PRINTF("\t\tt_str_stats->size |%d|\n", s->size);
+			PRINTF("\t\tt_str_stats->last_mod |%s|\n", s->last_mod);
+			PRINTF("\t\tt_str_stats->size_blocks |%s|\n", s->size_blocks);
+			PRINTF("\t\tt_str_stats->rcode |%d|\n", s->rcode);
 		}
 	}
 }
@@ -53,13 +53,13 @@ void	ft_debug_prm(t_param *prm)
 	t_param	*tmp;
 
 	tmp = prm;
-	ft_printf("\tparams:\n");
+	PRINTF("\tparams:\n");
 	if (!prm)
-		ft_printf("\t\t(null)\n");
+		PRINTF("\t\t(null)\n");
 	else
 		while (tmp && tmp->s)
 		{
-			ft_printf("\t\tprm: %s\n", tmp->s);
+			PRINTF("\t\tprm: %s\n", tmp->s);
 			tmp = tmp->next;
 		}
 }
@@ -72,16 +72,16 @@ void	ft_debug_dir_content(t_dir_content *s)
 {
 	t_dir_entry	*tmp;
 
-	ft_printf("\nentries:\n");
+	PRINTF("\nentries:\n");
 	if (!s)
-		ft_printf("\t\t(null)\n");
+		PRINTF("\t\t(null)\n");
 	else
 	{
 		tmp = s->elems;
-		ft_printf("\t\tc: %u\n", s->c);
+		PRINTF("\t\tc: %u\n", s->c);
 		while (tmp)
 		{
-			ft_printf("\t\t\tentry: %s\n", tmp->s);
+			PRINTF("\t\t\tentry: %s\n", tmp->s);
 			//ft_debug_str_stats(tmp->s, tmp->stats, opts);
 			tmp = tmp->next;
 		}
@@ -94,18 +94,18 @@ void	ft_debug_dir_content(t_dir_content *s)
 
 void	ft_debug_opt(t_opt *opts)
 {
-	ft_printf("\topts:\n");
+	PRINTF("\topts:\n");
 	if (!opts)
-		ft_printf("\t\t(null)\n");
+		PRINTF("\t\t(null)\n");
 	else
 	{
-		ft_printf("\t\topt l: %d\n", opts->l);
-		ft_printf("\t\topt R: %d\n", opts->r_caps);
-		ft_printf("\t\topt a: %d\n", opts->a);
-		ft_printf("\t\topt r: %d\n", opts->r);
-		ft_printf("\t\topt t: %d\n", opts->t);
-		ft_printf("\t\topt n: %d\n", opts->n);
-		ft_printf("\t\topt G: %d\n", opts->g_caps);
+		PRINTF("\t\topt l: %d\n", opts->l);
+		PRINTF("\t\topt R: %d\n", opts->r_caps);
+		PRINTF("\t\topt a: %d\n", opts->a);
+		PRINTF("\t\topt r: %d\n", opts->r);
+		PRINTF("\t\topt t: %d\n", opts->t);
+		PRINTF("\t\topt n: %d\n", opts->n);
+		PRINTF("\t\topt G: %d\n", opts->g_caps);
 	}
 }
 
