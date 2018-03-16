@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 22:08:49 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 14:43:49 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_str_stats				*ft_get_stats(char *path, t_opt *opt, char *name)
 	f->rcode = lstat(path, &arg_stats);
 	if (f->rcode < 0)
 		return (ft_free_str_stat_struct(f));
-	f->name = name;
+	f->name = ft_strdup(name);
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
 	ft_fill_perms(f, &arg_stats);

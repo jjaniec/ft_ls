@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:44:07 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 15:01:46 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,19 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int rev, \
 		return (NULL);
 	r = ft_create_dir_content_s();
 	li = NULL;
-	while ((entry = readdir(d)))
-		if (li)
+	while ((entry = readdir(d)) && ft_strlen(entry->d_name) > 0)
+	{
+		if (li && entry->d_name[0] && (entry->d_name[0] != '.' || \
+			(entry->d_name[0] == '.' && opts && opts->a)))
 		{
 			tmp = ft_create_dir_entry_elem(entry->d_name, path, opts, total_blk);
 			li = ft_append_direntry(li, tmp, rev);
 		}
-		else if (!li && (entry->d_name[0] != '.' || \
+		else if (!li && entry->d_name[0] && (entry->d_name[0] != '.' || \
 			(entry->d_name[0] == '.' && opts && opts->a)))
 			li = ft_create_dir_entry_elem(entry->d_name, path, opts, total_blk);
+	}
+	closedir(d);
 	r->elems = li;
 	return (r);
 }

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 21:55:42 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 14:08:28 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 	char			*ns;
 
 	e = malloc(sizeof(t_dir_entry));
-	e->s = s;
+	e->s = ft_strdup(s);
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
 	e->stats = ft_get_stats(ns, opts, s);
 	if (e->stats)
