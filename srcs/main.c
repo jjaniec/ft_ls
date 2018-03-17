@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 21:04:57 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
 		if (li && li->stats && li->stats->folder && opts && opts->r_caps && ft_can_recurse(li))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-			ft_ls_foreach_in_dir(ft_strdup(ns), opts);
-			free(ns);
+			ft_ls_foreach_in_dir(ns, opts);
 		}
-		ptr = li;
-		li = li->next;
-		free(ptr);
+		ptr = li->next;
+		ft_free_dir_entry(li);
+		li = ptr;
 	}
-	//free(li);
+	ft_free_dir_entry(li);
+	ft_free_ptr(s);
+	ft_free_ptr(dc);
 }
 
 /*
@@ -86,11 +87,13 @@ void		ft_ls(t_args args)
 	{
 		ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
-			ft_ls_foreach_in_dir(aptr->s, args.opt);
+			ft_ls_foreach_in_dir(ft_strdup(aptr->s), args.opt);
 		prev = aptr;
 		aptr = aptr->next;
-		free(prev);
+		ft_free_param_elem(prev);
 	}
+	free(args.opt);
+	args.opt = NULL;
 }
 
 /*
