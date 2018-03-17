@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 21:29:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/17 20:27:35 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 		PRINTF("ft_ls: malloc error\n");
 		exit(1);
 	}
-	f->name = ft_strdup(s);
+	f->name = s;
 	f->folder = 0;
 	f->perms = NULL;
 	f->slnks = 0;
@@ -84,6 +84,7 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 		if (e->stats->perms && *(e->stats->perms) == 'l')
 			ft_get_symlink_target(ns, e->stats);
 	}
+	ft_free_ptr(ns);
 	e->next = NULL;
 	return (e);
 }
