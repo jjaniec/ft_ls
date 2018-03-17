@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:43:18 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/17 20:27:35 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
 	t_param		*p;
 
 	p = malloc(sizeof(t_param));
-	p->s = s;
+	p->s = ft_strdup(s);
 	p->stats = ft_get_stats(s, opts, s);
 	if (!p->stats)
 	{
 		free(p);
-		ft_printf("ft_ls: %s: No such file or directory\n", s);
+		PRINTF("ft_ls: %s: No such file or directory\n", s);
 		*r = 1;
 		return (NULL);
 	}
@@ -46,10 +46,10 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	f = malloc(sizeof(t_str_stats));
 	if (!f)
 	{
-		ft_printf("ft_ls: malloc error\n");
+		PRINTF("ft_ls: malloc error\n");
 		exit(1);
 	}
-	f->name = ft_strdup(s);
+	f->name = s;
 	f->folder = 0;
 	f->perms = NULL;
 	f->slnks = 0;
@@ -68,18 +68,23 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 ** it's address
 */
 
-t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
-						int *total_blk)
+t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
+						t_opt *opts, int *total_blk)
 {
 	t_dir_entry		*e;
 	char			*ns;
 
 	e = malloc(sizeof(t_dir_entry));
-	e->s = s;
+	e->s = ft_strdup(s);
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
 	e->stats = ft_get_stats(ns, opts, s);
 	if (e->stats)
+	{
 		*total_blk += e->stats->size_blocks;
+		if (e->stats->perms && *(e->stats->perms) == 'l')
+			ft_get_symlink_target(ns, e->stats);
+	}
+	ft_free_ptr(ns);
 	e->next = NULL;
 	return (e);
 }

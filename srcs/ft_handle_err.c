@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 15:23:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 15:16:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void			ft_handle_opt_err(char opt, char *pname)
 {
-	ft_printf("%s: illegal option -- %c\n", pname, opt);
+	PRINTF("%s: illegal option -- %c\n", pname, opt);
 	ft_print_usage(pname);
 	exit(1);
 }

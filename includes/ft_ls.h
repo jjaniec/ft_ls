@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 15:45:22 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/16 21:17:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
+# define SYMLINK_COLOR FG_MAGENTA
+
+# define PRINTF ft_printf
 
 typedef int			t_bool;
 
@@ -169,8 +172,16 @@ void			ft_debug_dir_content(t_dir_content *s);
 
 void			ft_ls_output_entry(t_str_stats *de, t_opt *opts);
 
-int				ft_can_recurse(char *s);
+int				ft_can_recurse(t_dir_entry *s);
 
 int				ft_is_option(char *str);
+
+void			ft_get_symlink_target(char *path, t_str_stats *f);
+
+void			ft_free_dir_entry(t_dir_entry *de);
+
+void			ft_free_param_elem(t_param *e);
+
+void			ft_free_ptr(void *ptr);
 
 #endif
