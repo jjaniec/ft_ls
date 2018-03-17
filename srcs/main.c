@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 21:04:57 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/17 22:10:37 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,35 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 ** Recursive part
 */
 
-static void		ft_ls_foreach_in_dir(char *s, t_opt *opts)
+static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 {
 	t_dir_content	*dc;
 	t_dir_entry		*li;
 	t_dir_entry		*ptr;
 	int				blocks_total;
 	char			*ns;
+	int				dir_err;
 
+	dir_err = 0;
 	blocks_total = 0;
-	dc = ft_create_folder_elems_ll(s, (opts) ? (opts->r) : (0), opts, &blocks_total);
+	dc = ft_create_folder_elems_ll(s, &dir_err, args, &blocks_total);
 	li = (dc) ? (dc->elems) : (NULL);
 	ptr = li;
-	PRINTF("%s:\ntotal %d\n", s, blocks_total);
+	if (dir_err == 0)
+		PRINTF("%s:\ntotal %d\n", s, blocks_total);
 	while (ptr)
 	{
 		if (ptr->stats)
-			ft_ls_output_entry(ptr->stats, opts);
+			ft_ls_output_entry(ptr->stats, args->opt);
 		ptr = ptr->next;
 	}
 	(terpri);
 	while (li)
 	{
-		if (li && li->stats && li->stats->folder && opts && opts->r_caps && ft_can_recurse(li))
+		if (li && li->stats && li->stats->folder && args->opt && args->opt->r_caps && ft_can_recurse(li))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-			ft_ls_foreach_in_dir(ns, opts);
+			ft_ls_foreach_in_dir(ns, args);
 		}
 		ptr = li->next;
 		ft_free_dir_entry(li);
@@ -87,7 +90,7 @@ void		ft_ls(t_args args)
 	{
 		ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
-			ft_ls_foreach_in_dir(ft_strdup(aptr->s), args.opt);
+			ft_ls_foreach_in_dir(ft_strdup(aptr->s), &args);
 		prev = aptr;
 		aptr = aptr->next;
 		ft_free_param_elem(prev);

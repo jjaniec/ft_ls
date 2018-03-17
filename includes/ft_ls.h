@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 21:17:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/17 22:11:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF ft_printf
+# define PRINTF printf
 
 typedef int			t_bool;
 
@@ -154,14 +154,14 @@ void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
 
 void			ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts, \
+t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, t_args *args, \
 					int *total_blk);
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_args *args, \
 					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);
@@ -183,5 +183,7 @@ void			ft_free_dir_entry(t_dir_entry *de);
 void			ft_free_param_elem(t_param *e);
 
 void			ft_free_ptr(void *ptr);
+
+void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 
 #endif
