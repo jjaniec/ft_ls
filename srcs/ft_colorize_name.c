@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 20:30:29 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/17 20:42:56 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_colorize_name(t_str_stats *f)
 			s = ft_strjoin_free(ft_strdup(SYMLINK_COLOR), ft_strdup(f->name));
 		if (s)
 		{
+			free(f->name);
 			f->name = s;
 			f->name = ft_strjoin(s, FG_WHITE);
 			free(s);
