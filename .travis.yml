@@ -26,4 +26,4 @@ matrix:
         - os: linux
           compiler: clang
           env: CXX=clang
-script: make CC=$CXX; ./ft_ls && ./ft_ls -la && ./ft_ls -R . && time ls -laGR . && time ./ft_ls -laGR .
+script: make CC=$CXX; ./ft_ls && ./ft_ls -la && ./ft_ls -R . && valgrind ./ft_ls -laGR /; echo $?; time ls -laGR . && time ./ft_ls -laGR .
