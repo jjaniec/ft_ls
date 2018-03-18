@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 22:11:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 00:35:23 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include <grp.h>
 # include <dirent.h>
 # include <time.h>
+
+# ifdef __linux__
+#  define __OS__ "Linux"
+# endif
+# ifdef __APPLE__
+#  define __OS__ "Darwin"
+# endif
+# ifndef __OS__
+#  define __OS__ "?"
+# endif
 
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
@@ -161,7 +171,7 @@ char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_args *args, \
+t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
 					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 22:10:37 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 00:34:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 static void		ft_init_args(int ac, char **av, t_args *args)
 {
 	t_param	*params;
+	t_param *ptr;
 
 	args->r = 0;
 	params = NULL;
@@ -28,6 +29,14 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 						(ft_create_param_elem(".", args->opt, &(args->r)));
 	if (!params && !(args->r))
 		params = ft_create_param_elem(".", args->opt, &(args->r));
+	ptr = params;
+	if (*__OS__ == 'D')
+		while (ptr && ptr->s)
+		{
+			if (!(ptr->stats))
+				PRINTF("ft_ls: %s: No such file or directory\n", ptr->s);
+			ptr = ptr->next;
+		}
 	args->prm = params;
 }
 
@@ -60,7 +69,7 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 	(terpri);
 	while (li)
 	{
-		if (li && li->stats && li->stats->folder && args->opt && args->opt->r_caps && ft_can_recurse(li))
+		if (li && li->s && li->stats && li->stats->folder && args->opt && args->opt->r_caps && ft_can_recurse(li))
 		{
 			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 			ft_ls_foreach_in_dir(ns, args);
@@ -88,7 +97,7 @@ void		ft_ls(t_args args)
 	aptr = args.prm;
 	while (aptr)
 	{
-		ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
+		//ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
 			ft_ls_foreach_in_dir(ft_strdup(aptr->s), &args);
 		prev = aptr;
@@ -110,7 +119,7 @@ int		main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
-	ft_debug_ls_args(args);
+	//ft_debug_ls_args(args);
 	if (args.prm)
 		ft_ls(args);
 	return ((args.r));

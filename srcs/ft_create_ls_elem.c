@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 20:27:35 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 00:34:27 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
 
 	p = malloc(sizeof(t_param));
 	p->s = ft_strdup(s);
-	p->stats = ft_get_stats(s, opts, s);
+	p->stats = ft_get_stats(p->s, opts, s);
 	if (!p->stats)
 	{
-		free(p);
-		PRINTF("ft_ls: %s: No such file or directory\n", s);
 		*r = 1;
-		return (NULL);
+		if (*__OS__ == 'L')
+		{
+			ft_free_ptr(p);
+			PRINTF("ft_ls: cannot access '%s': No such file or directory\n", s);
+			return (NULL);
+		}
+		p->s = ft_strdup(s);
 	}
 	p->next = NULL;
 	return (p);
