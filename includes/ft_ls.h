@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 01:21:29 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 18:06:39 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct		s_dir_entry
 typedef struct		s_dir_content
 {
 	unsigned int	c;
+	int				blocks_total;
 	t_dir_entry		*elems;
 
 }					t_dir_content;
@@ -195,5 +196,7 @@ void			ft_free_param_elem(t_param *e);
 void			ft_free_ptr(void *ptr);
 
 void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
+
+void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, t_args *args, char *s);
 
 #endif

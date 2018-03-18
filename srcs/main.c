@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 01:20:37 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 18:49:13 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,39 +48,34 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 {
 	t_dir_content	*dc;
 	t_dir_entry		*li;
-	t_dir_entry		*ptr;
 	int				blocks_total;
 	char			*ns;
 	int				dir_err;
+	t_dir_entry		*ptr;
 
 	dir_err = 0;
 	blocks_total = 0;
 	dc = ft_create_folder_elems_ll(s, &dir_err, args, &blocks_total);
-	li = (dc) ? (dc->elems) : (NULL);
-	ptr = li;
-	if (dir_err == 0)
-		PRINTF("%s:\ntotal %d\n", s, blocks_total);
-	while (ptr)
+	if (dc)
 	{
-		if (ptr->stats)
-			ft_ls_output_entry(ptr->stats, args->opt);
-		ptr = ptr->next;
-	}
-	(terpri);
-	while (li)
-	{
-		if (li && li->s && li->stats && li->stats->folder && args->opt && args->opt->r_caps && ft_can_recurse(li))
+		dc->blocks_total = blocks_total;
+		li = (dc) ? (dc->elems) : (NULL);
+		ft_ls_output_dir_elems(dc, &dir_err, args, s);
+		while (li)
 		{
-			ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-			ft_ls_foreach_in_dir(ns, args);
+			if (li && li->s && li->stats && li->stats->folder && args->opt && args->opt->r_caps && ft_can_recurse(li))
+			{
+				ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
+				ft_ls_foreach_in_dir(ns, args);
+			}
+			ptr = li->next;
+			ft_free_dir_entry(li);
+			li = ptr;
 		}
-		ptr = li->next;
 		ft_free_dir_entry(li);
-		li = ptr;
+		ft_free_ptr(s);
+		ft_free_ptr(dc);
 	}
-	ft_free_dir_entry(li);
-	ft_free_ptr(s);
-	ft_free_ptr(dc);
 }
 
 /*
@@ -117,7 +112,7 @@ int		main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
-	ft_debug_ls_args(args);
+	//ft_debug_ls_args(args);
 	if (args.prm)
 		ft_ls(args);
 	ft_free_ptr(args.opt);
