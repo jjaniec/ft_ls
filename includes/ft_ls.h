@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 21:17:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 18:06:39 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,21 @@
 # include <dirent.h>
 # include <time.h>
 
+# ifdef __linux__
+#  define __OS__ "Linux"
+# endif
+# ifdef __APPLE__
+#  define __OS__ "Darwin"
+# endif
+# ifndef __OS__
+#  define __OS__ "?"
+# endif
+
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF ft_printf
+# define PRINTF printf
 
 typedef int			t_bool;
 
@@ -110,6 +120,7 @@ typedef struct		s_dir_entry
 typedef struct		s_dir_content
 {
 	unsigned int	c;
+	int				blocks_total;
 	t_dir_entry		*elems;
 
 }					t_dir_content;
@@ -154,7 +165,7 @@ void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
 
 void			ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int rev, t_opt *opts, \
+t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, t_args *args, \
 					int *total_blk);
 
 char			*ft_strjoin_path(char *s1, char *s2);
@@ -183,5 +194,9 @@ void			ft_free_dir_entry(t_dir_entry *de);
 void			ft_free_param_elem(t_param *e);
 
 void			ft_free_ptr(void *ptr);
+
+void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
+
+void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, t_args *args, char *s);
 
 #endif

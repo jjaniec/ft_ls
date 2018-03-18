@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 20:25:53 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 19:22:54 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 void			ft_get_symlink_target(char *path, t_str_stats *f)
 {
 	char	*ns;
-	size_t	len;
+	ssize_t	len;
 	size_t	name_len;
 	char	*target;
 
 	name_len = ft_strlen(f->name);
 	target = ft_strnew(256);
 	ns = ft_strnew(256 + name_len + 4);
-	if ((len = readlink(path, target, 256) != -1))
+	if ((len = readlink(path, target, 256)) != -1)
 	{
 		ft_strcpy(ns, f->name);
 		ft_strcpy(ns + name_len, " -> ");
