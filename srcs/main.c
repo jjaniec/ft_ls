@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 00:34:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 01:20:37 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 	if (!params && !(args->r))
 		params = ft_create_param_elem(".", args->opt, &(args->r));
 	ptr = params;
-	if (*__OS__ == 'D')
+	if (*__OS__ == 'D' || *__OS__ == '?')
 		while (ptr && ptr->s)
 		{
 			if (!(ptr->stats))
@@ -104,8 +104,6 @@ void		ft_ls(t_args args)
 		aptr = aptr->next;
 		ft_free_param_elem(prev);
 	}
-	free(args.opt);
-	args.opt = NULL;
 }
 
 /*
@@ -119,8 +117,9 @@ int		main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
-	//ft_debug_ls_args(args);
+	ft_debug_ls_args(args);
 	if (args.prm)
 		ft_ls(args);
+	ft_free_ptr(args.opt);
 	return ((args.r));
 }
