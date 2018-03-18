@@ -26,4 +26,4 @@ matrix:
         - os: linux
           compiler: clang
           env: CXX=clang
-script: make CC=$CXX; ./ft_ls -l && ./ft_ls -la && ./ft_ls && valgrind --leak-check=full ./ft_ls -laGR ~
+script: make CC=$CXX; ./ft_ls -R; ./ft_ls -l && ./ft_ls -la && ./ft_ls && valgrind --leak-check=full ./ft_ls -laGRnr

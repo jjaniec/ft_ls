@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 18:49:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/18 19:20:38 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 	if (dc)
 	{
 		dc->blocks_total = blocks_total;
-		li = (dc) ? (dc->elems) : (NULL);
+		li = dc->elems;
 		ft_ls_output_dir_elems(dc, &dir_err, args, s);
 		while (li)
 		{
