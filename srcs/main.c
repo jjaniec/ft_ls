@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 19:20:38 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:06:18 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 			ptr = ptr->next;
 		}
 	args->prm = params;
+	args->cur_epoch = time(NULL);
 }
 
 /*
@@ -112,7 +113,7 @@ int		main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
-	//ft_debug_ls_args(args);
+	ft_debug_ls_args(args);
 	if (args.prm)
 		ft_ls(args);
 	ft_free_ptr(args.opt);

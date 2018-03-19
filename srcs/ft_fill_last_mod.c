@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:13:17 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 20:29:58 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:08:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void		ft_fill_last_mod(t_str_stats *f, struct stat *f_stats)
 {
 	char	*s;
 
+	//printf("%lu\n", (unsigned long)time(NULL)); 
 	s = ctime(&(*f_stats).st_mtime);
 	f->last_mod = ft_strsub(s + 4, 0, ft_strlen(s + 4) - 9);
 }
