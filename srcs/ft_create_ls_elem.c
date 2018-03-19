@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 18:26:53 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:29:44 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	f->ownr_grp_uid = 0;
 	f->size = 0;
 	f->last_mod = NULL;
+	f->last_mod_epoch = 0;
 	f->rcode = 0;
 	return (f);
 }

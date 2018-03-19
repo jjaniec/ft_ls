@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 15:05:59 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:28:55 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct		s_str_stats
 	unsigned int	ownr_grp_uid;
 	int				size;
 	char			*last_mod;
+	unsigned long	last_mod_epoch;
 	unsigned int	size_blocks;
 	int				rcode;
 }					t_str_stats;
