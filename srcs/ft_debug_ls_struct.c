@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 15:07:42 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:33:38 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 			}
 			PRINTF("\t\tt_str_stats->size |%d|\n", s->size);
 			PRINTF("\t\tt_str_stats->last_mod |%s|\n", s->last_mod);
+			PRINTF("\t\tt_str_stats->last_mod_epoch |%lu|\n", s->last_mod_epoch);
 			PRINTF("\t\tt_str_stats->size_blocks |%u|\n", s->size_blocks);
 			PRINTF("\t\tt_str_stats->rcode |%d|\n", s->rcode);
 		}
