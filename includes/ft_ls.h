@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 18:06:39 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 16:17:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct		s_str_stats
 	unsigned int	ownr_grp_uid;
 	int				size;
 	char			*last_mod;
+	unsigned long	last_mod_epoch;
 	unsigned int	size_blocks;
 	int				rcode;
 }					t_str_stats;
@@ -99,6 +100,7 @@ typedef struct		s_args
 	struct s_opt	*opt;
 	struct s_param	*prm;
 	int				r;
+	unsigned long	cur_epoch;
 }					t_args;
 
 /*
@@ -170,14 +172,12 @@ t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, t_args *args,
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
-t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
+t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, t_opt *opts);
 
 t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
 					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);
-
-t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, int rev);
 
 void			ft_debug_dir_content(t_dir_content *s);
 
