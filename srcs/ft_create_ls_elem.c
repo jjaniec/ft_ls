@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 15:29:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 21:40:55 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ t_dir_content		*ft_create_dir_content_s(void)
 	r = malloc(sizeof(t_dir_content));
 	r->c = 0;
 	r->elems = NULL;
+	r->blocks_total = 0;
 	return (r);
 }
