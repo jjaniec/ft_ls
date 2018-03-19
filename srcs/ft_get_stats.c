@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 19:22:54 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 22:53:24 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_str_stats		*ft_get_stats_l_opt(\
 	ft_fill_owners(f, f_stats, opts);
 	f->size = f_stats->st_size;
 	f->size_blocks = f_stats->st_blocks;
-	ft_fill_last_mod(f, f_stats);
 	return (f);
 }
 
@@ -63,7 +62,7 @@ t_str_stats		*ft_get_stats_l_opt(\
 ** name and sets str_stats.folder to 1 if $s is a folder
 */
 
-t_str_stats				*ft_get_stats(char *path, t_opt *opt, char *name)
+t_str_stats				*ft_get_stats(char *path, t_args *args, char *name)
 {
 	struct stat		arg_stats;
 	t_str_stats		*f;
@@ -76,9 +75,10 @@ t_str_stats				*ft_get_stats(char *path, t_opt *opt, char *name)
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
 	ft_fill_perms(f, &arg_stats);
-	if (opt && opt->g_caps)
+	if (args->opt && args->opt->g_caps)
 		ft_colorize_name(f);
-	if (opt && opt->l)
-		return (ft_get_stats_l_opt(f, &arg_stats, opt));
+	ft_fill_last_mod(f, &arg_stats, args);
+	if (args->opt && args->opt->l)
+		return (ft_get_stats_l_opt(f, &arg_stats, args->opt));
 	return (f);
 }

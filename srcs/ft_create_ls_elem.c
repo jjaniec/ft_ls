@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 21:40:55 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 22:50:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 ** Creates t_param elem with content passed as parameter and set next to null
 */
 
-t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
+t_param				*ft_create_param_elem(char *s, t_args *args, int *r)
 {
 	t_param		*p;
 
 	p = malloc(sizeof(t_param));
 	p->s = ft_strdup(s);
-	p->stats = ft_get_stats(p->s, opts, s);
+	p->stats = ft_get_stats(p->s, args, s);
 	if (!p->stats)
 	{
 		*r = 1;
@@ -74,7 +74,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 */
 
 t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
-						t_opt *opts, int *total_blk)
+						t_args *args, int *total_blk)
 {
 	t_dir_entry		*e;
 	char			*ns;
@@ -82,7 +82,7 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 	e = malloc(sizeof(t_dir_entry));
 	e->s = ft_strdup(s);
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
-	e->stats = ft_get_stats(ns, opts, s);
+	e->stats = ft_get_stats(ns, args, s);
 	if (e->stats)
 	{
 		*total_blk += e->stats->size_blocks;

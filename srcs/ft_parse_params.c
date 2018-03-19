@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 00:18:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 22:52:27 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 */
 
 static void			*ft_init_params_list(\
-						t_param **initptr, char *s, t_opt *opts, int *r)
+						t_param **initptr, char *s, t_args *args, int *r)
 {
 	t_param		*t;
 
-	t = ft_create_param_elem(s, opts, r);
+	t = ft_create_param_elem(s, args, r);
 	*initptr = t;
 	return (t);
 }
@@ -48,11 +48,11 @@ t_param				*ft_parse_params(int ac, char **av, t_args *args)
 	{
 		if (li)
 		{
-			tmp = ft_create_param_elem(av[i], opts, &(args->r));
+			tmp = ft_create_param_elem(av[i], args, &(args->r));
 			li = (tmp) ? (ft_append_elem(li, tmp, args->opt->r)) : (li);
 		}
 		else
-			ft_init_params_list(&li, av[i], opts, &(args->r));
+			ft_init_params_list(&li, av[i], args, &(args->r));
 		i++;
 	}
 	return (li);

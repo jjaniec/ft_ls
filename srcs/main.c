@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 21:43:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 22:55:27 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 	params = NULL;
 	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
-						(ft_create_param_elem(".", args->opt, &(args->r)));
+						(ft_create_param_elem(".", args, &(args->r)));
 	if (!params && !(args->r))
-		params = ft_create_param_elem(".", args->opt, &(args->r));
+		params = ft_create_param_elem(".", args, &(args->r));
 	ptr = params;
 	if (*__OS__ == 'D' || *__OS__ == '?')
 		while (ptr && ptr->s)
@@ -110,7 +110,7 @@ int		main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
-	ft_debug_ls_args(args);
+	//ft_debug_ls_args(args);
 	if (args.prm)
 		ft_ls(args);
 	ft_free_ptr(args.opt);

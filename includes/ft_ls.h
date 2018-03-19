@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 21:45:03 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/19 22:53:56 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ t_opt			*ft_parse_options(int ac, char **av);
 
 t_param			*ft_parse_params(int ac, char **av, t_args *args);
 
-t_param			*ft_create_param_elem(char *s, t_opt *opts, int *r);
+t_param			*ft_create_param_elem(char *s, t_args *args, int *r);
 
 t_str_stats		*ft_create_str_stats_elem(char *s);
 
@@ -143,7 +143,7 @@ void			ft_debug_ls_args(t_args arg);
 
 t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
 
-t_str_stats		*ft_get_stats(char *str, t_opt *opt, char *name);
+t_str_stats		*ft_get_stats(char *str, t_args *args, char *name);
 
 t_str_stats		*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
@@ -163,7 +163,7 @@ void			ft_fill_perms(t_str_stats *f, struct stat *f_stats);
 void			ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
 
-void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats);
+void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, t_args *args);
 
 void			ft_colorize_name(t_str_stats *f);
 
@@ -173,7 +173,7 @@ char			*ft_strjoin_path(char *s1, char *s2);
 
 t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, t_opt *opts);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_opt *opts, \
+t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_args *args, \
 					int *total_blk);
 
 t_dir_content	*ft_create_dir_content_s(void);
