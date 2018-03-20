@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:17:12 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:05:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_param				*ft_create_param_elem(char *s, t_args *args, int *r)
 		*r = 1;
 		if (*__OS__ == 'L')
 		{
+			ft_handle_not_found_err(s);
 			ft_free_ptr(p);
-			PRINTF("ft_ls: cannot access '%s': No such file or directory\n", s);
 			return (NULL);
 		}
 		p->s = ft_strdup(s);
