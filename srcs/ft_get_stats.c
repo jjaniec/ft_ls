@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 22:53:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:17:37 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_str_stats				*ft_get_stats(char *path, t_args *args, char *name)
 	if (S_ISDIR(arg_stats.st_mode))
 		f->folder = TRUE;
 	ft_fill_perms(f, &arg_stats);
+	ft_fill_ext_attr_acl(path, f);
 	if (args->opt && args->opt->g_caps)
 		ft_colorize_name(f);
 	ft_fill_last_mod(f, &arg_stats, args);
