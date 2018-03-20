@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 22:53:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:19:07 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <grp.h>
 # include <dirent.h>
 # include <time.h>
+# include <sys/xattr.h>
+# include <sys/acl.h>
 
 # ifdef __linux__
 #  define __OS__ "Linux"
@@ -68,6 +70,7 @@ typedef struct		s_str_stats
 	char			*name;
 	t_bool			folder;
 	char			*perms;
+	char			perms_attr_acl;
 	int				slnks;
 	char			*ownr;
 	unsigned int	ownr_uid;
@@ -163,7 +166,8 @@ void			ft_fill_perms(t_str_stats *f, struct stat *f_stats);
 void			ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
 					t_opt *opts);
 
-void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, t_args *args);
+void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, \
+					t_args *args);
 
 void			ft_colorize_name(t_str_stats *f);
 
@@ -171,7 +175,8 @@ t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, t_args *args)
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
-t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, t_opt *opts);
+t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
+					t_opt *opts);
 
 t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_args *args, \
 					int *total_blk);
@@ -196,6 +201,9 @@ void			ft_free_ptr(void *ptr);
 
 void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 
-void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, t_args *args, char *s);
+void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
+					t_args *args, char *s);
+
+void		ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
 
 #endif
