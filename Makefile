@@ -6,11 +6,13 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/20 15:18:42 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/20 16:39:34 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
+
+UNAME_S := $(shell uname -s)
 
 SRC_NAME = 	ft_append_elem.c \
 			ft_colorize_name.c \
@@ -31,8 +33,11 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_can_recurse.c \
 			ft_is_option.c \
 			ft_ls_output_dir_elems.c \
-			ft_fill_ext_attr_acl.c \
 			main.c
+
+ifeq ($(UNAME_S),Darwin)
+	SRC_NAME += ft_fill_ext_attr_acl.c
+endif
 
 SRC_DIR = ./srcs/
 INCLUDES_DIR = ./includes/

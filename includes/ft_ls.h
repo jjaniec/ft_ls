@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:52:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:45:21 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <dirent.h>
 # include <time.h>
 # include <sys/xattr.h>
-# include <sys/acl.h>
 
 # ifdef __linux__
 #  define __OS__ "Linux"
 # endif
 # ifdef __APPLE__
 #  define __OS__ "Darwin"
+#  include <sys/acl.h>
 # endif
 # ifndef __OS__
 #  define __OS__ "?"
@@ -139,7 +139,7 @@ t_param			*ft_create_param_elem(char *s, t_args *args, int *r);
 
 t_str_stats		*ft_create_str_stats_elem(char *s);
 
-void 			ft_handle_opt_err(char opt, char *pname);
+void			ft_handle_opt_err(char opt, char *pname);
 
 void			ft_print_usage(char *pname);
 
@@ -172,7 +172,8 @@ void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, \
 
 void			ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, t_args *args);
+t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, \
+					t_args *args);
 
 char			*ft_strjoin_path(char *s1, char *s2);
 
@@ -205,8 +206,14 @@ void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 					t_args *args, char *s);
 
-void			ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
-
 void			ft_handle_not_found_err(char *s);
+
+# ifdef __linux__
+#  define ft_fill_ext_attr_acl(path, f);
+# endif
+# ifdef __APPLE__
+#  include <sys/acl.h>
+void	ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
+# endif
 
 #endif
