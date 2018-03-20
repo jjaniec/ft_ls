@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 22:52:27 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:31:24 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_param				*ft_parse_params(int ac, char **av, t_args *args)
 		else
 			ft_init_params_list(&li, av[i], args, &(args->r));
 		i++;
+		args->prm_len++;
 	}
 	return (li);
 }
