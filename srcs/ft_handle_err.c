@@ -6,11 +6,23 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 22:15:27 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:01:21 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+void		ft_handle_not_found_err(char *s)
+{
+	ft_putstr_fd("ft_ls: ", 2);
+	if (*__OS__ == 'L')
+		ft_putstr_fd("cannot access '", 2);
+	ft_putstr_fd(s, 2);
+	if (*__OS__ == 'L')
+		ft_putstr_fd("': No such file or directory\n", 2);
+	else
+		ft_putstr_fd(": No such file or directory\n", 2);
+}
 
 /*
 ** Checks why ft_ls can't read direcory $path, print
@@ -24,7 +36,18 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 	if (!(lstat(path, &dir_stats)))
 		if (S_ISDIR(dir_stats.st_mode))
 		{
-			PRINTF("ft_ls: cannot open directory '%s': Permission denied\n", path);
+			if (*__OS__ == 'L')
+				ft_putstr_fd("cannot open directory '", 2);
+			else
+			{
+				PRINTF("\n%s:\n", path);
+				ft_putstr_fd("ft_ls: ", 2);
+			}
+			ft_putstr_fd(path, 2);
+			if (*__OS__ == 'L')
+				ft_putstr_fd("': Permission denied\n", 2);
+			else
+				ft_putstr_fd(": Permission denied\n", 2);
 			args->r = 1;
 		}
 	*dir_err = 1;

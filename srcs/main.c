@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:37:29 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:06:12 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 		while (ptr && ptr->s)
 		{
 			if (!(ptr->stats))
-				PRINTF("ft_ls: %s: No such file or directory\n", ptr->s);
+				ft_handle_not_found_err(ptr->s);
 			ptr = ptr->next;
 		}
 	args->prm = params;

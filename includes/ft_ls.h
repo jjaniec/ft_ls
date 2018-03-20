@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:28:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:52:46 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,8 @@ void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 					t_args *args, char *s);
 
-void		ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
+void			ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
+
+void			ft_handle_not_found_err(char *s);
 
 #endif
