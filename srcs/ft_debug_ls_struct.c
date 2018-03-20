@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:15:39 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:33:07 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ void		ft_debug_ls_args(t_args arg)
 	ft_debug_opt(arg.opt);
 	ft_debug_prm(arg.prm);
 	PRINTF("\tr: %d\n", arg.r);
+	PRINTF("\tprm_len: %d\n", arg.prm_len);
 	PRINTF("\tcur_epoch: %lu\n", arg.cur_epoch);
 }

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:59:09 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/18 18:59:22 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:36:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, t_args *args, char 
 	ptr = (dc) ? (dc->elems) : (NULL);
 	if (*dir_err == 0)
 	{
-		if (args->opt && (args->opt->l || args->opt->r_caps)) // or nbr of cli args != 1
+		if ((args->opt && args->opt->r_caps) || (args->prm_len > 1))
 			PRINTF("%s:\n", s);
 		if (args->opt && (args->opt->l))
 			PRINTF("total %d\n", dc->blocks_total);
