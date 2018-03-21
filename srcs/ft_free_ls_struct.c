@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/16 21:04:38 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:09:26 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_free_dir_entry(t_dir_entry *de)
 }
 
 /*
-**
+** Free string and stats of a cli param element
 */
 
 void	ft_free_param_elem(t_param *e)

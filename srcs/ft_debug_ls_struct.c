@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 15:33:07 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:14:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 ** print content of a t_str_stats struct
 */
 
-void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
+void		ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 {
 	PRINTF("\t{FG_GREEN}t_str_stats of %s{FG_DEFAULT}:\n", name);
-	if (!s)
-		PRINTF("\t\t(null)\n");
-	else
+	if (s)
 	{
 		PRINTF("\t\tt_str_stats->name |%s|\n", s->name);
 		PRINTF("\t\tt_str_stats->folder: |%d|\n", s->folder);
@@ -39,7 +37,7 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 			}
 			PRINTF("\t\tt_str_stats->size |%d|\n", s->size);
 			PRINTF("\t\tt_str_stats->last_mod |%s|\n", s->last_mod);
-			PRINTF("\t\tt_str_stats->last_mod_epoch |%lu|\n", s->last_mod_epoch);
+			PRINTF("\t\tt_str_stats->last_modepoch |%lu|\n", s->last_mod_epoch);
 			PRINTF("\t\tt_str_stats->size_blocks |%u|\n", s->size_blocks);
 			PRINTF("\t\tt_str_stats->rcode |%d|\n", s->rcode);
 		}
@@ -50,7 +48,7 @@ void	ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts)
 ** print content of a s_param linked list
 */
 
-void	ft_debug_prm(t_param *prm)
+void		ft_debug_prm(t_param *prm)
 {
 	t_param	*tmp;
 
@@ -70,7 +68,7 @@ void	ft_debug_prm(t_param *prm)
 ** Print content of elements of a d_dir_content struct
 */
 
-void	ft_debug_dir_content(t_dir_content *s)
+void		ft_debug_dir_content(t_dir_content *s)
 {
 	t_dir_entry	*tmp;
 
@@ -84,17 +82,16 @@ void	ft_debug_dir_content(t_dir_content *s)
 		while (tmp)
 		{
 			PRINTF("\t\t\tentry: %s\n", tmp->s);
-			//ft_debug_str_stats(tmp->s, tmp->stats, opts);
 			tmp = tmp->next;
 		}
 	}
 }
 
 /*
-** print content of a s_opt struct
+** Print content of a s_opt struct
 */
 
-void	ft_debug_opt(t_opt *opts)
+void		ft_debug_opt(t_opt *opts)
 {
 	PRINTF("\topts:\n");
 	if (!opts)

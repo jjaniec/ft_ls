@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 18:36:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 21:04:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,27 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF ft_printf
+# define PRINTF printf
 
 typedef int			t_bool;
 
 # define TRUE 1
 # define FALSE 0
 
-# define terpri		ft_putchar('\n')
-
 /*
 ** Struct to store options, toggle booleans if option is specified
 */
 
-typedef struct	s_opt
+typedef struct		s_opt
 {
-	t_bool		l;
-	t_bool		r_caps;
-	t_bool		a;
-	t_bool		r;
-	t_bool		t;
-	t_bool		n;
-	t_bool		g_caps;
-}				t_opt;
+	t_bool			l;
+	t_bool			r_caps;
+	t_bool			a;
+	t_bool			r;
+	t_bool			t;
+	t_bool			n;
+	t_bool			g_caps;
+}					t_opt;
 
 /*
 ** Struct to store converted content of
@@ -131,89 +129,91 @@ typedef struct		s_dir_content
 
 }					t_dir_content;
 
-t_opt			*ft_parse_options(int ac, char **av);
+t_opt				*ft_parse_options(int ac, char **av);
 
-t_param			*ft_parse_params(int ac, char **av, t_args *args);
+t_param				*ft_parse_params(int ac, char **av, t_args *args);
 
-t_param			*ft_create_param_elem(char *s, t_args *args, int *r);
+t_param				*ft_create_param_elem(char *s, t_args *args, int *r);
 
-t_str_stats		*ft_create_str_stats_elem(char *s);
+t_str_stats			*ft_create_str_stats_elem(char *s);
 
-void			ft_handle_opt_err(char opt, char *pname);
+void				ft_handle_opt_err(char opt, char *pname);
 
-void			ft_print_usage(char *pname);
+void				ft_print_usage(char *pname);
 
-void			ft_debug_ls_args(t_args arg);
+void				ft_debug_ls_args(t_args arg);
 
-t_param			*ft_append_elem(t_param *li, t_param *prm, t_opt *opts);
+t_param				*ft_append_elem(t_param *li, t_param *prm, t_opt *opts);
 
-t_str_stats		*ft_get_stats(char *str, t_args *args, char *name);
+t_str_stats			*ft_get_stats(char *str, t_args *args, char *name);
 
-t_str_stats		*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
-					t_opt *opts);
+t_str_stats			*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
+						t_opt *opts);
 
-void			ft_ls(t_args args);
+void				ft_ls(t_args args);
 
-void			ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
+void				ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
 
-void			ft_debug_prm(t_param *prm);
+void				ft_debug_prm(t_param *prm);
 
-void			ft_debug_opt(t_opt *opts);
+void				ft_debug_opt(t_opt *opts);
 
-void			*ft_free_str_stat_struct(t_str_stats *t_s);
+void				*ft_free_str_stat_struct(t_str_stats *t_s);
 
-void			ft_fill_perms(t_str_stats *f, struct stat *f_stats);
+void				ft_fill_perms(t_str_stats *f, struct stat *f_stats);
 
-void			ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
-					t_opt *opts);
+void				ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
+						t_opt *opts);
 
-void			ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, \
-					t_args *args);
+void				ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, \
+						t_args *args);
 
-void			ft_colorize_name(t_str_stats *f);
+void				ft_colorize_name(t_str_stats *f);
 
-t_dir_content	*ft_create_folder_elems_ll(char *path, int *dir_err, \
-					t_args *args);
+t_dir_content		*ft_create_folder_elems_ll(char *path, int *dir_err, \
+						t_args *args);
 
-char			*ft_strjoin_path(char *s1, char *s2);
+char				*ft_strjoin_path(char *s1, char *s2);
 
-t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
-					t_opt *opts);
+t_dir_entry			*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
+						t_opt *opts);
 
-t_dir_entry		*ft_create_dir_entry_elem(char *s, char *path, t_args *args, \
-					int *total_blk);
+t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
+						t_args *args, int *total_blk);
 
-t_dir_content	*ft_create_dir_content_s(void);
+t_dir_content		*ft_create_dir_content_s(void);
 
-void			ft_debug_dir_content(t_dir_content *s);
+void				ft_debug_dir_content(t_dir_content *s);
 
-void			ft_ls_output_entry(t_str_stats *de, t_opt *opts);
+void				ft_ls_output_entry(t_str_stats *de, t_opt *opts);
 
-int				ft_can_recurse(t_dir_entry *s);
+int					ft_can_recurse(t_dir_entry *s);
 
-int				ft_is_option(char *str);
+int					ft_is_option(char *str);
 
-void			ft_get_symlink_target(char *path, t_str_stats *f);
+void				ft_get_symlink_target(char *path, t_str_stats *f);
 
-void			ft_free_dir_entry(t_dir_entry *de);
+void				ft_free_dir_entry(t_dir_entry *de);
 
-void			ft_free_param_elem(t_param *e);
+void				ft_free_param_elem(t_param *e);
 
-void			ft_free_ptr(void *ptr);
+void				ft_free_ptr(void *ptr);
 
-void			*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
+void				*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 
-void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
-					t_args *args, char *s);
+void				ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
+						t_args *args, char *s);
 
-void			ft_handle_not_found_err(char *s);
+void				ft_handle_not_found_err(char *s);
+
+void				ft_ls_foreach_in_dir(char *s, t_args *args);
 
 # ifdef __linux__
 #  define ft_fill_ext_attr_acl(path, f);
 # endif
 # ifdef __APPLE__
 #  include <sys/acl.h>
-void	ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
+void				ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
 # endif
 
 #endif
