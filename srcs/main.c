@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 17:01:33 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 17:54:08 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,23 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 void		ft_ls(t_args args)
 {
 	t_param		*aptr;
+	t_param		*aptr2;
 	t_param		*prev;
 
 	prev = NULL;
 	aptr = args.prm;
+	aptr2 = aptr;
+	ft_debug_ls_args(args);
+	while (aptr2)
+	{
+		if (aptr2->stats && !aptr2->stats->folder)
+			ft_ls_output_entry(aptr2->stats, args.opt);
+		aptr2 = aptr2->next;
+	}
 	while (aptr)
 	{
-		//ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
 			ft_ls_foreach_in_dir(aptr->s, &args);
-		else if (aptr->stats && !aptr->stats->folder)
-			ft_ls_output_entry(aptr->stats, args.opt);
 		prev = aptr;
 		aptr = aptr->next;
 		ft_free_param_elem(prev);
