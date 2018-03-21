@@ -6,11 +6,13 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/14 15:58:42 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/20 16:39:34 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
+
+UNAME_S := $(shell uname -s)
 
 SRC_NAME = 	ft_append_elem.c \
 			ft_colorize_name.c \
@@ -30,52 +32,67 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_ls_output.c \
 			ft_can_recurse.c \
 			ft_is_option.c \
+			ft_ls_output_dir_elems.c \
 			main.c
+
+ifeq ($(UNAME_S),Darwin)
+	SRC_NAME += ft_fill_ext_attr_acl.c
+endif
 
 SRC_DIR = ./srcs/
 INCLUDES_DIR = ./includes/
-OBJ_DIR = ./obj/
+OBJ_DIR = ./objs/
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
 
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
 LFLAGS = -L./ft_printf -lftprintf
 
-FT_PRINTF = ./ft_printf
+FT_PRINTF_DIR = ./ft_printf
+LIBFTPRINTF = $(addprefix $(FT_PRINTF_DIR),"/libftprintf.a")
+
+MAKEFILE_STATUS = $(addprefix $(addprefix $(FT_PRINTF_DIR),"/libft"),"/.makefile_status")
 
 UNAME_S := $(shell uname -s)
 
+define ui_line
+	$(MAKEFILE_STATUS) $(1) $(2) || true
+endef
+
 all : $(NAME)
 
-.PHONY : all clean
-
-$(NAME) : $(FT_PRINTF) $(OBJ)
-	cp ./ft_printf/libftprintf.a ./libftprintf.a
+$(NAME) : $(LIBFTPRINTF) $(OBJ)
+	@cp $(LIBFTPRINTF) ./libftprintf.a
 ifeq ($(UNAME_S),Linux)
-	gcc $(CFLAGS) $(LFLAGS) $(OBJ) ./ft_printf/libftprintf.a -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) $(LIBFTPRINTF) -o $(NAME)
 endif
 ifeq ($(UNAME_S),Darwin)
-	gcc $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
 endif
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
-	gcc $(CFLAGS) -c $(IFLAGS) $^ -o $@
+	@cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
+	@gcc $(CFLAGS) -c $(IFLAGS) $^ -o $@ && $(call ui_line, $@, $(NAME))
 
-$(FT_PRINTF):
+$(FT_PRINTF_DIR):
 	git clone https://github.com/jjaniec/ft_printf || true
+
+$(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make clean -C ft_printf/
+	@rm -rf $(OBJ_DIR)
+	@make clean -C ft_printf/
 
 fclean: clean
-	make fclean -C ft_printf/
-	rm -f $(NAME)
-	rm ft_printf/includes/libft_printf.h
+	@make fclean -C ft_printf/
+	@rm -f $(NAME)
+	@rm ft_printf/includes/libft_printf.h
 
 re: fclean all
+
+.PHONY: clean fclean all re

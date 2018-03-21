@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/17 20:27:35 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:06:39 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@
 ** Creates t_param elem with content passed as parameter and set next to null
 */
 
-t_param				*ft_create_param_elem(char *s, t_opt *opts, int *r)
+t_param				*ft_create_param_elem(char *s, t_args *args, int *r)
 {
 	t_param		*p;
 
 	p = malloc(sizeof(t_param));
 	p->s = ft_strdup(s);
-	p->stats = ft_get_stats(s, opts, s);
+	p->stats = ft_get_stats(p->s, args, s);
 	if (!p->stats)
 	{
-		free(p);
-		PRINTF("ft_ls: %s: No such file or directory\n", s);
 		*r = 1;
-		return (NULL);
+		if (*__OS__ == 'L')
+		{
+			ft_handle_not_found_err(s);
+			ft_free_ptr(p);
+			return (NULL);
+		}
+		p->s = ft_strdup(s);
 	}
 	p->next = NULL;
 	return (p);
@@ -52,6 +56,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	f->name = s;
 	f->folder = 0;
 	f->perms = NULL;
+	f->perms_attr_acl = ' ';
 	f->slnks = 0;
 	f->ownr = NULL;
 	f->ownr_grp = NULL;
@@ -59,7 +64,8 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	f->ownr_grp_uid = 0;
 	f->size = 0;
 	f->last_mod = NULL;
-	f->rcode = -1;
+	f->last_mod_epoch = 0;
+	f->rcode = 0;
 	return (f);
 }
 
@@ -69,7 +75,7 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 */
 
 t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
-						t_opt *opts, int *total_blk)
+						t_args *args, int *total_blk)
 {
 	t_dir_entry		*e;
 	char			*ns;
@@ -77,14 +83,14 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 	e = malloc(sizeof(t_dir_entry));
 	e->s = ft_strdup(s);
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(s));
-	e->stats = ft_get_stats(ns, opts, s);
-	if (e->stats)
+	e->stats = ft_get_stats(ns, args, s);
+	if (ns && e->stats)
 	{
 		*total_blk += e->stats->size_blocks;
 		if (e->stats->perms && *(e->stats->perms) == 'l')
 			ft_get_symlink_target(ns, e->stats);
+		ft_free_ptr(ns);
 	}
-	ft_free_ptr(ns);
 	e->next = NULL;
 	return (e);
 }
@@ -101,5 +107,6 @@ t_dir_content		*ft_create_dir_content_s(void)
 	r = malloc(sizeof(t_dir_content));
 	r->c = 0;
 	r->elems = NULL;
+	r->blocks_total = 0;
 	return (r);
 }
