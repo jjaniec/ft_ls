@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:49:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/19 19:09:31 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 15:08:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,21 @@ t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, t_opt *opts)
 	int				rev;
 	int				time_sort;
 
+	if (!new)
+		return (li);
 	rev = (opts) ? (opts->r) : (0);
 	time_sort = (opts) ? (opts->t) : (0);
 	ptr = li;
 	prev = NULL;
 	//PRINTF("OS%s\n", __OS__);
-	while (ptr && \
+	while (new && ptr && \
 		((rev && \
-			(((time_sort) ? (!(new->stats->last_mod_epoch <= ptr->stats->last_mod_epoch)) : (0)) || \
-			(((time_sort) ? ((new->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
+			(((time_sort) ? (!(new->stats && new->stats->last_mod_epoch <= ptr->stats->last_mod_epoch)) : (0)) || \
+			(((time_sort) ? ((new->stats && new->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
 				ft_strcmp(ptr->s, new->s) > 0))) || \
 		(!rev && \
-			(((time_sort) ? (!(new->stats->last_mod_epoch >= ptr->stats->last_mod_epoch)) : (0)) || \
-			(((time_sort) ? ((new->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
+			(((time_sort) ? (!(new->stats && new->stats->last_mod_epoch >= ptr->stats->last_mod_epoch)) : (0)) || \
+			(((time_sort) ? ((new->stats && new->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
 				ft_strcmp(ptr->s, new->s) < 0)))))
 	{
 		prev = ptr;
