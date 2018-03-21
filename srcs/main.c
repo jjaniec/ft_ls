@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 16:06:12 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 14:49:08 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 			{
 				ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
 				ft_ls_foreach_in_dir(ns, args);
+				ft_free_ptr(ns);
 			}
 			ptr = li->next;
 			ft_free_dir_entry(li);
 			li = ptr;
 		}
 		ft_free_dir_entry(li);
-		ft_free_ptr(s);
 		ft_free_ptr(dc);
 	}
 }
@@ -93,7 +93,7 @@ void		ft_ls(t_args args)
 	{
 		//ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
-			ft_ls_foreach_in_dir(ft_strdup(aptr->s), &args);
+			ft_ls_foreach_in_dir(aptr->s, &args);
 		prev = aptr;
 		aptr = aptr->next;
 		ft_free_param_elem(prev);
