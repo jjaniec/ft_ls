@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:13:17 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 16:42:34 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 15:50:59 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 
 void		ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, t_args *args)
 {
-	char	*s;
-	char	*sr;
+	char			*s;
+	char			*sr;
+	unsigned long	six_months_epoch;
 
 	sr = ft_strnew(12);
 	f->last_mod_epoch = f_stats->st_mtime;
 	s = ctime(&(*f_stats).st_mtime);
-	if (!((args->cur_epoch - (86400 * 30 * 6)) > \
-				(unsigned long)f_stats->st_mtime))
+	six_months_epoch = args->cur_epoch - (86400 * 30 * 6);
+	if (!(six_months_epoch > f->last_mod_epoch))
 	{
 		ft_strncpy(sr, s + 4, 12);
 	}

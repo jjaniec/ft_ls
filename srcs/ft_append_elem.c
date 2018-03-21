@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:49:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 15:08:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:47:11 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,31 @@
 
 /*
 ** Append to linked list, a created element with passed string as parameter
-** todo verif si fichier/dossier existe et stop et print erreur si fichier non trouvé
+** 
 */
 
-t_param			*ft_append_elem(t_param *li, t_param *prm, int rev)
+t_param			*ft_append_elem(t_param *li, t_param *prm, t_opt *opts)
 {
 	t_param		*ptr;
 	t_param		*prev;
+	int			time_sort;
+	int			rev;
 
 	ptr = li;
 	if (!prm)
 		return (li);
 	prev = NULL;
+	rev = (opts) ? (opts->r) : (0);
+	time_sort = (opts) ? (opts->t) : (0);
 	while (prm && ptr && \
-		((rev && (ft_strcmp(ptr->s, prm->s) > 0)) || \
-		(!rev && (ft_strcmp(ptr->s, prm->s) < 0))))
+		((rev && \
+			(((time_sort) ? (!(prm->stats && ptr->stats && prm->stats->last_mod_epoch <= ptr->stats->last_mod_epoch)) : (0)) || \
+			(((time_sort) ? ((prm->stats && ptr->stats && prm->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
+				ft_strcmp(ptr->s, prm->s) > 0))) || \
+		(!rev && \
+			(((time_sort) ? (!(prm->stats && ptr->stats && prm->stats->last_mod_epoch >= ptr->stats->last_mod_epoch)) : (0)) || \
+			(((time_sort) ? ((prm->stats && ptr->stats && prm->stats->last_mod_epoch == ptr->stats->last_mod_epoch)) : (1)) && \
+				ft_strcmp(ptr->s, prm->s) < 0)))))
 	{
 		prev = ptr;
 		ptr = ptr->next;

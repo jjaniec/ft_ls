@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 16:45:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:36:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF printf
+# define PRINTF ft_printf
 
 typedef int			t_bool;
 
@@ -145,7 +145,7 @@ void			ft_print_usage(char *pname);
 
 void			ft_debug_ls_args(t_args arg);
 
-t_param			*ft_append_elem(t_param *li, t_param *prm, int rev);
+t_param			*ft_append_elem(t_param *li, t_param *prm, t_opt *opts);
 
 t_str_stats		*ft_get_stats(char *str, t_args *args, char *name);
 
