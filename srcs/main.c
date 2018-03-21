@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 14:49:08 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 17:01:33 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 
 	args->r = 0;
 	args->prm_len = 0;
+	args->cur_epoch = time(NULL);
 	params = NULL;
 	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
 	params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
@@ -39,7 +40,6 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 			ptr = ptr->next;
 		}
 	args->prm = params;
-	args->cur_epoch = time(NULL);
 }
 
 /*
@@ -94,6 +94,8 @@ void		ft_ls(t_args args)
 		//ft_debug_str_stats(aptr->s, aptr->stats, args.opt);
 		if (aptr->stats && aptr->stats->folder)
 			ft_ls_foreach_in_dir(aptr->s, &args);
+		else if (aptr->stats && !aptr->stats->folder)
+			ft_ls_output_entry(aptr->stats, args.opt);
 		prev = aptr;
 		aptr = aptr->next;
 		ft_free_param_elem(prev);

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 16:45:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 15:54:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF printf
+# define PRINTF ft_printf
 
 typedef int			t_bool;
 
