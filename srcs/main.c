@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:31:40 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 21:07:05 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,24 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 
 /*
 ** Recursive part, create linked list of dir $s entries, print
-** it's content and search for other directories in the linked list
+** it's content and search for other directories in it,
+** if a new directory is found call ft_recurse_to_dir to repeat
+** ft_ls_foreach_in_dir with new path
 */
 
-static void		ft_ls_foreach_in_dir(char *s, t_args *args)
+static void		ft_recurse_to_dir(char *path, char *entry, t_args *args)
+{
+	char		*ns;
+
+	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(entry));
+	ft_ls_foreach_in_dir(ns, args);
+	ft_free_ptr(ns);
+}
+
+void			ft_ls_foreach_in_dir(char *s, t_args *args)
 {
 	t_dir_content	*dc;
 	t_dir_entry		*li;
-	char			*ns;
 	int				dir_err;
 	t_dir_entry		*ptr;
 
@@ -66,9 +76,7 @@ static void		ft_ls_foreach_in_dir(char *s, t_args *args)
 			if (li && li->s && li->stats && li->stats->folder && \
 				args->opt && args->opt->r_caps && ft_can_recurse(li))
 			{
-				ns = ft_strjoin_path(ft_strdup(s), ft_strdup(li->s));
-				ft_ls_foreach_in_dir(ns, args);
-				ft_free_ptr(ns);
+				ft_recurse_to_dir(s, li->s, args);
 			}
 			ptr = li->next;
 			ft_free_dir_entry(li);

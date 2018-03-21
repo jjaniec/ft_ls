@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:00:40 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 21:04:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 
-# define PRINTF ft_printf
+# define PRINTF printf
 
 typedef int			t_bool;
 
@@ -205,6 +205,8 @@ void				ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 						t_args *args, char *s);
 
 void				ft_handle_not_found_err(char *s);
+
+void				ft_ls_foreach_in_dir(char *s, t_args *args);
 
 # ifdef __linux__
 #  define ft_fill_ext_attr_acl(path, f);
