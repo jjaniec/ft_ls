@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/20 16:45:49 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:37:01 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_param				*ft_parse_params(int ac, char **av, t_args *args)
 		if (li)
 		{
 			tmp = ft_create_param_elem(av[i], args, &(args->r));
-			li = (tmp) ? (ft_append_elem(li, tmp, args->opt->r)) : (li);
+			li = (tmp) ? (ft_append_elem(li, tmp, args->opt)) : (li);
 		}
 		else
 			ft_init_params_list(&li, av[i], args, &(args->r));
