@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 15:12:27 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/15 22:20:50 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:01:17 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 int		ft_can_recurse(t_dir_entry *e)
 {
-	if (e->s && e->s[0] == '.' && e->stats && e->stats->perms && *(e->stats->perms) != 'l')
+	if (e->s && e->s[0] == '.' && \
+		e->stats && e->stats->perms && *(e->stats->perms) != 'l')
 	{
 		if (!(e->s[1]) || ft_strcmp(e->s, "..") == 0)
 			return (0);

@@ -6,11 +6,11 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 23:44:49 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 18:37:01 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:12:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<ft_ls.h>
+#include <ft_ls.h>
 
 /*
 ** Creates linked list's first argument and init return value of ft_parse_params
