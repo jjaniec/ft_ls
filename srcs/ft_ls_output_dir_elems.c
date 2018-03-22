@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:59:09 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:12:57 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:10:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 			t_args *args, char *s)
 {
 	t_dir_entry		*ptr;
-
-	ft_putchar('\n');
+	if (args->file_cli_args)
+		ft_putchar('\n');
+	else
+		args->file_cli_args = 1;
 	ptr = (dc) ? (dc->elems) : (NULL);
 	if (*dir_err == 0)
 	{
