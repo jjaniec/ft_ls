@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/20 16:39:34 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/22 18:50:30 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC = $(addprefix $(SRC_DIR), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
 LFLAGS = -L./ft_printf -lftprintf
 
@@ -73,13 +73,13 @@ ifeq ($(UNAME_S),Darwin)
 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
 endif
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c ./includes/ft_ls.h
 	@mkdir -p $(OBJ_DIR)
 	@cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
-	@gcc $(CFLAGS) -c $(IFLAGS) $^ -o $@ && $(call ui_line, $@, $(NAME))
+	@gcc $(CFLAGS) -c $(IFLAGS) $< -o $@ && $(call ui_line, $@, $(NAME))
 
 $(FT_PRINTF_DIR):
-	git clone https://github.com/jjaniec/ft_printf || true
+	@git clone https://github.com/jjaniec/ft_printf || true
 
 $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
