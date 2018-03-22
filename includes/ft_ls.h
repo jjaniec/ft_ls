@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 21:04:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:09:30 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct		s_args
 	int				prm_len;
 	int				r;
 	unsigned long	cur_epoch;
+	int				file_cli_args;
 }					t_args;
 
 /*

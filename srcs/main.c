@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 21:07:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:11:29 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 
 	args->r = 0;
 	args->prm_len = 0;
+	args->file_cli_args = 0;
 	args->cur_epoch = time(NULL);
 	params = NULL;
 	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
@@ -75,9 +76,7 @@ void			ft_ls_foreach_in_dir(char *s, t_args *args)
 		{
 			if (li && li->s && li->stats && li->stats->folder && \
 				args->opt && args->opt->r_caps && ft_can_recurse(li))
-			{
 				ft_recurse_to_dir(s, li->s, args);
-			}
 			ptr = li->next;
 			ft_free_dir_entry(li);
 			li = ptr;
@@ -104,7 +103,10 @@ void			ft_ls(t_args args)
 	while (aptr2)
 	{
 		if (aptr2->stats && !aptr2->stats->folder)
+		{
 			ft_ls_output_entry(aptr2->stats, args.opt);
+			args.file_cli_args = 1;
+		}
 		aptr2 = aptr2->next;
 	}
 	while (aptr)
