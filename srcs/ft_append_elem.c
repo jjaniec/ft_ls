@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:49:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 20:30:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 19:01:32 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,14 @@ t_param			*ft_append_elem(t_param *li, t_param *new, t_opt *opts)
 	if (!new)
 		return (li);
 	prev = NULL;
-	ft_skip_elems(&ptr, &new, &prev, opts);
+	if (!new->stats)
+		while (li && ptr && !li->stats && ft_strcmp(ptr->s, new->s) < 0)
+		{
+			prev = ptr;
+			ptr = ptr->next;
+		}
+	else
+		ft_skip_elems(&ptr, &new, &prev, opts);
 	if (prev)
 	{
 		prev->next = new;

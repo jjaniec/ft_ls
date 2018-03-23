@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/22 14:09:30 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:48:28 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@
 # define DIR_COLOR FG_BLUE
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
-
+# define SPECIAL_COLOR FG_BLUE
+# define FIFO_COLOR FG_YELLOW
+# define BLOCK_SPE_BG_COLOR BG_MAGENTA
+# define CHAR_SPE_BG_COLOR BG_YELLOW
 # define PRINTF printf
 
 typedef int			t_bool;
@@ -78,6 +81,8 @@ typedef struct		s_str_stats
 	char			*last_mod;
 	unsigned long	last_mod_epoch;
 	unsigned int	size_blocks;
+	unsigned int	rdev_min;
+	unsigned int	rdev_maj;
 	int				rcode;
 }					t_str_stats;
 
@@ -208,6 +213,9 @@ void				ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 void				ft_handle_not_found_err(char *s);
 
 void				ft_ls_foreach_in_dir(char *s, t_args *args);
+
+void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
+
 
 # ifdef __linux__
 #  define ft_fill_ext_attr_acl(path, f);
