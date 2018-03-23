@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 16:58:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:48:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_str_stats		*ft_get_stats_l_opt(\
 	ft_fill_owners(f, f_stats, opts);
 	f->size = f_stats->st_size;
 	f->size_blocks = f_stats->st_blocks;
+	if (*f->perms == 'b' || *f->perms == 'c')
+		ft_get_rdev_infos(f_stats, f);
 	return (f);
 }
 
