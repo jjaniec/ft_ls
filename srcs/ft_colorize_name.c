@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/22 18:50:47 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 16:22:13 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static char		*ft_get_color_str(t_str_stats *f)
 {
 	char *ns;
 
-	ns = ft_strnew(1);
-	if (f->folder)
+	ns = "";
+	if (f->folder && *f->perms == 'd')
 		ns = ft_strjoin(ns, DIR_COLOR);
 	else if (f->perms[3] == 'x' && !(*(f->perms) == 'l'))
 		ns = ft_strjoin(ns, EXEC_COLOR);
@@ -63,6 +63,7 @@ void			ft_colorize_name(t_str_stats *f)
 		if (*(f->perms) == 'c' || *(f->perms) == 'b')
 			ft_strncpy(ns + s_l + name_l + def_l[0], BG_DEFAULT, def_l[1]);
 		free(f->name);
+		free(s);
 		f->name = ns;
 	}
 }

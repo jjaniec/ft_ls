@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/22 18:50:30 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/23 16:31:42 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,12 @@ SRC = $(addprefix $(SRC_DIR), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
+DEV_FLAGS = -fsanitize=address -fno-omit-frame-pointer
 IFLAGS = -I./ft_printf/includes -I./$(INCLUDES_DIR)
 LFLAGS = -L./ft_printf -lftprintf
 
+CFLAGS += $(DEV_FLAGS)
 FT_PRINTF_DIR = ./ft_printf
 LIBFTPRINTF = $(addprefix $(FT_PRINTF_DIR),"/libftprintf.a")
 
