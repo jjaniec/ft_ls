@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 16:22:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 16:50:12 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static char		*ft_get_color_str(t_str_stats *f)
 		ns = ft_strjoin(ns, EXEC_COLOR);
 	else if (*(f->perms) == 'l')
 		ns = ft_strjoin(ns, SYMLINK_COLOR);
+	else if (*(f->perms) == 'p')
+		ns = ft_strjoin(ns, FIFO_COLOR);
 	else if (*(f->perms) == 'c' || *(f->perms) == 'b')
 	{
 		ns = ft_strjoin(ns, SPECIAL_COLOR);

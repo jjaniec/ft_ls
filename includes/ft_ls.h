@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/22 18:48:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/23 16:46:44 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define EXEC_COLOR FG_RED
 # define SYMLINK_COLOR FG_MAGENTA
 # define SPECIAL_COLOR FG_BLUE
+# define FIFO_COLOR FG_YELLOW
 # define BLOCK_SPE_BG_COLOR BG_MAGENTA
 # define CHAR_SPE_BG_COLOR BG_YELLOW
 # define PRINTF printf
