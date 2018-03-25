@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:02:07 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:33:49 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,14 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int *dir_err, \
 	r = ft_create_dir_content_s();
 	li = NULL;
 	while ((entry = readdir(d)) && ft_strlen(entry->d_name) > 0)
-		if (entry->d_name[0] && (entry->d_name[0] != '.' || \
-			(entry->d_name[0] == '.' && args->opt && args->opt->a)))
+		if (entry->d_name[0] && (entry->d_name[0] != '.' || (args->opt->a)) && \
+			!(entry->d_name[0] == '.' && (!entry->d_name[1] || \
+			entry->d_name[1] == '.') && (args->opt->a_caps)))
 		{
 			tmp = ft_create_dir_entry_elem(entry->d_name, path, args, \
 				&(r->blocks_total));
-			if (li)
-				li = ft_append_direntry(li, tmp, args->opt);
-			else
-				li = tmp;
+			li = (li) ? \
+				(ft_append_direntry(li, tmp, args->opt)) : (tmp);
 		}
 	closedir(d);
 	r->elems = li;

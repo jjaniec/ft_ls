@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 15:56:34 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:07:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:32:16 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_is_option(char *str)
 	if (*str != 'l' && *str != 'R' && \
 		*str != 'a' && *str != 'r' && \
 		*str != 't' && *str != 'n' && \
-		*str != 'G')
+		*str != 'G' && *str != 'A')
 		return (0);
 	return (1);
 }

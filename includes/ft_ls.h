@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/25 18:05:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:33:10 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_opt
 	t_bool			l;
 	t_bool			r_caps;
 	t_bool			a;
+	t_bool			a_caps;
 	t_bool			r;
 	t_bool			t;
 	t_bool			n;
