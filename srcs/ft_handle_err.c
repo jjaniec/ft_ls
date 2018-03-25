@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:31:03 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:57:35 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 			}
 			ft_putstr_fd(path, 2);
 			if (*__OS__ == 'L')
-				ft_putstr_fd("': Permission denied\n", 2);
-			else
-				ft_putstr_fd(": Permission denied\n", 2);
+				ft_putstr_fd("'", 2);
+			ft_putstr_fd(": Permission denied\n", 2);
 			args->r = 1;
 		}
 	*dir_err = 1;
@@ -60,7 +59,13 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 
 void		ft_handle_opt_err(char opt, char *pname)
 {
-	PRINTF("%s: illegal option -- %c\n", pname, opt);
+	ft_putstr_fd(pname, 2);
+	if (*__OS__ == 'L')
+		ft_putstr_fd(": invalid option -- ", 2);
+	else
+		ft_putstr_fd(": illegal option -- ", 2);
+	ft_putchar_fd(opt, 2);
+	ft_putchar_fd('\n', 2);
 	ft_print_usage(pname);
 	exit(1);
 }
