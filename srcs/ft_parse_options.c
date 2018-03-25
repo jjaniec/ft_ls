@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 16:02:38 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:31:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 			opts->r_caps = TRUE;
 		if (*str == 'a')
 			opts->a = TRUE;
+		if (*str == 'A')
+			opts->a_caps = TRUE;
 		if (*str == 'r')
 			opts->r = TRUE;
 		if (*str == 't')
@@ -62,6 +64,7 @@ static void		ft_init_opt_struct(t_opt **opts)
 	(*opts)->l = FALSE;
 	(*opts)->r_caps = FALSE;
 	(*opts)->a = FALSE;
+	(*opts)->a_caps = FALSE;
 	(*opts)->r = FALSE;
 	(*opts)->t = FALSE;
 	(*opts)->n = FALSE;
