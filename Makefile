@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/23 18:43:59 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/25 18:07:09 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c ./includes/ft_ls.h
 	@gcc $(CFLAGS) -c $(IFLAGS) $< -o $@ && $(call ui_line, $@, $(NAME))
 
 $(FT_PRINTF_DIR):
-	@git clone https://github.com/jjaniec/ft_printf || true
+	@git clone https://github.com/jjaniec/ft_printf 2> /dev/null || true
 
 $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
@@ -94,7 +94,7 @@ clean:
 fclean: clean
 	@make fclean -C ft_printf/
 	@rm -f $(NAME)
-	@rm ft_printf/includes/libft_printf.h
+	@rm ft_printf/includes/libft_printf.h || true
 
 re: fclean all
 

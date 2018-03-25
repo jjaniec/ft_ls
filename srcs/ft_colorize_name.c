@@ -6,23 +6,23 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 16:50:12 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:09:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Apply colors on file/folder name:
-** red: executable
-** magenta: folder
+** Apply colors on dir entries
 */
 
 static char		*ft_get_color_str(t_str_stats *f)
 {
-	char *ns;
+	char	*ns;
+	char	*tmp;
 
 	ns = "";
+	tmp = NULL;
 	if (f->folder && *f->perms == 'd')
 		ns = ft_strjoin(ns, DIR_COLOR);
 	else if (f->perms[3] == 'x' && !(*(f->perms) == 'l'))
@@ -33,11 +33,12 @@ static char		*ft_get_color_str(t_str_stats *f)
 		ns = ft_strjoin(ns, FIFO_COLOR);
 	else if (*(f->perms) == 'c' || *(f->perms) == 'b')
 	{
-		ns = ft_strjoin(ns, SPECIAL_COLOR);
-		ns = ft_strjoin(ns, (*(f->perms) == 'b') ? \
+		tmp = ft_strjoin(ns, SPECIAL_COLOR);
+		ns = ft_strjoin(tmp, (*(f->perms) == 'b') ? \
 			(BLOCK_SPE_BG_COLOR) : (CHAR_SPE_BG_COLOR));
+		ft_free_ptr(tmp);
 	}
-	return ((ns[0]) ? (ns) : (NULL));
+	return (ns);
 }
 
 void			ft_colorize_name(t_str_stats *f)

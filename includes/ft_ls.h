@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 18:48:28 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:05:24 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
 
 
 # ifdef __linux__
+#  include <sys/sysmacros.h>
 #  define ft_fill_ext_attr_acl(path, f);
 # endif
 # ifdef __APPLE__
