@@ -8,7 +8,12 @@ do
 	sleep $delay;
 	i=$[$i+1];
 	tmp=$(echo "." | ./radamsa/bin/radamsa)
-	opts=$(echo -e "\n--\n-a\n-r\n-t\n-G\n-l\n-A\n-n" | shuf -n 1)
+	if [ "$(uname -s)" == "Linux" ];
+	then
+		opts=$(echo -e "\n--\n-a\n-r\n-t\n-G\n-l\n-A\n-n" | shuf -n 1 2> /dev/null);
+	else
+		opts=$(echo -e "\n--\n-a\n-r\n-t\n-G\n-l\n-A\n-n" | gshuf -n 1 2> /dev/null);
+	fi;
 	printf "\033[31mTesting |%s||%s|\n\033[0m" "$opts" "$tmp";
 	(echo "$tmp" | xxd) || true
 	./ft_ls "$opts" "$tmp";
