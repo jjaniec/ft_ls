@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/25 19:58:51 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/25 20:21:01 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 input_tests:
 	git clone https://github.com/aoh/radamsa.git || true
 	make -C radamsa
-	sudo make -C radamsa install
 	chmod +x ./.radamsa_input_tests.sh
 	./.radamsa_input_tests.sh
 
