@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/25 18:07:09 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/25 19:58:51 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,13 @@ $(FT_PRINTF_DIR):
 $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
+input_tests:
+	git clone https://github.com/aoh/radamsa.git || true
+	make -C radamsa
+	sudo make -C radamsa install
+	chmod +x ./.radamsa_input_tests.sh
+	./.radamsa_input_tests.sh
+
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make clean -C ft_printf/
@@ -98,4 +105,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re input_tests
