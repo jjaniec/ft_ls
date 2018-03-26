@@ -6,17 +6,48 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 20:07:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 21:06:24 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Apply colors on dir entries
+** Apply colors on dir entries with colors from $LS_COLORS
+** environnement variable
 */
 
-static char		*ft_get_color_str(t_str_stats *f)
+static char		*ft_get_color_str_env(t_str_stats *f, t_ls_colors *cl)
+{
+	if (f->folder && f->perms[8] == 'w')
+		return ((f->perms[9] == 't') ? \
+			(cl->tw) : (cl->ow));
+	if (f->perms[3] == 's')
+		return (cl->su);
+	if (f->perms[6] == 's')
+		return (cl->sg);
+	if (f->folder && *f->perms == 'd')
+		return (cl->di);
+	if (*(f->perms) == 'l')
+		return (cl->ln);
+	if (*(f->perms) == 's')
+		return (cl->so);
+	if (*(f->perms) == 'p')
+		return (cl->pi);
+	if (*(f->perms) == 'b')
+		return (cl->bd);
+	if (*(f->perms) == 'c')
+		return (cl->cd);
+	if (f->perms[3] == 'x')
+		return (cl->ex);
+	return (NULL);
+}
+
+/*
+** Apply colors on dir entries with default official colors
+*/
+
+static char		*ft_get_color_str_default(t_str_stats *f)
 {
 	if (f->folder && f->perms[8] == 'w')
 		return ((f->perms[9] == 't') ? \
@@ -42,14 +73,17 @@ static char		*ft_get_color_str(t_str_stats *f)
 	return (NULL);
 }
 
-void			ft_colorize_name(t_str_stats *f)
+void			ft_colorize_name(t_str_stats *f, t_ls_colors *cl)
 {
 	char	*ns;
 	char	*col;
 	int		name_len;
 
 	ns = NULL;
-	col = ft_get_color_str(f);
+	if (cl)
+		col = ft_get_color_str_env(f, cl);
+	else
+		col = ft_get_color_str_default(f);
 	if (col)
 	{
 		name_len = ft_strlen(f->name);
