@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 17:05:40 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:13:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,21 @@
 #  define __OS__ "?"
 # endif
 
-# define DIR_COLOR FG_BLUE
-# define EXEC_COLOR FG_RED
-# define SYMLINK_COLOR FG_MAGENTA
-# define SPECIAL_COLOR FG_BLUE
-# define FIFO_COLOR FG_YELLOW
-# define BLOCK_SPE_BG_COLOR BG_MAGENTA
-# define CHAR_SPE_BG_COLOR BG_YELLOW
+# define DIR_COLOR "\e[1;36m"
+# define SYMLINK_COLOR "\e[35m"
+# define SOCKET_COLOR "\e[32m"
+# define PIPE_COLOR "\e[33m"
+# define EXEC_COLOR "\e[31m"
+# define BLOCK_SPE_COLOR "\e[34;46m"
+# define CHAR_SPE_COLOR "\e[34;43m"
+# define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m"
+# define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m"
+
+# define EXE_SETUID_COLOR "\e[30;41m"
+# define EXE_SETGID_COLOR "\e[30;46m"
+
+# define COLOR_RESET "\e[0m"
+
 # define PRINTF printf
 
 typedef int			t_bool;
