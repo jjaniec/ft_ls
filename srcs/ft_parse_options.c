@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/25 18:31:52 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 17:28:36 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 	{
 		if (!ft_is_option(str))
 			ft_handle_opt_err(*str, pname);
+		if (ft_strcmp("-linux-sort", str) == 0)
+		{
+			opts->linux_sort = TRUE;
+			break;
+		}
 		if (*str == 'l')
 			opts->l = TRUE;
 		if (*str == 'R')
@@ -69,6 +74,7 @@ static void		ft_init_opt_struct(t_opt **opts)
 	(*opts)->t = FALSE;
 	(*opts)->n = FALSE;
 	(*opts)->g_caps = FALSE;
+	(*opts)->linux_sort = FALSE;
 }
 
 /*
@@ -85,7 +91,7 @@ t_opt			*ft_parse_options(int ac, char **av)
 	ft_init_opt_struct(&opts);
 	--ac;
 	ptr = &av[1];
-	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
+	while (ac-- > 0 && **ptr == '-' && !(ft_strcmp(*ptr, "--") == 0))
 	{
 		if (**ptr == '-')
 			ft_toggle_opt(opts, (*ptr), av[0]);

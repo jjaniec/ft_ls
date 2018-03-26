@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/25 18:33:10 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 17:05:40 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct		s_opt
 	t_bool			t;
 	t_bool			n;
 	t_bool			g_caps;
+	t_bool			linux_sort;
 }					t_opt;
 
 /*
@@ -217,6 +218,7 @@ void				ft_ls_foreach_in_dir(char *s, t_args *args);
 
 void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
 
+int					ft_ls_str_alphacmp(char *s1, char *s2);
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>
