@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:48:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 16:47:03 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 17:09:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 		return (li);
 	ptr = li;
 	prev = NULL;
-	if (*__OS__ == 'L' && !(opts && opts->t))
+	if ((*__OS__ == 'L' && !(opts && opts->t)) || \
+		(*__OS__ == 'D' && opts && opts->linux_sort && !opts->t))
 		ft_skip_direntries_alphacmp(&ptr, &new, &prev, (opts) ? (opts->r) : (0));
 	else
 		ft_skip_direntries(&ptr, &new, &prev, opts);

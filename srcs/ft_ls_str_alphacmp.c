@@ -6,11 +6,19 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:45:51 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 16:44:57 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 17:02:06 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+/*
+** These functions compares strings without minding caps and by skipping '.'
+** like the order of the readl linux ls, but,
+** as the real ls uses strcoll, I tried to mimic it as much
+** as possible but it can't be 100% exactly the same order
+** depending on $LS_COLLATE
+*/
 
 int		ft_str_alphacmp(char *s1, char *s2, int i, int j)
 {
