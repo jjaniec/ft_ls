@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:09:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:55:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_free_ptr(void *ptr)
 {
-	free(ptr);
+	if (ptr)
+		free(ptr);
 	ptr = NULL;
 }
 
@@ -64,5 +65,27 @@ void	ft_free_param_elem(t_param *e)
 		if (e->stats)
 			ft_free_str_stat_struct(e->stats);
 		ft_free_ptr(e);
+	}
+}
+
+/*
+** Free all color specifiers of a t_ls_color struct
+*/
+
+void	ft_free_colors(t_ls_colors *e)
+{
+	if (e)
+	{
+		ft_free_ptr(e->di);
+		ft_free_ptr(e->ln);
+		ft_free_ptr(e->so);
+		ft_free_ptr(e->pi);
+		ft_free_ptr(e->ex);
+		ft_free_ptr(e->bd);
+		ft_free_ptr(e->cd);
+		ft_free_ptr(e->su);
+		ft_free_ptr(e->sg);
+		ft_free_ptr(e->tw);
+		ft_free_ptr(e->ow);
 	}
 }

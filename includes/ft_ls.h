@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 20:08:02 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:53:21 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,21 @@ typedef int			t_bool;
 /*
 ** Struct to store options, toggle booleans if option is specified
 */
+
+typedef struct		s_ls_colors
+{
+	char			*di;
+	char			*ln;
+	char			*so;
+	char			*pi;
+	char			*ex;
+	char			*bd;
+	char			*cd;
+	char			*su;
+	char			*sg;
+	char			*tw;
+	char			*ow;
+}					t_ls_colors;
 
 typedef struct		s_opt
 {
@@ -124,6 +139,7 @@ typedef struct		s_args
 	int				r;
 	unsigned long	cur_epoch;
 	int				file_cli_args;
+	t_ls_colors		*cl;
 }					t_args;
 
 /*
@@ -232,6 +248,10 @@ void				ft_ls_foreach_in_dir(char *s, t_args *args);
 void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
 
 int					ft_ls_str_alphacmp(char *s1, char *s2);
+
+void				ft_free_colors(t_ls_colors *e);
+
+void				ft_init_colors(t_args *args);
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>
