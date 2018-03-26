@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 21:06:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 21:11:43 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,9 @@ int					ft_ls_str_alphacmp(char *s1, char *s2);
 void				ft_free_colors(t_ls_colors *e);
 
 void				ft_init_colors(t_args *args);
+
+void				ft_debug_ls_colors(t_ls_colors *cl);
+
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>

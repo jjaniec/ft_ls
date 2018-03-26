@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 20:55:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 21:12:03 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int				main(int ac, char **av)
 	t_args	args;
 
 	ft_init_args(ac, av, &args);
+	ft_debug_ls_colors(args.cl);
 	if (args.prm)
 		ft_ls(args);
 	ft_free_colors(args.cl);
