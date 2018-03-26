@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:35:56 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 20:54:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 22:21:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,24 @@ static char		*ft_parse_color(char *type, char *env_data)
 {
 	char	*p;
 	int		i;
+	int		j;
 	char	*tmp;
 
 	i = 0;
+	j = 0;
 	p = ft_strstr(env_data, type);
-	if (p)
+	if (p && p + 3)
 	{
-		while (env_data[i] && env_data[i] != ':')
+		while ((p + 3)[i] != ':' && (p + 3)[i])
 			i++;
-		tmp = ft_strsub(p, 0, i);
+		if (i == 0)
+			return (NULL);
+		tmp = ft_strsub(p + 3, 0, i);
 		p = ft_strjoin("\e[", tmp);
 		free(tmp);
+		tmp = ft_strjoin(p, "m");
+		free(p);
+		p = tmp;
 	}
 	return (p);
 }
@@ -50,17 +57,17 @@ void			ft_init_colors(t_args *args)
 	else
 	{
 		e = malloc(sizeof(t_ls_colors));
-		e->di = ft_parse_color("di", s);
-		e->ln = ft_parse_color("ln", s);
-		e->so = ft_parse_color("so", s);
-		e->pi = ft_parse_color("pi", s);
-		e->ex = ft_parse_color("ex", s);
-		e->bd = ft_parse_color("bd", s);
-		e->cd = ft_parse_color("cd", s);
-		e->su = ft_parse_color("su", s);
-		e->sg = ft_parse_color("sg", s);
-		e->tw = ft_parse_color("tw", s);
-		e->ow = ft_parse_color("ow", s);
+		e->di = ft_parse_color("di=", s);
+		e->ln = ft_parse_color("ln=", s);
+		e->so = ft_parse_color("so=", s);
+		e->pi = ft_parse_color("pi=", s);
+		e->ex = ft_parse_color("ex=", s);
+		e->bd = ft_parse_color("bd=", s);
+		e->cd = ft_parse_color("cd=", s);
+		e->su = ft_parse_color("su=", s);
+		e->sg = ft_parse_color("sg=", s);
+		e->tw = ft_parse_color("tw=", s);
+		e->ow = ft_parse_color("ow=", s);
 		args->cl = e;
 	}
 }

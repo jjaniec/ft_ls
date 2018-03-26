@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:09:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 21:13:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 22:19:33 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void		ft_debug_ls_colors(t_ls_colors *cl)
 		PRINTF("\t\tDefault\n");
 	else
 	{
-		PRINTF("\t\tcl->di: %s\n", cl->di);
-		PRINTF("\t\tcl->ln: %s\n", cl->ln);
-		PRINTF("\t\tcl->so: %s\n", cl->so);
-		PRINTF("\t\tcl->pi: %s\n", cl->pi);
-		PRINTF("\t\tcl->ex: %s\n", cl->ex);
-		PRINTF("\t\tcl->bd: %s\n", cl->bd);
-		PRINTF("\t\tcl->cd: %s\n", cl->cd);
-		PRINTF("\t\tcl->su: %s\n", cl->su);
-		PRINTF("\t\tcl->sg: %s\n", cl->sg);
-		PRINTF("\t\tcl->tw: %s\n", cl->tw);
-		PRINTF("\t\tcl->ow: %s\n", cl->ow);
+		PRINTF("\t\t%scl->di\n", cl->di);
+		PRINTF("\t\t%scl->ln\n", cl->ln);
+		PRINTF("\t\t%scl->so\n", cl->so);
+		PRINTF("\t\t%scl->pi\n", cl->pi);
+		PRINTF("\t\t%scl->ex\n", cl->ex);
+		PRINTF("\t\t%scl->bd\n", cl->bd);
+		PRINTF("\t\t%scl->cd\n", cl->cd);
+		PRINTF("\t\t%scl->su\n", cl->su);
+		PRINTF("\t\t%scl->sg\n", cl->sg);
+		PRINTF("\t\t%scl->tw\n", cl->tw);
+		PRINTF("\t\t%scl->ow\n%s", cl->ow, COLOR_RESET);
 	}
 }
