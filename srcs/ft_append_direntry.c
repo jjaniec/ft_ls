@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:48:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 15:08:02 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 16:44:42 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		ft_skip_direntries_alphacmp(t_dir_entry **ptr, t_dir_entry **new, \
 		while (*ptr && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) > 0)
 			ft_goto_next(ptr, prev);
 	else if (!rev && (*new) && (*ptr))
-		while (*ptr && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) < 0)
+		while (*ptr && (ft_ls_str_alphacmp((*ptr)->s, (*new)->s) < 0))
 			ft_goto_next(ptr, prev);
 }
 
@@ -70,7 +70,7 @@ t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 	ptr = li;
 	prev = NULL;
 	if (*__OS__ == 'L' && !(opts->t))
-		ft_skip_direntries_alphacmp(&ptr, &new, &prev, (opts) ?(opts->r) : (0));
+		ft_skip_direntries_alphacmp(&ptr, &new, &prev, (opts) ? (opts->r) : (0));
 	else
 		ft_skip_direntries(&ptr, &new, &prev, opts);
 	if (prev)
