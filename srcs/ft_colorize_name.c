@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 19:13:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:46:01 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@
 
 static char		*ft_get_color_str(t_str_stats *f)
 {
+	if (f->folder && f->perms[8] == 'w')
+		return ((f->perms[9] == 't') ? \
+			(DIR_WRITEOTHER_STICKY_COLOR) : (DIR_WRITEOTHER_NOSTICKY_COLOR));
 	if (f->folder && *f->perms == 'd')
 		return (DIR_COLOR);
-	if (f->perms[3] == 'x' && !(*(f->perms) == 'l'))
-		return (EXEC_COLOR);
 	if (*(f->perms) == 'l')
 		return (SYMLINK_COLOR);
+	if (*(f->perms) == 's')
+		return (SOCKET_COLOR);
 	if (*(f->perms) == 'p')
 		return (PIPE_COLOR);
-	if (*(f->perms) == 'c')
-		return (CHAR_SPE_COLOR);
 	if (*(f->perms) == 'b')
 		return (BLOCK_SPE_COLOR);
+	if (*(f->perms) == 'c')
+		return (CHAR_SPE_COLOR);
+	if (f->perms[3] == 'x')
+		return (EXEC_COLOR);
 	return (NULL);
 }
 
