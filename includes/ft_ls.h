@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 19:47:38 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:08:02 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@
 # define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m" // tw / perms[8] == 'w' && perms[9] == 't'
 # define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m" // ow / perms[8] == 'w' && perms[9] != 't'
 
-# define EXE_SETUID_COLOR "\e[30;41m"
-# define EXE_SETGID_COLOR "\e[30;46m"
+# define EXE_SETUID_COLOR "\e[30;41m" // su / perms[3] == 's'
+# define EXE_SETGID_COLOR "\e[30;46m" // sg / perms[6] == 's'
 
 # define COLOR_RESET "\e[0m"
 

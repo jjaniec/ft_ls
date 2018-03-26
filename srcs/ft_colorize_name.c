@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 19:46:01 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:07:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static char		*ft_get_color_str(t_str_stats *f)
 	if (f->folder && f->perms[8] == 'w')
 		return ((f->perms[9] == 't') ? \
 			(DIR_WRITEOTHER_STICKY_COLOR) : (DIR_WRITEOTHER_NOSTICKY_COLOR));
+	if (f->perms[3] == 's')
+		return (EXE_SETUID_COLOR);
+	if (f->perms[6] == 's')
+		return (EXE_SETGID_COLOR);
 	if (f->folder && *f->perms == 'd')
 		return (DIR_COLOR);
 	if (*(f->perms) == 'l')
