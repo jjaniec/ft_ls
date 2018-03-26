@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 17:05:40 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:08:02 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,26 @@
 #  define __OS__ "?"
 # endif
 
-# define DIR_COLOR FG_BLUE
-# define EXEC_COLOR FG_RED
-# define SYMLINK_COLOR FG_MAGENTA
-# define SPECIAL_COLOR FG_BLUE
-# define FIFO_COLOR FG_YELLOW
-# define BLOCK_SPE_BG_COLOR BG_MAGENTA
-# define CHAR_SPE_BG_COLOR BG_YELLOW
+/*
+** Default colors applied $LS_COLORS format:
+** di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+*/
+
+# define DIR_COLOR "\e[1;36m" // di / 'd'
+# define SYMLINK_COLOR "\e[35m" // ln / 'l'
+# define SOCKET_COLOR "\e[32m" // so / 's'
+# define PIPE_COLOR "\e[33m" // pi / 'p'
+# define EXEC_COLOR "\e[31m" // ex / perms[3] == 'x'
+# define BLOCK_SPE_COLOR "\e[34;46m" // bd / 'b'
+# define CHAR_SPE_COLOR "\e[34;43m" // cd / 'c'
+# define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m" // tw / perms[8] == 'w' && perms[9] == 't'
+# define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m" // ow / perms[8] == 'w' && perms[9] != 't'
+
+# define EXE_SETUID_COLOR "\e[30;41m" // su / perms[3] == 's'
+# define EXE_SETGID_COLOR "\e[30;46m" // sg / perms[6] == 's'
+
+# define COLOR_RESET "\e[0m"
+
 # define PRINTF printf
 
 typedef int			t_bool;

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:24:03 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:07:42 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:07:07 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,21 @@ void	ft_fill_perms(t_str_stats *f, struct stat *f_stats)
 	*s = (S_ISSOCK(f_stats->st_mode)) ? ('s') : (*s);
 	s[1] = ((f_stats->st_mode & S_IRUSR) ? 'r' : '-');
 	s[2] = ((f_stats->st_mode & S_IWUSR) ? 'w' : '-');
-	s[3] = ((f_stats->st_mode & S_IXUSR) ? 'x' : '-');
+	if (f_stats->st_mode & S_ISUID)
+		s[3] = ((f_stats->st_mode & S_IXUSR) ? 's' : 'S');
+	else
+		s[3] = ((f_stats->st_mode & S_IXUSR) ? 'x' : '-');
 	s[4] = ((f_stats->st_mode & S_IRGRP) ? 'r' : '-');
 	s[5] = ((f_stats->st_mode & S_IWGRP) ? 'w' : '-');
-	s[6] = ((f_stats->st_mode & S_IXGRP) ? 'x' : '-');
+	if (f_stats->st_mode & S_ISGID)
+		s[6] = ((f_stats->st_mode & S_IXGRP) ? 's' : 'S');
+	else
+		s[6] = ((f_stats->st_mode & S_IXGRP) ? 'x' : '-');
 	s[7] = ((f_stats->st_mode & S_IROTH) ? 'r' : '-');
 	s[8] = ((f_stats->st_mode & S_IWOTH) ? 'w' : '-');
-	s[9] = ((f_stats->st_mode & S_IXOTH) ? 'x' : '-');
+	if (f_stats->st_mode & S_ISVTX)
+		s[9] = (f_stats->st_mode & S_IXOTH) ? ('t') : ('T');
+	else
+		s[9] = (f_stats->st_mode & S_IXOTH) ? ('x') : ('-');
 	f->perms = s;
 }
