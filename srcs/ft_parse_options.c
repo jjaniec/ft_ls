@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 17:47:34 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/26 20:23:32 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 {
 	while (*(++str))
 	{
-		if (!ft_is_option(str))
+		if ((*str == '-' && str[-1] != '-') || !ft_is_option(str))
 			ft_handle_opt_err(*str, pname);
 		if (ft_strcmp("-linux-sort", str) == 0)
 		{
