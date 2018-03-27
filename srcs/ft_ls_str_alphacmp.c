@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:45:51 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 17:02:06 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 17:46:51 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		ft_ls_str_alphacmp(char *s1, char *s2)
 	offset_s2 = 0;
 	while (s1[offset_s1] == '.')
 		offset_s1++;
+	if (!(s1[offset_s1]))
+		return (-1);
 	while (s2[offset_s2] == '.')
 		offset_s2++;
 	r = ft_str_alphacmp(s1, s2, offset_s1, offset_s2);
