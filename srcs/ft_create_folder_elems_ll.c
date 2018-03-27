@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:22:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 15:20:55 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 15:31:43 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_dir_content		*ft_create_folder_elems_ll(char *path, int *dir_err, \
 	while ((entry = readdir(d)) && ft_strlen(entry->d_name) > 0)
 		if (entry->d_name[0] && !(entry->d_name[0] == '.' && \
 			!(args->opt && (args->opt->a || args->opt->a_caps))) && \
-			!(args->opt->a_caps && !args->opt->a && \
+			!(args->opt && args->opt->a_caps && !args->opt->a && \
 				ft_is_cur_prev_dir(entry->d_name)))
 		{
 			tmp = ft_create_dir_entry_elem(entry->d_name, path, args, \

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:35:56 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 14:55:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 16:09:36 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void			ft_init_colors(t_args *args)
 	t_ls_colors	*e;
 
 	s = getenv("FT_LS_COLORS");
-	if (!s)
-		args->cl = NULL;
-	else
+	args->cl = NULL;
+	if (s)
 	{
 		e = malloc(sizeof(t_ls_colors));
 		e->di = ft_parse_color("di=", s);
