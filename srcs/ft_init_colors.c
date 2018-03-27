@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:35:56 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 22:21:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 14:55:21 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ static char		*ft_parse_color(char *type, char *env_data)
 {
 	char	*p;
 	int		i;
-	int		j;
 	char	*tmp;
 
 	i = 0;
-	j = 0;
 	p = ft_strstr(env_data, type);
-	if (p && p + 3)
+	if (p && p[3])
 	{
-		while ((p + 3)[i] != ':' && (p + 3)[i])
+		while (p[i] != ':' && p[i + 3])
 			i++;
 		if (i == 0)
 			return (NULL);
@@ -51,7 +49,7 @@ void			ft_init_colors(t_args *args)
 	char		*s;
 	t_ls_colors	*e;
 
-	s = getenv("LS_COLORS");
+	s = getenv("FT_LS_COLORS");
 	if (!s)
 		args->cl = NULL;
 	else
