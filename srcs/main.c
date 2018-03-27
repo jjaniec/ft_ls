@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 15:37:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 16:42:17 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 	args->cur_epoch = time(NULL);
 	params = NULL;
 	args->opt = (ac > 1) ? (ft_parse_options(ac, av)) : (NULL);
+	ft_init_colors(args);
 	params = (ac > 1) ? (ft_parse_params(ac, av, args)) : \
 						(ft_create_param_elem(".", args, &(args->r)));
 	if (!params && !(args->r))
@@ -41,7 +42,6 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 			ptr = ptr->next;
 		}
 	args->prm = params;
-	ft_init_colors(args);
 }
 
 /*
