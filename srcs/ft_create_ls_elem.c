@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 16:58:39 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:08:35 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_str_stats			*ft_create_str_stats_elem(char *s)
 	}
 	f->name = s;
 	f->folder = 0;
-	f->perms = NULL;
 	f->perms_attr_acl = ' ';
 	f->slnks = 0;
 	f->ownr = NULL;

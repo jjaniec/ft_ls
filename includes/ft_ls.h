@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 21:11:43 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:05:51 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct		s_str_stats
 {
 	char			*name;
 	t_bool			folder;
-	char			*perms;
+	char			perms[11];
 	char			perms_attr_acl;
 	int				slnks;
 	char			*ownr;

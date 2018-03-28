@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 15:59:39 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:10:43 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	*ft_free_str_stat_struct(t_str_stats *t_s)
 {
 	if (t_s->name)
 		ft_free_ptr(t_s->name);
-	if (t_s->perms)
-		ft_free_ptr(t_s->perms);
 	if (t_s->last_mod)
 		ft_free_ptr(t_s->last_mod);
 	ft_free_ptr(t_s);
