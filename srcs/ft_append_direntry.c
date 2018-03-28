@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:48:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 17:09:48 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/27 17:42:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		ft_skip_direntries_alphacmp(t_dir_entry **ptr, t_dir_entry **new, \
 					t_dir_entry **prev, int rev)
 {
 	if (rev && (*new) && (*ptr))
-		while (*ptr && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) > 0)
+		while (*ptr && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) >= 0)
 			ft_goto_next(ptr, prev);
 	else if (!rev && (*new) && (*ptr))
 		while (*ptr && (ft_ls_str_alphacmp((*ptr)->s, (*new)->s) < 0))
