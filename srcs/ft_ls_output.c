@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:32:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:00:44 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:18:48 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ static void		ft_ls_output_no_n_opt(t_str_stats *de)
 	}
 }
 
-void	ft_ls_output_entry(t_str_stats *de, t_opt *opts)
+void			ft_ls_output_entry(t_str_stats *de, t_opt *opts)
 {
-	if (opts && de)
+	if (opts && de && opts->l)
 	{
-		if (opts->l && !opts->n)
+		if (!opts->n)
 			ft_ls_output_no_n_opt(de);
-		else if (opts->l && opts->n)
+		else
 			PRINTF("%s%c %3d %7u %10u %9d %s %s\n", de->perms, \
 				de->perms_attr_acl, de->slnks, de->ownr_uid, \
 				de->ownr_grp_uid, de->size, de->last_mod, de->name);
 	}
-	else if (de && (!opts || !opts->l))
+	else if (de && !(opts && opts->l))
 		PRINTF("%s\n", de->name);
 }

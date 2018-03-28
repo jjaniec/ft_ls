@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:45:51 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 17:46:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 16:39:42 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int		ft_str_alphacmp(char *s1, char *s2)
 {
 	char	c;
 	char	c2;
-    int     i;
-    int     j;
+	int		i;
+	int		j;
 
-    i = 0;
-    j = 0;
+	i = 0;
+	j = 0;
 	while (s1[i] && s2[j])
 	{
 		c = s1[i];
@@ -38,12 +38,12 @@ int		ft_str_alphacmp(char *s1, char *s2)
 		if (c2 >= 'A' && c2 <= 'Z')
 			c2 += 32;
 		if (c != c2)
-			break;
+			break ;
 		i++;
 		j++;
 	}
-    if (c == c2 && !c)
-        return (0);
+	if (c == c2 && !c)
+		return (0);
 	else if (c == c2 && ft_strlen(s1) < ft_strlen(s2))
 		return (-1);
 	return ((unsigned int)c - (unsigned int)c2);
@@ -56,8 +56,8 @@ int		ft_ls_str_alphacmp(char *s1, char *s2)
 	int		r;
 
 	r = 0;
-    if (ft_strcmp(s2, ".") == 0)
-        return (1);
+	if (ft_strcmp(s2, ".") == 0)
+		return (1);
 	else if (s1[0] == '.' && ((s1[1] == '.' && !s1[2]) || !s1[1]))
 		return (-1);
 	offset_s1 = 0;
@@ -69,7 +69,8 @@ int		ft_ls_str_alphacmp(char *s1, char *s2)
 	while (s2[offset_s2] == '.')
 		offset_s2++;
 	r = ft_str_alphacmp(s1 + offset_s1, s2 + offset_s2);
-	if (offset_s1 < offset_s2 && r == 0 && ft_strlen(s1 + offset_s1) == ft_strlen(s2 + offset_s2))
+	if (offset_s1 < offset_s2 && r == 0 && \
+		ft_strlen(s1 + offset_s1) == ft_strlen(s2 + offset_s2))
 		return (-1);
 	return (r);
 }

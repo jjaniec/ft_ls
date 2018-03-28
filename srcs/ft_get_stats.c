@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:54:04 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/26 20:59:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 16:56:54 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_str_stats		*ft_get_stats(char *path, t_args *args, char *name)
 	if (args->opt && args->opt->g_caps)
 		ft_colorize_name(f, args->cl);
 	ft_fill_last_mod(f, &arg_stats, args);
-	if (f->perms && *(f->perms) == 'l')
+	if (*(f->perms) == 'l')
 		ft_get_symlink_target(path, f);
 	if (args->opt && args->opt->l)
 		return (ft_get_stats_l_opt(f, &arg_stats, args->opt));

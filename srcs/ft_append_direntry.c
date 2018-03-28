@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:48:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 17:42:04 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 16:42:47 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 static void		ft_goto_next(t_dir_entry **ptr, t_dir_entry **prev)
 {
-		*prev = *ptr;
-		*ptr = (*ptr)->next;
+	*prev = *ptr;
+	*ptr = (*ptr)->next;
 }
 
 static void		ft_skip_direntries(t_dir_entry **ptr, t_dir_entry **new, \
@@ -48,8 +48,8 @@ static void		ft_skip_direntries(t_dir_entry **ptr, t_dir_entry **new, \
 		ft_goto_next(ptr, prev);
 }
 
-static void		ft_skip_direntries_alphacmp(t_dir_entry **ptr, t_dir_entry **new, \
-					t_dir_entry **prev, int rev)
+static void		ft_skip_direntries_alphacmp(t_dir_entry **ptr, \
+					t_dir_entry **new, t_dir_entry **prev, int rev)
 {
 	if (rev && (*new) && (*ptr))
 		while (*ptr && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) >= 0)
@@ -71,7 +71,8 @@ t_dir_entry		*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 	prev = NULL;
 	if ((*__OS__ == 'L' && !(opts && opts->t)) || \
 		(*__OS__ == 'D' && opts && opts->linux_sort && !opts->t))
-		ft_skip_direntries_alphacmp(&ptr, &new, &prev, (opts) ? (opts->r) : (0));
+		ft_skip_direntries_alphacmp(&ptr, &new, &prev, \
+			(opts) ? (opts->r) : (0));
 	else
 		ft_skip_direntries(&ptr, &new, &prev, opts);
 	if (prev)

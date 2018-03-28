@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 15:09:23 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 16:54:33 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static char		*ft_get_color_str_env(t_str_stats *f, t_ls_colors *cl)
 {
-	if (!(f && f->perms))
+	if (!f)
 		return (NULL);
 	if (f->folder && f->perms[8] == 'w')
 		return ((f->perms[9] == 't') ? (cl->tw) : (cl->ow));
@@ -53,7 +53,7 @@ static char		*ft_get_color_str_default(t_str_stats *f)
 	if (f->folder && f->perms[8] == 'w')
 		return ((f->perms[9] == 't') ? (DIR_WRITEOTHER_STICKY_COLOR) : \
 			(DIR_WRITEOTHER_NOSTICKY_COLOR));
-	if (f->perms[3] == 's')
+		if (f->perms[3] == 's')
 		return (EXE_SETUID_COLOR);
 	if (f->perms[6] == 's')
 		return (EXE_SETGID_COLOR);

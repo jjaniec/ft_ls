@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:05:51 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:02:46 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/xattr.h>
 
 # ifdef __linux__
+#  include <sys/sysmacros.h>
 #  define __OS__ "Linux"
 # endif
 # ifdef __APPLE__
@@ -34,21 +35,22 @@
 
 /*
 ** Default colors applied $LS_COLORS format:
-** di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+** "di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:
+** cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 */
 
-# define DIR_COLOR "\e[1;36m" // di / 'd'
-# define SYMLINK_COLOR "\e[35m" // ln / 'l'
-# define SOCKET_COLOR "\e[32m" // so / 's'
-# define PIPE_COLOR "\e[33m" // pi / 'p'
-# define EXEC_COLOR "\e[31m" // ex / perms[3] == 'x'
-# define BLOCK_SPE_COLOR "\e[34;46m" // bd / 'b'
-# define CHAR_SPE_COLOR "\e[34;43m" // cd / 'c'
-# define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m" // tw / perms[8] == 'w' && perms[9] == 't'
-# define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m" // ow / perms[8] == 'w' && perms[9] != 't'
+# define DIR_COLOR "\e[1;36m"
+# define SYMLINK_COLOR "\e[35m"
+# define SOCKET_COLOR "\e[32m"
+# define PIPE_COLOR "\e[33m"
+# define EXEC_COLOR "\e[31m"
+# define BLOCK_SPE_COLOR "\e[34;46m"
+# define CHAR_SPE_COLOR "\e[34;43m"
+# define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m"
+# define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m"
 
-# define EXE_SETUID_COLOR "\e[30;41m" // su / perms[3] == 's'
-# define EXE_SETGID_COLOR "\e[30;46m" // sg / perms[6] == 's'
+# define EXE_SETUID_COLOR "\e[30;41m"
+# define EXE_SETGID_COLOR "\e[30;46m"
 
 # define COLOR_RESET "\e[0m"
 
@@ -257,11 +259,9 @@ void				ft_debug_ls_colors(t_ls_colors *cl);
 
 
 # ifdef __linux__
-#  include <sys/sysmacros.h>
 #  define ft_fill_ext_attr_acl(path, f);
 # endif
 # ifdef __APPLE__
-#  include <sys/acl.h>
 void				ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
 # endif
 
