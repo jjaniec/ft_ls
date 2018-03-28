@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:32:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/23 18:55:33 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:00:44 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,45 @@
 ** Prints infos of directory entry dependending of command line options
 */
 
+static void		ft_ls_output_no_n_opt(t_str_stats *de)
+{
+	if (*de->perms == 'b' || *de->perms == 'c')
+		PRINTF("%s%c %3d %-7s %-10s %3u, %4u %s %s\n", de->perms, \
+			de->perms_attr_acl, de->slnks, de->ownr, \
+			de->ownr_grp, de->rdev_maj, de->rdev_min, de->last_mod, de->name);
+	else
+	{
+		if (de->ownr && de->ownr_grp)
+			PRINTF("%s%c %3d %-7s %-10s %9d %s %s\n", de->perms, \
+				de->perms_attr_acl, de->slnks, de->ownr, \
+				de->ownr_grp, de->size, de->last_mod, de->name);
+		else if (!de->ownr || !de->ownr_grp)
+		{
+			PRINTF("%s%c %3d", de->perms, de->perms_attr_acl, de->slnks);
+			if (de->ownr)
+				PRINTF(" %-7s", de->ownr);
+			else
+				PRINTF(" %7u", de->ownr_uid);
+			if (de->ownr_grp)
+				PRINTF(" %-10s", de->ownr_grp);
+			else
+				PRINTF(" %10u", de->ownr_grp_uid);
+			PRINTF(" %9d %s %s\n", de->size, de->last_mod, de->name);
+		}
+	}
+}
+
 void	ft_ls_output_entry(t_str_stats *de, t_opt *opts)
 {
 	if (opts && de)
 	{
 		if (opts->l && !opts->n)
-		{
-			if (*de->perms == 'b' || *de->perms == 'c')
-				PRINTF("%s%c %3d %-7s %-10s %3u, %4u %s %s\n", de->perms, \
-					de->perms_attr_acl, de->slnks, de->ownr, \
-					de->ownr_grp, de->rdev_maj, de->rdev_min, de->last_mod, de->name);
-			else
-				PRINTF("%s%c %3d %-7s %-10s %9d %s %s\n", de->perms, \
-					de->perms_attr_acl, de->slnks, de->ownr, \
-					de->ownr_grp, de->size, de->last_mod, de->name);
-		}
-		if (opts->l && opts->n)
-			PRINTF("%s%c %3d %-5u %-4u %9d %s %s\n", de->perms, \
+			ft_ls_output_no_n_opt(de);
+		else if (opts->l && opts->n)
+			PRINTF("%s%c %3d %7u %10u %9d %s %s\n", de->perms, \
 				de->perms_attr_acl, de->slnks, de->ownr_uid, \
 				de->ownr_grp_uid, de->size, de->last_mod, de->name);
 	}
-	if (de && (!opts || !opts->l))
+	else if (de && (!opts || !opts->l))
 		PRINTF("%s\n", de->name);
 }
