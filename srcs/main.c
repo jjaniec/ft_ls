@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/27 16:42:17 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 18:51:50 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void			ft_ls(t_args args)
 	aptr2 = aptr;
 	while (aptr2)
 	{
-		if (aptr2->stats && !aptr2->stats->folder)
+		if (aptr2->stats && !aptr2->stats->folder && \
+			!ft_ls_follow_symlink(aptr2, args.opt))
 		{
 			ft_ls_output_entry(aptr2->stats, args.opt);
 			args.file_cli_args = 1;
@@ -112,7 +113,8 @@ void			ft_ls(t_args args)
 	}
 	while (aptr)
 	{
-		if (aptr->stats && aptr->stats->folder)
+		if (aptr->stats && (aptr->stats->folder || \
+			ft_ls_follow_symlink(aptr, args.opt)))
 			ft_ls_foreach_in_dir(aptr->s, &args);
 		prev = aptr;
 		aptr = aptr->next;

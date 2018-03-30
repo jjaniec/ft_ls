@@ -6,27 +6,9 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 16:03:31 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 19:06:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-./ft_ls -l pp
->total 0
-
-ls -l pp
->
----
-./ft_ls -G /tmp
-/tmp
----
-gls -R /dev/fd
-/dev/fd:
-0  1  2  3
-gls: cannot open directory '/dev/fd/3': Bad file descriptor
----
-valgrind --leak-check=full ./ft_ls -Rta ~  | wc -l - abort
-*/
 
 #ifndef FT_LS_H
 # define FT_LS_H
@@ -275,6 +257,7 @@ void				ft_init_colors(t_args *args);
 
 void				ft_debug_ls_colors(t_ls_colors *cl);
 
+int					ft_ls_follow_symlink(t_param *e, t_opt *opts);
 
 # ifdef __linux__
 #  define ft_fill_ext_attr_acl(path, f);
