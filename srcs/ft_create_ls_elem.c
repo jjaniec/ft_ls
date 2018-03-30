@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 16:14:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 19:45:55 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,12 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 ** init the total blocks count to 0 and return address of created element
 */
 
-t_dir_content		*ft_create_dir_content_s(void)
+t_dir_content		*ft_create_dir_content_s(char *path)
 {
 	t_dir_content		*r;
 
 	r = malloc(sizeof(t_dir_content));
+	r->s = path;
 	r->c = 0;
 	r->elems = NULL;
 	r->blocks_total = 0;

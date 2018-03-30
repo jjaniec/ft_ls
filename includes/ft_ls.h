@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 19:06:52 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 19:46:38 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct		s_dir_entry
 
 typedef struct		s_dir_content
 {
+	char			*s;
 	unsigned int	c;
 	int				blocks_total;
 	t_dir_entry		*elems;
@@ -220,7 +221,7 @@ t_dir_entry			*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 						t_args *args, int *total_blk);
 
-t_dir_content		*ft_create_dir_content_s(void);
+t_dir_content		*ft_create_dir_content_s(char *path);
 
 void				ft_debug_dir_content(t_dir_content *s);
 
