@@ -6,9 +6,27 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:02:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 16:03:31 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+./ft_ls -l pp
+>total 0
+
+ls -l pp
+>
+---
+./ft_ls -G /tmp
+/tmp
+---
+gls -R /dev/fd
+/dev/fd:
+0  1  2  3
+gls: cannot open directory '/dev/fd/3': Bad file descriptor
+---
+valgrind --leak-check=full ./ft_ls -Rta ~  | wc -l - abort
+*/
 
 #ifndef FT_LS_H
 # define FT_LS_H
@@ -236,7 +254,7 @@ void				ft_free_dir_entry(t_dir_entry *de);
 
 void				ft_free_param_elem(t_param *e);
 
-void				ft_free_ptr(void *ptr);
+void				*ft_free_ptr(void *ptr);
 
 void				*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 

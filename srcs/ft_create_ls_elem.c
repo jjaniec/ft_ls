@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:08:35 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 16:14:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 	e->stats = ft_get_stats(ns, args, s);
 	if (ns && e->stats)
 		*total_blk += e->stats->size_blocks;
-	ft_free_ptr(ns);
+	if (e->stats)
+		ns = ft_free_ptr(ns);
 	e->next = NULL;
 	return (e);
 }

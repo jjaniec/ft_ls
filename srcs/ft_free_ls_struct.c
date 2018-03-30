@@ -6,17 +6,18 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 16:40:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 16:06:42 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_free_ptr(void *ptr)
+void	*ft_free_ptr(void *ptr)
 {
 	if (ptr)
 		free(ptr);
 	ptr = NULL;
+	return (NULL);
 }
 
 /*
