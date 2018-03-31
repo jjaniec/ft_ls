@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 19:45:55 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 19:51:08 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_param				*ft_create_param_elem(char *s, t_args *args, int *r)
 		if (*__OS__ == 'L')
 		{
 			ft_handle_not_found_err(s);
-			ft_free_ptr(p);
+			p = ft_free_ptr(p);
 			return (NULL);
 		}
 		p->s = ft_strdup(s);

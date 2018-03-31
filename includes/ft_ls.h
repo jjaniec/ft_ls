@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 19:18:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 20:21:27 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ typedef struct		s_args
 	struct s_opt	*opt;
 	struct s_param	*prm;
 	int				prm_len;
+	int				cur_loop;
 	int				r;
 	unsigned long	cur_epoch;
 	int				file_cli_args;

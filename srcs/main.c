@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 19:02:21 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 22:59:19 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 
 	args->r = 0;
 	args->prm_len = 0;
+	args->cur_loop = 0;
 	args->file_cli_args = 0;
 	args->cur_epoch = time(NULL);
 	params = NULL;
@@ -56,8 +57,9 @@ static void		ft_recurse_to_dir(char *path, char *entry, t_args *args)
 	char		*ns;
 
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(entry));
+	args->cur_loop += 1;
 	ft_ls_foreach_in_dir(ns, args);
-	ft_free_ptr(ns);
+	ns = ft_free_ptr(ns);
 }
 
 void			ft_ls_foreach_in_dir(char *s, t_args *args)
@@ -83,7 +85,7 @@ void			ft_ls_foreach_in_dir(char *s, t_args *args)
 			li = ptr;
 		}
 		ft_free_dir_entry(li);
-		ft_free_ptr(dc);
+		dc = ft_free_ptr(dc);
 	}
 }
 
@@ -118,6 +120,7 @@ void			ft_ls(t_args args)
 			ft_ls_foreach_in_dir(aptr->s, &args);
 		prev = aptr;
 		aptr = aptr->next;
+		args.cur_loop += 1;
 		ft_free_param_elem(prev);
 	}
 }
@@ -137,6 +140,6 @@ int				main(int ac, char **av)
 	if (args.prm)
 		ft_ls(args);
 	ft_free_colors(args.cl);
-	ft_free_ptr(args.opt);
+	args.opt = ft_free_ptr(args.opt);
 	return ((args.r));
 }

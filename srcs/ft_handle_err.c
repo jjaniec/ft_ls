@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 19:19:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 23:16:02 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 				ft_putstr_fd("cannot open directory '", 2);
 			else
 			{
-				PRINTF("\n%s:\n", path);
+				if (args && args->prm_len == 1 && args->cur_loop != 0)
+					PRINTF("%s:\n", path);
+				else if (args && (args->prm_len > 1 || (args->prm_len == 0 && args->opt && args->opt->r_caps)))
+				{
+					if (args->cur_loop != 0)
+						PRINTF("\n");
+					PRINTF("%s:\n", path);
+				}
 				ft_putstr_fd("ft_ls: ", 2);
 			}
 			ft_putstr_fd(path, 2);

@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/31 17:50:58 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/31 23:15:12 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
 output_tests:
-	git clone https://github.com/asciimoo/exrex.git || true
 	chmod +x ./.output_tests.sh
 	./.output_tests.sh
 
