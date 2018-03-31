@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/31 23:15:12 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/04/01 00:21:40 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_init_colors.c \
 			ft_debug_ls_colors.c \
 			ft_ls_follow_symlink.c \
+			ft_ls_foreach_in_dir.c \
 			main.c
 
 ifeq ($(UNAME_S),Darwin)

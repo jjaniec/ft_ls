@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:59:09 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 16:44:56 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/01 00:13:01 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		ft_print_head(char *s, t_args *args, t_dir_content *dc)
 			(dc->blocks_total / 2) : (dc->blocks_total));
 }
 
-void	ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
+void			ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 			t_args *args, char *s)
 {
 	t_dir_entry		*ptr;

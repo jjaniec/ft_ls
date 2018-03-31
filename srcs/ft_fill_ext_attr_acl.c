@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:05:19 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 18:44:19 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/01 00:10:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ void		ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats)
 	else if (acls)
 		f_stats->perms_attr_acl = '+';
 	acl_free(acls);
-
 }

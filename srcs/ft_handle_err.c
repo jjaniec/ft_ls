@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 23:16:02 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/01 00:31:23 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void		ft_handle_not_found_err(char *s)
 ** associated error message and modify return value
 */
 
+static void	ft_print_err_head(char *path, t_args *args)
+{
+	if (!(args->prm_len <= 1 && !(args->opt && args->opt->r_caps)))
+	{
+		if (args->cur_loop == 0 && !(args->prm_len <= 1))
+			PRINTF("%s:\n", path);
+		else
+			PRINTF("\n%s:\n", path);
+	}
+}
+
 void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 {
 	struct stat		dir_stats;
@@ -49,14 +60,7 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 				ft_putstr_fd("cannot open directory '", 2);
 			else
 			{
-				if (args && args->prm_len == 1 && args->cur_loop != 0)
-					PRINTF("%s:\n", path);
-				else if (args && (args->prm_len > 1 || (args->prm_len == 0 && args->opt && args->opt->r_caps)))
-				{
-					if (args->cur_loop != 0)
-						PRINTF("\n");
-					PRINTF("%s:\n", path);
-				}
+				ft_print_err_head(path, args);
 				ft_putstr_fd("ft_ls: ", 2);
 			}
 			ft_putstr_fd(path, 2);
