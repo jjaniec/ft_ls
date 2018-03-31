@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/30 19:05:55 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/03/31 17:50:58 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,12 @@ $(FT_PRINTF_DIR):
 $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
-input_tests:
+output_tests:
+	git clone https://github.com/asciimoo/exrex.git || true
+	chmod +x ./.output_tests.sh
+	./.output_tests.sh
+
+fuzzing_tests:
 	git clone https://github.com/aoh/radamsa.git || true
 	make -C radamsa
 	chmod +x ./.radamsa_input_tests.sh
