@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 18:51:50 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 19:02:21 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int				main(int ac, char **av)
 {
 	t_args	args;
 
+	errno = 0;
 	ft_init_args(ac, av, &args);
 	if (args.prm)
 		ft_ls(args);

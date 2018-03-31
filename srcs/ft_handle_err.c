@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/25 18:57:35 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 19:19:19 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 void		ft_handle_not_found_err(char *s)
 {
-	ft_putstr_fd("ft_ls: ", 2);
-	if (*__OS__ == 'L')
-		ft_putstr_fd("cannot access '", 2);
-	ft_putstr_fd(s, 2);
-	if (*__OS__ == 'L')
-		ft_putstr_fd("': No such file or directory\n", 2);
-	else
-		ft_putstr_fd(": No such file or directory\n", 2);
+	if (errno == EBADF)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(s, 2);
+		ft_putstr_fd(": Bad file descriptor\n", 2);
+	}
+	else if (errno == ENOENT)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		if (*__OS__ == 'L')
+			ft_putstr_fd("cannot access '", 2);
+		ft_putstr_fd(s, 2);
+		if (*__OS__ == 'L')
+			ft_putstr_fd("': No such file or directory\n", 2);
+		else
+			ft_putstr_fd(": No such file or directory\n", 2);
+	}
 }
 
 /*
