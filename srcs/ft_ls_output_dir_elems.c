@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:59:09 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 23:31:03 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:44:56 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 static void		ft_print_head(char *s, t_args *args, t_dir_content *dc)
 {
-	//PRINTF("prmlen : %d - args->prm->s %s - dc->s %s diff %d\n", args->prm_len, args->prm->s, dc->s, ft_strcmp(args->prm->s, dc->s));
 	if ((args->prm_len > 1) || \
 		(dc && \
 		(ft_strcmp(s, dc->s) != 0 || \
@@ -39,7 +38,7 @@ void	ft_ls_output_dir_elems(t_dir_content *dc, int *dir_err, \
 	t_dir_entry		*ptr;
 
 	if (args->file_cli_args)
-		ft_putchar('\n');
+		PRINTF("\n");
 	else
 		args->file_cli_args = 1;
 	ptr = (dc) ? (dc->elems) : (NULL);
