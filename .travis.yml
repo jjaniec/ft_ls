@@ -23,4 +23,4 @@ matrix:
         - os: linux
           compiler: clang
           env: CXX=clang
-script: make CC=$CXX; ./ft_ls && make input_tests && ./ft_ls -R; ./ft_ls -l && ./ft_ls -latA && ./ft_ls -lRA && ./ft_ls -laGRnr
+script: make CC=$CXX && echo "--- Output tests ---" && make output_tests && echo "--- Fuzzing tests ---" && make fuzzing_tests

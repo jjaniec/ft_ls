@@ -6,7 +6,7 @@ delay=0.25
 while [ $? -lt 127 ] && [ $i -ne 200 ];
 do
 	sleep $delay;
-	i=$(($i+1));
+	((i = i + 1))
 	tmp=$(echo "." | ./radamsa/bin/radamsa)
 	if [ "$(uname -s)" == "Linux" ];
 	then

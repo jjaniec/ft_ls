@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:35:56 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 16:40:09 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:14:14 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void			ft_init_colors(t_args *args)
 	char		*s;
 	t_ls_colors	*e;
 
-	s = getenv("FT_LS_COLORS");
+	s = NULL;
 	args->cl = NULL;
+	if (args->opt && args->opt->g_caps)
+		s = getenv("FT_LS_COLORS");
 	if (s)
 	{
 		e = malloc(sizeof(t_ls_colors));

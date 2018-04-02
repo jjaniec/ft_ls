@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/03/26 21:11:29 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/04/02 18:54:34 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC_NAME = 	ft_append_elem.c \
 			ft_get_rdev_infos.c \
 			ft_init_colors.c \
 			ft_debug_ls_colors.c \
+			ft_ls_follow_symlink.c \
+			ft_ls_foreach_in_dir.c \
 			main.c
 
 ifeq ($(UNAME_S),Darwin)
@@ -91,11 +93,15 @@ $(FT_PRINTF_DIR):
 $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
-input_tests:
+output_tests:
+	chmod +x ./tests/output_tests.sh
+	./tests/output_tests.sh
+
+fuzzing_tests:
 	git clone https://github.com/aoh/radamsa.git || true
 	make -C radamsa
-	chmod +x ./.radamsa_input_tests.sh
-	./.radamsa_input_tests.sh
+	chmod +x ./tests/input_tests.sh
+	./tests/input_tests.sh
 
 clean:
 	@rm -rf $(OBJ_DIR)

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_option.c                                     :+:      :+:    :+:   */
+/*   ft_ls_follow_symlink.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/14 15:56:34 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/30 23:11:18 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/30 17:22:20 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/04/01 00:12:49 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int		ft_is_option(char *str)
+/*
+** Determine if ft_ls should print symlink (0) or print content of directory
+** pointed by the symlink
+*/
+
+int		ft_ls_follow_symlink(t_param *e, t_opt *opts)
 {
-	if ((*str == '-' && !(ft_strcmp(str, "--"))) || \
-		*str == 'l' || *str == 'R' || \
-		*str == 'a' || *str == 'r' || \
-		*str == 't' || *str == 'n' || \
-		*str == 'G' || *str == 'A' || \
-		ft_strcmp(str, "-linux-sort") == 0)
-		return (1);
+	struct stat		a;
+
+	if (e->stats && e->stats->perms[0] == 'l')
+	{
+		if (!(stat(e->s, &a) < 0))
+		{
+			if (opts && opts->l)
+				return (0);
+			else
+				return (1);
+		}
+	}
 	return (0);
 }

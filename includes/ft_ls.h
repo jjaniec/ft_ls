@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:02:46 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:31:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <dirent.h>
 # include <time.h>
 # include <sys/xattr.h>
+# include <errno.h>
+# include <string.h>
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>
@@ -138,6 +140,7 @@ typedef struct		s_args
 	struct s_opt	*opt;
 	struct s_param	*prm;
 	int				prm_len;
+	int				cur_loop;
 	int				r;
 	unsigned long	cur_epoch;
 	int				file_cli_args;
@@ -162,6 +165,7 @@ typedef struct		s_dir_entry
 
 typedef struct		s_dir_content
 {
+	char			*s;
 	unsigned int	c;
 	int				blocks_total;
 	t_dir_entry		*elems;
@@ -189,7 +193,7 @@ t_str_stats			*ft_get_stats(char *str, t_args *args, char *name);
 t_str_stats			*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 						t_opt *opts);
 
-void				ft_ls(t_args args);
+void				ft_ls(t_args *args);
 
 void				ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
 
@@ -220,7 +224,7 @@ t_dir_entry			*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 						t_args *args, int *total_blk);
 
-t_dir_content		*ft_create_dir_content_s(void);
+t_dir_content		*ft_create_dir_content_s(char *path);
 
 void				ft_debug_dir_content(t_dir_content *s);
 
@@ -236,7 +240,7 @@ void				ft_free_dir_entry(t_dir_entry *de);
 
 void				ft_free_param_elem(t_param *e);
 
-void				ft_free_ptr(void *ptr);
+void				*ft_free_ptr(void *ptr);
 
 void				*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 
@@ -251,12 +255,13 @@ void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
 
 int					ft_ls_str_alphacmp(char *s1, char *s2);
 
-void				ft_free_colors(t_ls_colors *e);
+void				*ft_free_colors(t_ls_colors *e);
 
 void				ft_init_colors(t_args *args);
 
 void				ft_debug_ls_colors(t_ls_colors *cl);
 
+int					ft_ls_follow_symlink(t_param *e, t_opt *opts);
 
 # ifdef __linux__
 #  define ft_fill_ext_attr_acl(path, f);
