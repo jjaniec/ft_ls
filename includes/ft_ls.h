@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 19:45:53 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:31:25 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
 
 int					ft_ls_str_alphacmp(char *s1, char *s2);
 
-void				ft_free_colors(t_ls_colors *e);
+void				*ft_free_colors(t_ls_colors *e);
 
 void				ft_init_colors(t_args *args);
 

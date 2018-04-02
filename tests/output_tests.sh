@@ -14,12 +14,12 @@ else
 	python2.7 exrex/exrex.py -o opt.list '[A]?[a]?[r]?[l]?[n]?'
 fi;
 
-while read line;
+while read -r line;
 do
 	echo "diff for: [ ls -$line |$arg1| |$arg2| |$arg3| ]" && \
 	./ft_ls "-$line" $arg1 $arg2 $arg3 2> /dev/null | tr -d ' ' > /tmp/diff1;
 	r1=$?
-	ls -1 "-$line" $arg1 $arg2 $arg3 2> /dev/null | tr -d ' ' > /tmp/diff2;
+	ls "-$line" $arg1 $arg2 $arg3 2> /dev/null | tr -d ' ' > /tmp/diff2;
 	r2=$?
 	if ! cmp /tmp/diff1 /tmp/diff2 >/dev/null 2>&1
 	then

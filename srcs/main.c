@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 14:16:41 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:31:33 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int				main(int ac, char **av)
 	ft_init_args(ac, av, &args);
 	if (args.prm)
 		ft_ls(&args);
-	ft_free_colors(args.cl);
+	args.cl = ft_free_colors(args.cl);
 	args.opt = ft_free_ptr(args.opt);
 	return ((args.r));
 }

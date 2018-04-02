@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 19:40:04 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:31:13 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_free_param_elem(t_param *e)
 ** Free all color specifiers of a t_ls_color struct
 */
 
-void	ft_free_colors(t_ls_colors *e)
+void	*ft_free_colors(t_ls_colors *e)
 {
 	if (e)
 	{
@@ -85,6 +85,7 @@ void	ft_free_colors(t_ls_colors *e)
 		e->sg = ft_free_ptr(e->sg);
 		e->tw = ft_free_ptr(e->tw);
 		e->ow = ft_free_ptr(e->ow);
-		e = ft_free_ptr(e);
+		free(e);
 	}
+	return (NULL);
 }
