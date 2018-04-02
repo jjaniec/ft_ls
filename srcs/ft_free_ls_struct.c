@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/31 19:55:05 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 19:40:04 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	*ft_free_ptr(void *ptr)
 {
 	if (ptr)
 		free(ptr);
-	ptr = NULL;
 	return (NULL);
 }
 
@@ -31,7 +30,7 @@ void	*ft_free_str_stat_struct(t_str_stats *t_s)
 		t_s->name = ft_free_ptr(t_s->name);
 	if (t_s->last_mod)
 		t_s->last_mod = ft_free_ptr(t_s->last_mod);
-	t_s = ft_free_ptr(t_s);
+	free(t_s);
 	return (NULL);
 }
 
@@ -47,7 +46,7 @@ void	ft_free_dir_entry(t_dir_entry *de)
 			de->s = ft_free_ptr(de->s);
 		if (de->stats)
 			de->stats = ft_free_str_stat_struct(de->stats);
-		de = ft_free_ptr(de);
+		free(de);
 	}
 }
 
@@ -63,7 +62,7 @@ void	ft_free_param_elem(t_param *e)
 			e->s = ft_free_ptr(e->s);
 		if (e->stats)
 			e->stats = ft_free_str_stat_struct(e->stats);
-		e = ft_free_ptr(e);
+		free(e);
 	}
 }
 

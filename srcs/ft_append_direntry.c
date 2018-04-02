@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:48:39 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 16:42:47 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 17:33:23 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		ft_skip_direntries(t_dir_entry **ptr, t_dir_entry **new, \
 			: (0)) || \
 		(((time_sort) ? (((*new)->stats && (*ptr)->stats && \
 			(*new)->stats->last_mod_epoch == (*ptr)->stats->last_mod_epoch)) \
-			: (1)) && ft_strcmp((*ptr)->s, (*new)->s) > 0))) || \
+			: (1)) && ft_ls_str_alphacmp((*ptr)->s, (*new)->s) > 0))) || \
 		(!rev && \
 		(((time_sort) ? (!((*new)->stats && (*ptr)->stats && \
 			(*new)->stats->last_mod_epoch >= (*ptr)->stats->last_mod_epoch)) \
@@ -44,7 +44,7 @@ static void		ft_skip_direntries(t_dir_entry **ptr, t_dir_entry **new, \
 		(((time_sort) ? (((*new)->stats && (*ptr)->stats && \
 			(*new)->stats->last_mod_epoch == (*ptr)->stats->last_mod_epoch)) \
 			: (1)) && \
-			ft_strcmp((*ptr)->s, (*new)->s) < 0)))))
+			ft_ls_str_alphacmp((*ptr)->s, (*new)->s) < 0)))))
 		ft_goto_next(ptr, prev);
 }
 

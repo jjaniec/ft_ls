@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 16:59:48 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 19:45:53 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <time.h>
 # include <sys/xattr.h>
 # include <errno.h>
+# include <string.h>
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>

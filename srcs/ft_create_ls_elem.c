@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:28:18 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 16:59:57 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 17:57:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_param				*ft_create_param_elem(char *s, t_args *args, int *r)
 	p->s = ft_strdup(s);
 	p->stats = ft_get_stats(p->s, args, s);
 	if (!p->stats || \
-		(p->stats && p->stats->perms && p->stats->perms[3] == '-'))
+		(p->stats && p->stats->perms[3] == '-'))
 		*r = 2;
 	if (!p->stats)
 	{

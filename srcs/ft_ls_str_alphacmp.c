@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:45:51 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 16:39:42 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 18:28:45 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /*
 ** These functions compares strings without minding caps and by skipping '.'
-** like the order of the readl linux ls, but,
+** like the order of the real linux ls,
 ** as the real ls uses strcoll, I tried to mimic it as much
-** as possible but it can't be 100% exactly the same order
+** as possible but results can vary
 ** depending on $LC_COLLATE
 */
 
@@ -44,6 +44,8 @@ int		ft_str_alphacmp(char *s1, char *s2)
 	}
 	if (c == c2 && !c)
 		return (0);
+	else if (!c && c2)
+		return (-1);
 	else if (c == c2 && ft_strlen(s1) < ft_strlen(s2))
 		return (-1);
 	return ((unsigned int)c - (unsigned int)c2);

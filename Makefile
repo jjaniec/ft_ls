@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/04/01 00:21:40 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/04/02 18:54:34 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,14 +94,14 @@ $(LIBFTPRINTF): $(FT_PRINTF_DIR)
 	make -C ft_printf
 
 output_tests:
-	chmod +x ./.output_tests.sh
-	./.output_tests.sh
+	chmod +x ./tests/output_tests.sh
+	./tests/output_tests.sh
 
 fuzzing_tests:
 	git clone https://github.com/aoh/radamsa.git || true
 	make -C radamsa
-	chmod +x ./.radamsa_input_tests.sh
-	./.radamsa_input_tests.sh
+	chmod +x ./tests/input_tests.sh
+	./tests/input_tests.sh
 
 clean:
 	@rm -rf $(OBJ_DIR)
