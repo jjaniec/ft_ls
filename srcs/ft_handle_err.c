@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/01 00:31:23 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:59:24 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 		if (S_ISDIR(dir_stats.st_mode))
 		{
 			if (*__OS__ == 'L')
-				ft_putstr_fd("cannot open directory '", 2);
+				ft_putstr_fd("ft_ls: cannot open directory '", 2);
 			else
 			{
 				ft_print_err_head(path, args);
@@ -67,7 +67,8 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 			if (*__OS__ == 'L')
 				ft_putstr_fd("'", 2);
 			ft_putstr_fd(": Permission denied\n", 2);
-			args->r = 1;
+			if (args->r != 2)
+				args->r = 1;
 		}
 	*dir_err = 1;
 	return (NULL);
@@ -87,5 +88,5 @@ void		ft_handle_opt_err(char opt, char *pname)
 	ft_putchar_fd(opt, 2);
 	ft_putchar_fd('\n', 2);
 	ft_print_usage(pname);
-	exit(1);
+	exit(2);
 }

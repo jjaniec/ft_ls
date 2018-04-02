@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/01 00:26:35 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:16:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 }
 
 /*
-** Cycle through cli arguments and launch ft_ls_foreach_in_dir
-** for each element of the linked list args.aptr
+** Cycle through cli arguments, output files informations,
+** and launch ft_ls_foreach_in_dir
+** for each directory of the linked list args->prm
 */
 
 static void		ft_start_ls_foreach_dir(t_args *args)
@@ -69,22 +70,22 @@ static void		ft_start_ls_foreach_dir(t_args *args)
 	}
 }
 
-void			ft_ls(t_args args)
+void			ft_ls(t_args *args)
 {
 	t_param		*aptr2;
 
-	aptr2 = args.prm;
+	aptr2 = args->prm;
 	while (aptr2)
 	{
 		if (aptr2->stats && !aptr2->stats->folder && \
-			!ft_ls_follow_symlink(aptr2, args.opt))
+			!ft_ls_follow_symlink(aptr2, args->opt))
 		{
-			ft_ls_output_entry(aptr2->stats, args.opt);
-			args.file_cli_args = 1;
+			ft_ls_output_entry(aptr2->stats, args->opt);
+			args->file_cli_args = 1;
 		}
 		aptr2 = aptr2->next;
 	}
-	ft_start_ls_foreach_dir(&args);
+	ft_start_ls_foreach_dir(args);
 }
 
 /*
@@ -100,7 +101,7 @@ int				main(int ac, char **av)
 	errno = 0;
 	ft_init_args(ac, av, &args);
 	if (args.prm)
-		ft_ls(args);
+		ft_ls(&args);
 	ft_free_colors(args.cl);
 	args.opt = ft_free_ptr(args.opt);
 	return ((args.r));
