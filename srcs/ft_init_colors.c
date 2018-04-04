@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:35:56 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 14:14:14 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 14:45:57 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static char		*ft_parse_color(char *type, char *env_data)
 
 	i = 0;
 	p = ft_strstr(env_data, type);
-	if (p && p[3])
+	if (p && p[1] && p[2] && p[3])
 	{
-		while (p[i] != ':' && p[i + 3])
+		while (p[i] && p[i] != ':')
 			i++;
 		if (i == 0)
 			return (NULL);
-		tmp = ft_strsub(p + 3, 0, i);
+		tmp = ft_strsub(p, 3, i - 3);
 		p = ft_strjoin("\e[", tmp);
 		free(tmp);
 		tmp = ft_strjoin(p, "m");
