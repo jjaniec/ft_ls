@@ -6,38 +6,95 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 18:34:37 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:02:36 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/01 00:10:12 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Apply colors on file/folder name:
-** red: executable
-** magenta: folder
+** Apply colors on dir entries with colors from $LS_COLORS
+** environnement variable
 */
 
-void	ft_colorize_name(t_str_stats *f)
+static char		*ft_get_color_str_env(t_str_stats *f, t_ls_colors *cl)
 {
-	char	*s;
+	if (!f)
+		return (NULL);
+	if (f->folder && f->perms[8] == 'w')
+		return ((f->perms[9] == 't') ? (cl->tw) : (cl->ow));
+	if (f->perms[3] == 's')
+		return (cl->su);
+	if (f->perms[6] == 's')
+		return (cl->sg);
+	if (f->folder && *f->perms == 'd')
+		return (cl->di);
+	if (*(f->perms) == 'l')
+		return (cl->ln);
+	if (*(f->perms) == 's')
+		return (cl->so);
+	if (*(f->perms) == 'p')
+		return (cl->pi);
+	if (*(f->perms) == 'b')
+		return (cl->bd);
+	if (*(f->perms) == 'c')
+		return (cl->cd);
+	if (f->perms[3] == 'x')
+		return (cl->ex);
+	return (NULL);
+}
 
-	s = NULL;
-	if (f->perms && (f->folder || f->perms[3] == 'x' || *(f->perms) != 'l'))
+/*
+** Apply colors on dir entries with default official colors
+*/
+
+static char		*ft_get_color_str_default(t_str_stats *f)
+{
+	if (f->folder && f->perms[8] == 'w')
 	{
-		if (f->folder)
-			s = ft_strjoin_free(ft_strdup(DIR_COLOR), ft_strdup(f->name));
-		else if (f->perms[3] == 'x' && !(*(f->perms) == 'l'))
-			s = ft_strjoin_free(ft_strdup(EXEC_COLOR), ft_strdup(f->name));
-		else if (*(f->perms) == 'l')
-			s = ft_strjoin_free(ft_strdup(SYMLINK_COLOR), ft_strdup(f->name));
-		if (s)
-		{
-			free(f->name);
-			f->name = ft_strjoin(s, FG_WHITE);
-			free(s);
-		}
-		else
-			free(s);
+		return ((f->perms[9] == 't') ? (DIR_WRITEOTHER_STICKY_COLOR) : \
+			(DIR_WRITEOTHER_NOSTICKY_COLOR));
+	}
+	if (f->perms[3] == 's')
+		return (EXE_SETUID_COLOR);
+	if (f->perms[6] == 's')
+		return (EXE_SETGID_COLOR);
+	if (f->folder && *f->perms == 'd')
+		return (DIR_COLOR);
+	if (*(f->perms) == 'l')
+		return (SYMLINK_COLOR);
+	if (*(f->perms) == 's')
+		return (SOCKET_COLOR);
+	if (*(f->perms) == 'p')
+		return (PIPE_COLOR);
+	if (*(f->perms) == 'b')
+		return (BLOCK_SPE_COLOR);
+	if (*(f->perms) == 'c')
+		return (CHAR_SPE_COLOR);
+	if (f->perms[3] == 'x')
+		return (EXEC_COLOR);
+	return (NULL);
+}
+
+void			ft_colorize_name(t_str_stats *f, t_ls_colors *cl)
+{
+	char	*ns;
+	char	*col;
+	int		name_len;
+
+	ns = NULL;
+	if (cl)
+		col = ft_get_color_str_env(f, cl);
+	else
+		col = ft_get_color_str_default(f);
+	if (col)
+	{
+		name_len = ft_strlen(f->name);
+		ns = ft_strnew(name_len + ft_strlen(col) + 5);
+		ft_strcpy(ns, col);
+		ft_strcat(ns, f->name);
+		ft_strcat(ns, COLOR_RESET);
+		free(f->name);
+		f->name = ns;
 	}
 }

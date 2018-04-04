@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_can_recurse.c                                   :+:      :+:    :+:   */
+/*   ft_get_rdev_infos.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/14 15:12:27 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/28 17:04:28 by jjaniec          ###   ########.fr       */
+/*   Created: 2018/03/23 18:40:22 by jjaniec           #+#    #+#             */
+/*   Updated: 2018/03/28 16:41:15 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 /*
-** Return 0 if strcmp($s, ".") == 0 || strcmp($s, "..") == 0
-** otherwise return 1
+** Get major and minor number of a char/block device special file
 */
 
-int		ft_can_recurse(t_dir_entry *e)
+void	ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f)
 {
-	if (e->s && e->s[0] == '.' && \
-		e->stats && *(e->stats->perms) != 'l')
-	{
-		if (!(e->s[1]) || ft_strcmp(e->s, "..") == 0)
-			return (0);
-	}
-	return (1);
+	f->rdev_min = minor(f_stats->st_rdev);
+	f->rdev_maj = major(f_stats->st_rdev);
 }

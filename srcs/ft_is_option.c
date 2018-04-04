@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 15:56:34 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:07:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/30 23:11:18 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		ft_is_option(char *str)
 {
-	if (*str != 'l' && *str != 'R' && \
-		*str != 'a' && *str != 'r' && \
-		*str != 't' && *str != 'n' && \
-		*str != 'G')
-		return (0);
-	return (1);
+	if ((*str == '-' && !(ft_strcmp(str, "--"))) || \
+		*str == 'l' || *str == 'R' || \
+		*str == 'a' || *str == 'r' || \
+		*str == 't' || *str == 'n' || \
+		*str == 'G' || *str == 'A' || \
+		ft_strcmp(str, "-linux-sort") == 0)
+		return (1);
+	return (0);
 }

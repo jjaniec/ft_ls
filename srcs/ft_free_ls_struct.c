@@ -6,16 +6,17 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:09:26 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/03 15:02:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_free_ptr(void *ptr)
+void	*ft_free_ptr(void *ptr)
 {
-	free(ptr);
-	ptr = NULL;
+	if (ptr)
+		free(ptr);
+	return (NULL);
 }
 
 /*
@@ -26,12 +27,10 @@ void	ft_free_ptr(void *ptr)
 void	*ft_free_str_stat_struct(t_str_stats *t_s)
 {
 	if (t_s->name)
-		ft_free_ptr(t_s->name);
-	if (t_s->perms)
-		ft_free_ptr(t_s->perms);
+		t_s->name = ft_free_ptr(t_s->name);
 	if (t_s->last_mod)
-		ft_free_ptr(t_s->last_mod);
-	ft_free_ptr(t_s);
+		t_s->last_mod = ft_free_ptr(t_s->last_mod);
+	free(t_s);
 	return (NULL);
 }
 
@@ -44,10 +43,10 @@ void	ft_free_dir_entry(t_dir_entry *de)
 	if (de)
 	{
 		if (de->s)
-			ft_free_ptr(de->s);
+			de->s = ft_free_ptr(de->s);
 		if (de->stats)
-			ft_free_str_stat_struct(de->stats);
-		ft_free_ptr(de);
+			de->stats = ft_free_str_stat_struct(de->stats);
+		free(de);
 	}
 }
 
@@ -55,14 +54,39 @@ void	ft_free_dir_entry(t_dir_entry *de)
 ** Free string and stats of a cli param element
 */
 
-void	ft_free_param_elem(t_param *e)
+void	*ft_free_param_elem(t_param *e)
 {
 	if (e)
 	{
 		if (e->s)
-			ft_free_ptr(e->s);
+			e->s = ft_free_ptr(e->s);
 		if (e->stats)
-			ft_free_str_stat_struct(e->stats);
-		ft_free_ptr(e);
+			e->stats = ft_free_str_stat_struct(e->stats);
+		free(e);
 	}
+	return (NULL);
+}
+
+/*
+** Free all color specifiers of a t_ls_color struct
+*/
+
+void	*ft_free_colors(t_ls_colors *e)
+{
+	if (e)
+	{
+		e->di = ft_free_ptr(e->di);
+		e->ln = ft_free_ptr(e->ln);
+		e->so = ft_free_ptr(e->so);
+		e->pi = ft_free_ptr(e->pi);
+		e->ex = ft_free_ptr(e->ex);
+		e->bd = ft_free_ptr(e->bd);
+		e->cd = ft_free_ptr(e->cd);
+		e->su = ft_free_ptr(e->su);
+		e->sg = ft_free_ptr(e->sg);
+		e->tw = ft_free_ptr(e->tw);
+		e->ow = ft_free_ptr(e->ow);
+		free(e);
+	}
+	return (NULL);
 }

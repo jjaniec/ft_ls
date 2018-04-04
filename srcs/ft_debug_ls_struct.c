@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 20:54:05 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 19:14:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/25 18:34:41 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		ft_debug_opt(t_opt *opts)
 		PRINTF("\t\topt l: %d\n", opts->l);
 		PRINTF("\t\topt R: %d\n", opts->r_caps);
 		PRINTF("\t\topt a: %d\n", opts->a);
+		PRINTF("\t\topt A: %d\n", opts->a_caps);
 		PRINTF("\t\topt r: %d\n", opts->r);
 		PRINTF("\t\topt t: %d\n", opts->t);
 		PRINTF("\t\topt n: %d\n", opts->n);

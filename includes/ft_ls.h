@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/21 21:04:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:50:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 # include <dirent.h>
 # include <time.h>
 # include <sys/xattr.h>
+# include <errno.h>
+# include <string.h>
 
 # ifdef __linux__
+#  include <sys/sysmacros.h>
 #  define __OS__ "Linux"
 # endif
 # ifdef __APPLE__
@@ -32,9 +35,26 @@
 #  define __OS__ "?"
 # endif
 
-# define DIR_COLOR FG_BLUE
-# define EXEC_COLOR FG_RED
-# define SYMLINK_COLOR FG_MAGENTA
+/*
+** Default colors applied $LS_COLORS format:
+** "di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:
+** cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+*/
+
+# define DIR_COLOR "\e[1;36m"
+# define SYMLINK_COLOR "\e[35m"
+# define SOCKET_COLOR "\e[32m"
+# define PIPE_COLOR "\e[33m"
+# define EXEC_COLOR "\e[31m"
+# define BLOCK_SPE_COLOR "\e[34;46m"
+# define CHAR_SPE_COLOR "\e[34;43m"
+# define DIR_WRITEOTHER_STICKY_COLOR "\e[30;42m"
+# define DIR_WRITEOTHER_NOSTICKY_COLOR "\e[30;43m"
+
+# define EXE_SETUID_COLOR "\e[30;41m"
+# define EXE_SETGID_COLOR "\e[30;46m"
+
+# define COLOR_RESET "\e[0m"
 
 # define PRINTF printf
 
@@ -47,15 +67,32 @@ typedef int			t_bool;
 ** Struct to store options, toggle booleans if option is specified
 */
 
+typedef struct		s_ls_colors
+{
+	char			*di;
+	char			*ln;
+	char			*so;
+	char			*pi;
+	char			*ex;
+	char			*bd;
+	char			*cd;
+	char			*su;
+	char			*sg;
+	char			*tw;
+	char			*ow;
+}					t_ls_colors;
+
 typedef struct		s_opt
 {
 	t_bool			l;
 	t_bool			r_caps;
 	t_bool			a;
+	t_bool			a_caps;
 	t_bool			r;
 	t_bool			t;
 	t_bool			n;
 	t_bool			g_caps;
+	t_bool			linux_sort;
 }					t_opt;
 
 /*
@@ -67,7 +104,7 @@ typedef struct		s_str_stats
 {
 	char			*name;
 	t_bool			folder;
-	char			*perms;
+	char			perms[11];
 	char			perms_attr_acl;
 	int				slnks;
 	char			*ownr;
@@ -78,6 +115,8 @@ typedef struct		s_str_stats
 	char			*last_mod;
 	unsigned long	last_mod_epoch;
 	unsigned int	size_blocks;
+	unsigned int	rdev_min;
+	unsigned int	rdev_maj;
 	int				rcode;
 }					t_str_stats;
 
@@ -101,8 +140,12 @@ typedef struct		s_args
 	struct s_opt	*opt;
 	struct s_param	*prm;
 	int				prm_len;
+	int				cur_elem;
+	int				cur_loop;
 	int				r;
 	unsigned long	cur_epoch;
+	int				file_cli_args;
+	t_ls_colors		*cl;
 }					t_args;
 
 /*
@@ -123,6 +166,7 @@ typedef struct		s_dir_entry
 
 typedef struct		s_dir_content
 {
+	char			*s;
 	unsigned int	c;
 	int				blocks_total;
 	t_dir_entry		*elems;
@@ -150,7 +194,7 @@ t_str_stats			*ft_get_stats(char *str, t_args *args, char *name);
 t_str_stats			*ft_get_stats_l_opt(t_str_stats *f, struct stat *f_stats, \
 						t_opt *opts);
 
-void				ft_ls(t_args args);
+void				ft_ls(t_args *args);
 
 void				ft_debug_str_stats(char *name, t_str_stats *s, t_opt *opts);
 
@@ -168,7 +212,7 @@ void				ft_fill_owners(t_str_stats *f, struct stat *f_stats, \
 void				ft_fill_last_mod(t_str_stats *f, struct stat *f_stats, \
 						t_args *args);
 
-void				ft_colorize_name(t_str_stats *f);
+void				ft_colorize_name(t_str_stats *f, t_ls_colors *cl);
 
 t_dir_content		*ft_create_folder_elems_ll(char *path, int *dir_err, \
 						t_args *args);
@@ -181,7 +225,7 @@ t_dir_entry			*ft_append_direntry(t_dir_entry *li, t_dir_entry *new, \
 t_dir_entry			*ft_create_dir_entry_elem(char *s, char *path, \
 						t_args *args, int *total_blk);
 
-t_dir_content		*ft_create_dir_content_s(void);
+t_dir_content		*ft_create_dir_content_s(char *path);
 
 void				ft_debug_dir_content(t_dir_content *s);
 
@@ -195,9 +239,9 @@ void				ft_get_symlink_target(char *path, t_str_stats *f);
 
 void				ft_free_dir_entry(t_dir_entry *de);
 
-void				ft_free_param_elem(t_param *e);
+void				*ft_free_param_elem(t_param *e);
 
-void				ft_free_ptr(void *ptr);
+void				*ft_free_ptr(void *ptr);
 
 void				*ft_handle_dir_err(char *path, t_args *args, int *dir_err);
 
@@ -208,11 +252,24 @@ void				ft_handle_not_found_err(char *s);
 
 void				ft_ls_foreach_in_dir(char *s, t_args *args);
 
+void				ft_get_rdev_infos(struct stat *f_stats, t_str_stats *f);
+
+int					ft_ls_str_alphacmp(char *s1, char *s2);
+
+void				*ft_free_colors(t_ls_colors *e);
+
+void				ft_init_colors(t_args *args);
+
+void				ft_debug_ls_colors(t_ls_colors *cl);
+
+int					ft_ls_follow_symlink(t_param *e, t_opt *opts);
+
 # ifdef __linux__
+
 #  define ft_fill_ext_attr_acl(path, f);
 # endif
 # ifdef __APPLE__
-#  include <sys/acl.h>
+
 void				ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
 # endif
 

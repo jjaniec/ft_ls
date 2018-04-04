@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:41 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/03/14 16:02:38 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:13:00 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,43 @@
 **     rather than converting to a user or group name in a long (-l) output.
 */
 
+static int		ft_toggle_opt_word(t_opt *opts, char *str)
+{
+	if (ft_strcmp("-linux-sort", str) == 0)
+	{
+		opts->linux_sort = TRUE;
+		return (1);
+	}
+	if (ft_strcmp("-color", str) == 0)
+	{
+		opts->g_caps = TRUE;
+		return (1);
+	}
+	return (0);
+}
+
 static void		ft_toggle_opt(t_opt *opts, char *str, char *pname)
 {
 	while (*(++str))
 	{
-		if (!ft_is_option(str))
+		if ((*str == '-' && str[-1] != '-') || !ft_is_option(str))
 			ft_handle_opt_err(*str, pname);
-		if (*str == 'l')
+		if (*str == '-' && ft_toggle_opt_word(opts, str))
+			break ;
+		if (*str == 'l' || *str == 'n')
 			opts->l = TRUE;
 		if (*str == 'R')
 			opts->r_caps = TRUE;
 		if (*str == 'a')
 			opts->a = TRUE;
+		if (*str == 'A')
+			opts->a_caps = TRUE;
 		if (*str == 'r')
 			opts->r = TRUE;
 		if (*str == 't')
 			opts->t = TRUE;
 		if (*str == 'n')
-		{
 			opts->n = TRUE;
-			opts->l = TRUE;
-		}
 		if (*str == 'G')
 			opts->g_caps = TRUE;
 	}
@@ -62,10 +78,12 @@ static void		ft_init_opt_struct(t_opt **opts)
 	(*opts)->l = FALSE;
 	(*opts)->r_caps = FALSE;
 	(*opts)->a = FALSE;
+	(*opts)->a_caps = FALSE;
 	(*opts)->r = FALSE;
 	(*opts)->t = FALSE;
 	(*opts)->n = FALSE;
 	(*opts)->g_caps = FALSE;
+	(*opts)->linux_sort = FALSE;
 }
 
 /*
@@ -82,7 +100,7 @@ t_opt			*ft_parse_options(int ac, char **av)
 	ft_init_opt_struct(&opts);
 	--ac;
 	ptr = &av[1];
-	while (ac-- > 0 && **ptr == '-' && !((*ptr)[0] == '-' && (*ptr)[1] == '-'))
+	while (ac-- > 0 && **ptr == '-' && !(ft_strcmp(*ptr, "--") == 0))
 	{
 		if (**ptr == '-')
 			ft_toggle_opt(opts, (*ptr), av[0]);

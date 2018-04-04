@@ -21,9 +21,6 @@ matrix:
           env: CXX=clang
     allow_failures:
         - os: linux
-          compiler: gcc
-          env: CXX=gcc
-        - os: linux
           compiler: clang
           env: CXX=clang
-script: make CC=$CXX; ./ft_ls -R; ./ft_ls -l && ./ft_ls -la && ./ft_ls && valgrind --leak-check=full ./ft_ls -laGRnr
+script: make CC=$CXX && echo "--- Output tests ---" && make output_tests && echo "--- Fuzzing tests ---" && make fuzzing_tests
