@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:41:53 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 13:42:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:30:13 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_recurse_to_dir(char *path, char *entry, t_args *args)
 	char		*ns;
 
 	ns = ft_strjoin_path(ft_strdup(path), ft_strdup(entry));
+	args->cur_loop += 1;
 	ft_ls_foreach_in_dir(ns, args);
 	ft_free_ptr(ns);
 }

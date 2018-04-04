@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:10 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 20:31:33 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:42:36 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_init_args(int ac, char **av, t_args *args)
 
 	args->r = 0;
 	args->prm_len = 0;
+	args->cur_elem = 0;
 	args->cur_loop = 0;
 	args->file_cli_args = 0;
 	args->cur_epoch = time(NULL);
@@ -65,8 +66,10 @@ static void		ft_start_ls_foreach_dir(t_args *args)
 			ft_ls_foreach_in_dir(aptr->s, args);
 		prev = aptr;
 		aptr = aptr->next;
-		args->cur_loop += 1;
-		ft_free_param_elem(prev);
+		args->cur_loop = 0;
+		args->cur_elem += 1;
+		prev = ft_free_param_elem(prev);
+		args->prm = aptr;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 21:53:25 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 20:31:25 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:50:09 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct		s_args
 	struct s_opt	*opt;
 	struct s_param	*prm;
 	int				prm_len;
+	int				cur_elem;
 	int				cur_loop;
 	int				r;
 	unsigned long	cur_epoch;
@@ -238,7 +239,7 @@ void				ft_get_symlink_target(char *path, t_str_stats *f);
 
 void				ft_free_dir_entry(t_dir_entry *de);
 
-void				ft_free_param_elem(t_param *e);
+void				*ft_free_param_elem(t_param *e);
 
 void				*ft_free_ptr(void *ptr);
 
@@ -264,9 +265,11 @@ void				ft_debug_ls_colors(t_ls_colors *cl);
 int					ft_ls_follow_symlink(t_param *e, t_opt *opts);
 
 # ifdef __linux__
+
 #  define ft_fill_ext_attr_acl(path, f);
 # endif
 # ifdef __APPLE__
+
 void				ft_fill_ext_attr_acl(char *path, t_str_stats *f_stats);
 # endif
 

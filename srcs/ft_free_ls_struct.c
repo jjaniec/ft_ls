@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 21:08:48 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 20:31:13 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/03 15:02:52 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_free_dir_entry(t_dir_entry *de)
 ** Free string and stats of a cli param element
 */
 
-void	ft_free_param_elem(t_param *e)
+void	*ft_free_param_elem(t_param *e)
 {
 	if (e)
 	{
@@ -64,6 +64,7 @@ void	ft_free_param_elem(t_param *e)
 			e->stats = ft_free_str_stat_struct(e->stats);
 		free(e);
 	}
+	return (NULL);
 }
 
 /*

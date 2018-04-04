@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:45:51 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 18:28:45 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:31:08 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ int		ft_str_alphacmp(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	if (c == c2 && !c)
-		return (0);
-	else if (!c && c2)
+	if (!c && c2)
 		return (-1);
 	else if (c == c2 && ft_strlen(s1) < ft_strlen(s2))
 		return (-1);

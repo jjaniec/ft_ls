@@ -6,7 +6,7 @@
 /*   By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 18:17:57 by jjaniec           #+#    #+#             */
-/*   Updated: 2018/04/02 15:59:24 by jjaniec          ###   ########.fr       */
+/*   Updated: 2018/04/04 14:04:22 by jjaniec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_handle_not_found_err(char *s)
 		ft_putstr_fd(s, 2);
 		ft_putstr_fd(": Bad file descriptor\n", 2);
 	}
-	else if (errno == ENOENT)
+	else
 	{
 		ft_putstr_fd("ft_ls: ", 2);
 		if (*__OS__ == 'L')
@@ -40,13 +40,10 @@ void		ft_handle_not_found_err(char *s)
 
 static void	ft_print_err_head(char *path, t_args *args)
 {
-	if (!(args->prm_len <= 1 && !(args->opt && args->opt->r_caps)))
-	{
-		if (args->cur_loop == 0 && !(args->prm_len <= 1))
-			PRINTF("%s:\n", path);
-		else
-			PRINTF("\n%s:\n", path);
-	}
+	if (!(args->cur_elem == 0 && ft_strcmp(path, args->prm->s) == 0))
+		PRINTF("\n");
+	if (args->prm_len > 1 || (args->opt && args->opt->r_caps && args->prm && args->prm->stats && args->prm->stats->perms[3] != '-'))
+		PRINTF("%s:\n", path);
 }
 
 void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
@@ -69,6 +66,10 @@ void		*ft_handle_dir_err(char *path, t_args *args, int *dir_err)
 			ft_putstr_fd(": Permission denied\n", 2);
 			if (args->r != 2)
 				args->r = 1;
+			if (args->cur_elem == 0 && args->cur_loop == 0 && args->prm && \
+				args->prm->next && args->prm->stats && \
+				args->prm->next->stats->perms[3] != '-')
+				PRINTF("\n");
 		}
 	*dir_err = 1;
 	return (NULL);
