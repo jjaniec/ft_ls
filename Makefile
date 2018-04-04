@@ -6,7 +6,7 @@
 #    By: jjaniec <jjaniec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/05 21:53:56 by jjaniec           #+#    #+#              #
-#    Updated: 2018/04/02 18:54:34 by jjaniec          ###   ########.fr        #
+#    Updated: 2018/04/04 16:50:37 by jjaniec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,32 +14,32 @@ NAME = ft_ls
 
 UNAME_S := $(shell uname -s)
 
-SRC_NAME = 	ft_append_elem.c \
+SRC_NAME = 	ft_append_direntry.c \
+			ft_append_elem.c \
+			ft_can_recurse.c \
 			ft_colorize_name.c \
+			ft_create_folder_elems_ll.c \
+			ft_create_ls_elem.c \
+			ft_debug_ls_colors.c \
 			ft_debug_ls_struct.c \
-			ft_free_ls_struct.c \
-			ft_fill_perms.c \
-			ft_append_direntry.c \
-			ft_ls_str_alphacmp.c \
-			ft_fill_owners.c \
 			ft_fill_last_mod.c \
+			ft_fill_owners.c \
+			ft_fill_perms.c \
+			ft_free_ls_struct.c \
+			ft_get_rdev_infos.c \
+			ft_get_stats.c \
 			ft_handle_err.c \
+			ft_init_colors.c \
+			ft_is_option.c \
+			ft_ls_follow_symlink.c \
+			ft_ls_foreach_in_dir.c \
+			ft_ls_output.c \
+			ft_ls_output_dir_elems.c \
+			ft_ls_str_alphacmp.c \
 			ft_parse_options.c \
 			ft_parse_params.c \
 			ft_print_usage.c \
-			ft_get_stats.c \
-			ft_create_ls_elem.c \
 			ft_strjoin_path.c \
-			ft_create_folder_elems_ll.c \
-			ft_ls_output.c \
-			ft_can_recurse.c \
-			ft_is_option.c \
-			ft_ls_output_dir_elems.c \
-			ft_get_rdev_infos.c \
-			ft_init_colors.c \
-			ft_debug_ls_colors.c \
-			ft_ls_follow_symlink.c \
-			ft_ls_foreach_in_dir.c \
 			main.c
 
 ifeq ($(UNAME_S),Darwin)
@@ -84,7 +84,6 @@ endif
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c ./includes/ft_ls.h
 	@mkdir -p $(OBJ_DIR)
-	@cp ft_printf/includes/ft_printf.h ft_printf/includes/libft_printf.h
 	@gcc $(CFLAGS) -c $(IFLAGS) $< -o $@ && $(call ui_line, $@, $(NAME))
 
 $(FT_PRINTF_DIR):
@@ -110,7 +109,6 @@ clean:
 fclean: clean
 	@make fclean -C ft_printf/
 	@rm -f $(NAME)
-	@rm ft_printf/includes/libft_printf.h || true
 
 re: fclean all
 
